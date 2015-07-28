@@ -1,0 +1,9 @@
+Ancients
+
+8h: 整合第三方框架backbone等框架
+8h: ajax
+8h: storage 存储
+10h: view  视图
+16h: history 历史 (包含view跳转,)
+4h: web geo 定位
+8h: util 帮助模块(基础,不含业务帮助)
