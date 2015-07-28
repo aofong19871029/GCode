@@ -6,7 +6,9 @@ define(['libs'], function(){
         paths: {
             'libs': baseDir + 'external/libs',
             'dInherit': baseDir + 'common/d.class',
-            'dValidate': baseDir + 'util/d.validate'
+            'dValidate': baseDir + 'util/d.validate',
+            'dDate': baseDir + 'util/d.date',
+            'dAbstractStorage': baseDir + 'storage/d.abstract.storage'
         }
     });
 });

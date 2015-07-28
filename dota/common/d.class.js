@@ -35,7 +35,7 @@ define(function() {
                 _super.__propertys__.call(this);
                 this.__propertys__.call(this);
                 // init the class
-                self.init.apply(self, arguments);
+                self.initialize.apply(self, arguments);
                 return self;
             }
 
@@ -82,9 +82,9 @@ define(function() {
                 }
                 proto._super = _super;
 
-                // if no init, assume we're inheriting from a non-Pjs class, so
+                // if no initialize, assume we're inheriting from a non-Pjs class, so
                 // default to using the superclass constructor.
-                if (!('init' in proto)) proto.init = _superclass;
+                if (!('initialize' in proto)) proto.initialize = _superclass;
                 if(!('__propertys__' in _super)) _super.__propertys__ = noop;
                 if(!('__propertys__' in proto)) proto.__propertys__ = noop;
 
