@@ -235,7 +235,7 @@ define(['dInherit'], function(){
         isOff: function(){
             return this._status == 0;
         }
-    }
+    };
 
     JsLog.ConsoleAdapter = function(){
         this.init(); // inhert function

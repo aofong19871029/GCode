@@ -1,4 +1,4 @@
-define(['libs'], function(){
+define(['dValidate'], function(dValidate){
     var contentTypeMap = {
             'json': 'application/json',
             'jsonp': 'application/json'
@@ -39,7 +39,7 @@ define(['libs'], function(){
      * @param opt
      * @private
      */
-    function _sendReq(opt){
+    function sendReq(opt){
         var config = {
             url: opt.url,
             type: getContentType(opt.type),
@@ -75,6 +75,28 @@ define(['libs'], function(){
     }
 
     return {
+        get: function(url, success, error){
+            var opt = {
+                url: url,
+                success: dValidate.isFunction(success) ? success : function(){},
+                error: dValidate.isFunction(error) ? error : function(){},
+                dataType: contentTypeMap.json,
+                type: 'GET'
+            };
 
+            return sendReq(opt)
+        },
+        post: function(url, success, error){
+            var opt = {
+                url: url,
+                success: dValidate.isFunction(success) ? success : function(){},
+                error: dValidate.isFunction(error) ? error : function(){},
+                dataType: contentTypeMap.json,
+                type: 'POST'
+            };
+
+            return sendReq(opt)
+        },
+        ajax: sendReq
     };
 });
