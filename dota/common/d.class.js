@@ -80,6 +80,7 @@ define(function() {
                         }
                     }
                 }
+                // parent constructor
                 proto._super = _super;
 
                 // if no initialize, assume we're inheriting from a non-Pjs class, so

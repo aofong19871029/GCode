@@ -1,5 +1,5 @@
 define(['dInherit', 'dAbstractStorage'], function(dInherit, dAbstractStorage){
-    var CookieStorage = new dInherit(dAbstractStorage, {
+    var CookieStorage = dInherit(dAbstractStorage, {
         __propertys__: function(){
             this.proxy = document.cookie;
         },
@@ -53,5 +53,5 @@ define(['dInherit', 'dAbstractStorage'], function(dInherit, dAbstractStorage){
         }
     };
 
-    return CookieStorage.getInstance();
+    return CookieStorage;
 });

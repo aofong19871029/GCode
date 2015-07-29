@@ -1,5 +1,5 @@
 define(['dInherit', 'dValidate', 'dDate'], function(dInherit, dValidate, dDate){
-    var AbstractStorage = new dInherit({
+    var AbstractStorage = dInherit({
         __propertys__: function(){
             this.proxy = null;
 

@@ -9,12 +9,18 @@ define(['libs'], function(){
         paths: {
             'libs': getAbsolutePath('external/libs'),
             'dInherit': getAbsolutePath('common/d.class'),
-            'dValidate': getAbsolutePath('util/d.validate'),
-            'dDate': getAbsolutePath('util/d.date'),
+            'dAjax': getAbsolutePath('common/d.ajax'),
+            'dValidate': getAbsolutePath('util/d.util.validate'),
+            'dDate': getAbsolutePath('util/d.util.date'),
             'dAbstractStorage': getAbsolutePath('storage/d.abstract.storage'),
             'dCookie': getAbsolutePath('storage/d.cookie'),
             'dLocalStorage': getAbsolutePath('storage/d.local.storage'),
-            'dSessionStorage': getAbsolutePath('storage/d.session.storage')
+            'dSessionStorage': getAbsolutePath('storage/d.session.storage'),
+            'dStore': getAbsolutePath('storage/d.store'),
+            'dBaseLog': getAbsolutePath('log/d.base.log'),
+            'dConsoleAdapter': getAbsolutePath('log/d.console.log'),
+            'dUIAdapter': getAbsolutePath('log/d.ui.log'),
+            'dLog': getAbsolutePath('log/d.log')
         }
     });
 });

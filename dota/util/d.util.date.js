@@ -133,7 +133,13 @@ define(['dInherit'], function(dInherit){
     var ClientDate = dInherit({
         initialize: function (date) {
             date = date || new Date();
-            this.date = new Date(date);
+
+            if(date instanceof  ClientDate){
+                this.date = date.date;
+            }
+            else {
+                this.date = new Date(date);
+            }
         },
         /**
          * 格式化时间

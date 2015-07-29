@@ -1,5 +1,5 @@
 define(['dInherit', 'dAbstractStorage'], function(dInherit, dAbstractStorage){
-    var LocalStorage = new dInherit(dAbstractStorage, {
+    var LocalStorage = dInherit(dAbstractStorage, {
         __propertys__: function(){
             this.proxy = window.localStorage;
         }
@@ -13,5 +13,5 @@ define(['dInherit', 'dAbstractStorage'], function(dInherit, dAbstractStorage){
         }
     };
 
-    return LocalStorage.getInstance();
+    return LocalStorage;
 });
