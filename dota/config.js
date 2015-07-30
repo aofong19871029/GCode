@@ -1,26 +1,28 @@
 define(['libs'], function(){
-    var baseDir = Ancients.dir,
-        getAbsolutePath = function(relative) {
-            return baseDir + relative;
-        };
+    var baseDir = Ancients.dir || '';
 
     require.config({
+        baseUrl: baseDir,
         waitSeconds: 20,
         paths: {
-            'libs': getAbsolutePath('external/libs'),
-            'dInherit': getAbsolutePath('common/d.class'),
-            'dAjax': getAbsolutePath('common/d.ajax'),
-            'dValidate': getAbsolutePath('util/d.util.validate'),
-            'dDate': getAbsolutePath('util/d.util.date'),
-            'dAbstractStorage': getAbsolutePath('storage/d.abstract.storage'),
-            'dCookie': getAbsolutePath('storage/d.cookie'),
-            'dLocalStorage': getAbsolutePath('storage/d.local.storage'),
-            'dSessionStorage': getAbsolutePath('storage/d.session.storage'),
-            'dStore': getAbsolutePath('storage/d.store'),
-            'dBaseLog': getAbsolutePath('log/d.base.log'),
-            'dConsoleAdapter': getAbsolutePath('log/d.console.log'),
-            'dUIAdapter': getAbsolutePath('log/d.ui.log'),
-            'dLog': getAbsolutePath('log/d.log')
+            'libs': 'external/libs',
+            'dInherit': 'common/d.class',
+            'dAjax': 'common/d.ajax',
+            'dValidate': 'util/d.util.validate',
+            'dDate': 'util/d.util.date',
+            'dAbstractStorage': 'storage/d.abstract.storage',
+            'dCookie': 'storage/d.cookie',
+            'dLocalStorage': 'storage/d.local.storage',
+            'dSessionStorage': 'storage/d.session.storage',
+            'dStore': 'storage/d.store',
+            'dBaseLog': 'log/d.base.log',
+            'dConsoleAdapter': 'log/d.log.console',
+            'dUIAdapter': 'log/d.log.ui',
+            'dLog': 'log/d.log',
+            'dHash': 'util/d.util.hash',
+            'dUIView': 'ui/d.ui.view',
+            'dUrl': 'util/d.util.url',
+            'dPageCache': 'page/d.page.cache'
         }
     });
 });
