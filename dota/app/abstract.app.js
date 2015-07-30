@@ -1,4 +1,4 @@
-define(['dInherit', 'dPageCache', 'dUIView'], function (dInherit, dPageCache, dUIView) {
+define(['dInherit', 'dPageCache', 'dUIView', 'dUrl'], function (dInherit, dPageCache, dUIView, dUrl) {
 
     var Appliction = dInherit({
         __propertys__: function () {
@@ -143,6 +143,7 @@ define(['dInherit', 'dPageCache', 'dUIView'], function (dInherit, dPageCache, dU
         },
 
         loadViewFromUrl: function(url){
+
         },
 
         //创建dom结构
@@ -164,12 +165,30 @@ define(['dInherit', 'dPageCache', 'dUIView'], function (dInherit, dPageCache, dU
         },
 
 
-        forward: function (url, replace, isNotAnimat) {
+        forward: function (url) {
+            this.loadViewFromUrl(this._getRootRelatavePath(url));
+        },
+
+        back: function (url) {
 
         },
 
-        back: function (url, isNotAnimat) {
+        /**
+         * 跟目录下的 相对路径
+         * @param url
+         * @returns {*}
+         * @private
+         */
+        _getRootRelatavePath: function(url){
+            var pathName = dUrl.parseUrl(location.href).pathname;
 
+            if(url.charAt(0) === '/'){
+                pathName = url;
+            } else{
+                pathName = pathName.slice(0, pathName.lastIndexOf('/')) + url;
+            }
+
+            return pathName;
         }
 
     });

@@ -27,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/config.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="693">
-              <caret line="24" column="23" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="23" />
+              <caret line="23" column="17" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -36,13 +36,16 @@
       <file leaf-file-name="abstract.app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/abstract.app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.58310246" vertical-offset="2330" max-vertical-offset="3066">
-              <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.4473684" vertical-offset="559" max-vertical-offset="1743">
+              <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
               <folding>
-                <element signature="e#746#826#0" expanded="false" />
-                <element signature="e#866#1003#0" expanded="false" />
-                <element signature="e#3557#4245#0" expanded="false" />
-                <element signature="e#4309#4481#0" expanded="false" />
+                <element signature="e#760#840#0" expanded="false" />
+                <element signature="e#880#1017#0" expanded="false" />
+                <element signature="e#1168#3488#0" expanded="false" />
+                <element signature="e#3571#4259#0" expanded="false" />
+                <element signature="e#4323#4495#0" expanded="false" />
+                <element signature="e#5364#5467#0" expanded="false" />
+                <element signature="e#5511#5803#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -51,8 +54,8 @@
       <file leaf-file-name="d.util.url.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util/d.util.url.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1281">
-              <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="1281">
+              <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
               <folding>
                 <element signature="e#1892#2030#0" expanded="false" />
                 <element signature="e#2249#2952#0" expanded="false" />
@@ -225,6 +228,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="log" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dota" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dota" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -687,14 +704,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="693">
-          <caret line="24" column="23" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/page/d.page.cache.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1470">
@@ -703,10 +712,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="693">
+          <caret line="23" column="17" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/util/d.util.url.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1281">
-          <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="1281">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
           <folding>
             <element signature="e#1892#2030#0" expanded="false" />
             <element signature="e#2249#2952#0" expanded="false" />
@@ -716,13 +733,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/abstract.app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58310246" vertical-offset="2330" max-vertical-offset="3066">
-          <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.4473684" vertical-offset="559" max-vertical-offset="1743">
+          <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
           <folding>
-            <element signature="e#746#826#0" expanded="false" />
-            <element signature="e#866#1003#0" expanded="false" />
-            <element signature="e#3557#4245#0" expanded="false" />
-            <element signature="e#4309#4481#0" expanded="false" />
+            <element signature="e#760#840#0" expanded="false" />
+            <element signature="e#880#1017#0" expanded="false" />
+            <element signature="e#1168#3488#0" expanded="false" />
+            <element signature="e#3571#4259#0" expanded="false" />
+            <element signature="e#4323#4495#0" expanded="false" />
+            <element signature="e#5364#5467#0" expanded="false" />
+            <element signature="e#5511#5803#0" expanded="false" />
           </folding>
         </state>
       </provider>
