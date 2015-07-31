@@ -7,3 +7,7 @@ Ancients
 16h: history 历史 (包含view跳转,)
 4h: web geo 定位
 8h: util 帮助模块(基础,不含业务帮助)
+
+controller 内涵 create, load, hide
+view 接上面  公开oncreate, onload, onhide接口
+model 包含cAjax

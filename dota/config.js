@@ -6,6 +6,7 @@ define(['libs'], function(){
         waitSeconds: 20,
         paths: {
             'libs': 'external/libs',
+            'dApp': 'app/d.abstract.app',
             'dInherit': 'common/d.class',
             'dAjax': 'common/d.ajax',
             'dValidate': 'util/d.util.validate',
@@ -22,7 +23,8 @@ define(['libs'], function(){
             'dHash': 'util/d.util.hash',
             'dUIView': 'ui/d.ui.view',
             'dUrl': 'util/d.util.url',
-            'dPageCache': 'page/d.page.cache'
+            'dPageCache': 'page/d.page.cache',
+            'dGuid': 'util/d.util.guid'
         }
     });
 });

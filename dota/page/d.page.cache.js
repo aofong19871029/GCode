@@ -58,6 +58,9 @@ define(['dInherit', 'dHash'], function(dInherit, dHash){
         getPagePath: function(name){
             var obj = _.findWhere_(this._queueCaches, {name: name});
             return obj ? obj.path : obj;
+        },
+        length: function(){
+            return this._queueCaches.length;
         }
     });
 
