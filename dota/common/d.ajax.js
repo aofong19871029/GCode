@@ -1,3 +1,4 @@
+// 暂时废弃，用Backbone.ajax 替代
 define(['dValidate'], function(dValidate){
     var contentTypeMap = {
             'json': 'application/json',
@@ -96,7 +97,6 @@ define(['dValidate'], function(dValidate){
             };
 
             return sendReq(opt)
-        },
-        ajax: sendReq
+        }
     };
 });

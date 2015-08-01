@@ -8,7 +8,7 @@ define(['libs'], function(){
             'libs': 'external/libs',
             'dApp': 'app/d.abstract.app',
             'dInherit': 'common/d.class',
-            'dAjax': 'common/d.ajax',
+            //'dAjax': 'common/d.ajax',
             'dValidate': 'util/d.util.validate',
             'dDate': 'util/d.util.date',
             'dAbstractStorage': 'storage/d.abstract.storage',
