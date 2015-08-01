@@ -112,14 +112,14 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
                 if( self.curController) {
                     self.lastController = self.curController;
                 }
-                self.curController = ctrl;
+                self.curController =  new ctrl();
 
                 // 将template 注入目标view, 以供其调用
                 self.curController.view.viewName = opt.viewName;
                 self.curController.view.T = opt.tpl;
 
                 // 存储view cache
-                self.pageCache[action](ctrl.view.viewName, path, ctrl.view);
+                self.pageCache[action](self.curController.view.viewName, path, ctrl.view);
 
                 self.createViewPort();
                 self.switchView();
