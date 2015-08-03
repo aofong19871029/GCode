@@ -17,8 +17,9 @@ define(['dInherit'], function(dInherit){
         hide: function(){
             this.view.hide();
         }
-
     });
+
+    Controlelr.extend = $.proxy(Backbone.Model.extend, Controlelr);
 
     return Controlelr;
 });

@@ -1,4 +1,4 @@
-define(['libs'], function(){
+(function() {
     var baseDir = Ancients.dir || '';
 
     require.config({
@@ -20,11 +20,17 @@ define(['libs'], function(){
             'dConsoleAdapter': 'log/d.log.console',
             'dUIAdapter': 'log/d.log.ui',
             'dLog': 'log/d.log',
-            'dHash': 'util/d.util.hash',
+            'dHash': 'storage/d.hash',
             'dUIView': 'ui/d.ui.view',
             'dUrl': 'util/d.util.url',
             'dPageCache': 'page/d.page.cache',
-            'dGuid': 'util/d.util.guid'
+            'dGuid': 'util/d.util.guid',
+            'dAbstractApp': 'app/d.abstract.app',
+            'dController': 'page/d.controller',
+            'dModel': 'page/d.model',
+            'dView': 'page/d.view'
         }
     });
-});
+
+    require(['libs']);
+})();

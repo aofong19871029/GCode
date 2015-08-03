@@ -72,20 +72,21 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
                 path = this._getRootAbsolutePath(url);
 
             require(['text!' + path], function(html){
-                self.loadView(self._resolvePageOption(html), path, opt.action);
+                self.loadView(self._collectPageOption(html), path, opt.action);
             });
         },
 
         /**
-         * 解析 page html
+         * 获取 page html
          * 获取controller, viewname, tpl, page title
+         * 通过获取到的数据 来加载controller js
+         *
          * @param html
          * @private
          */
-        _resolvePageOption: function(html){
+        _collectPageOption: function(html){
             var pageDom = $(html),
-                controller = pageDom.find('meta[name="controller"]').attr('value'),
-                viewName = pageDom.find('meta[name="view-name"]').attr('value'),
+                config = JSON.parse(pageDom.find('script[type="text/config"]').html()),
                 title = pageDom.find('title').html(),
                 tpl = {};
 
@@ -94,8 +95,8 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
             });
 
             return {
-                controller: controller,
-                viewName: viewName,
+                controllerPath: config.controller,
+                viewName: config.viewName,
                 tpl: tpl,
                 title: title
             };
@@ -103,36 +104,73 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
 
         loadView: function(opt, path, action){
             var self = this,
-                controller = opt.controller;
+                controllerPath = opt.controllerPath,
+                ctrl;
 
             this._freshUrlAndTitle();
 
-            require(controller, function(ctrl){
-                // view 互换
-                if( self.curController) {
-                    self.lastController = self.curController;
-                }
-                self.curController =  new ctrl();
+            // 现有取缓存中的
 
-                // 将template 注入目标view, 以供其调用
-                self.curController.view.viewName = opt.viewName;
-                self.curController.view.T = opt.tpl;
+            ctrl = this.pageCache.getPageByPath(controllerPath);
 
-                // 存储view cache
-                self.pageCache[action](self.curController.view.viewName, path, ctrl.view);
-
-                self.createViewPort();
-                self.switchView();
-            });
+            if(ctrl == null) {
+                require(controllerPath, function (ctrl) {
+                    self._handlerCntroller(ctrl, opt.path, opt.viewName, opt.tpl, action);
+                });
+            }
+            else {
+                this._handlerCntroller(ctrl, opt.path, opt.viewName, opt.tpl, action);
+            }
         },
 
-        switchView: function(){
+        /**
+         * controller 加载成功后, 做的操作
+         *
+         * 当前 controller 切换
+         * 给controller.view 注入模板 和 viewname
+         * cache controller
+         *
+         *
+         *
+         * @param controller
+         * @param path
+         * @param viewName
+         * @param tpl
+         * @param action
+         * @private
+         */
+        _handlerCntroller: function(controller, path, viewName, tpl, action){
+            // controller 互换
+            if( this.curController) {
+                this.lastController = this.curController;
+            }
+            self.curController =  new controller();
+
+            // 将template 注入目标view, 以供其调用
+            this.curController.view.viewName = viewName;
+            this.curController.view.T = tpl;
+
+            // 存储view cache
+            this.pageCache[action](this.curController.view.viewName, path, controller.view);
+
+            this._createViewPort();
+            this._switchView();
+        },
+
+        _switchView: function(){
             // 执行lastview.onHide
             self.lastController.hide();
             // curview 已构造，仅执行reload
             self.curController.load();
         },
 
+        /**
+         * 更改history url
+         * @param title
+         * @param path
+         * @param action
+         * @private
+         */
         _freshUrlAndTitle: function(title, path, action){
             var url = location.protocol + '//' + location.host + '/' + path;
 
@@ -157,7 +195,7 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
          * 创建view port container
          * view.$el 存在: 则无需构建新的dom
          */
-        createViewPort: function () {
+        _createViewPort: function () {
             if(this.curController.view.$el.length) return;
 
             var mainViewHtml = '<div class="main-viewport"></div>',
@@ -184,10 +222,14 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
 
         forward: function (url) {
            this.directTo(url, {action: 'forward'});
+
+            Ancients &&! Ancients.forward && (Ancients.forward = $.proxy(arguments.callee, this));
         },
 
         back: function (url) {
             this.directTo(url, {action: 'back'});
+
+            Ancients &&! Ancients.back && (Ancients.back = $.proxy(arguments.callee, this));
         },
 
         /**
@@ -196,8 +238,8 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
          * @param opt history方向
          */
         directTo: function(url, opt){
-            var currentPath = this._getRootRelatavePath(location.href),
-                targetPath = this._getRootRelatavePath(url);
+            var currentPath = this._getRootAbsolutePath(location.href),
+                targetPath = this._getRootAbsolutePath(url);
 
             // 如果goto的路径是当前url, 则什么都不做
             if(currentPath !== targetPath){
@@ -224,5 +266,6 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
         }
 
     });
-    return Appliction;
+
+    return AbstractApp;
 });

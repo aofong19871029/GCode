@@ -21,9 +21,9 @@ require.config({
     paths: {
         '$': 'zepto',
         '_': 'underscore',
-        'B': 'backbone.custom',
+        'B': 'backbone.custom.js',
         'F': 'fastclick',
-        'text': 'require.text'
+        'text': 'require.text.js'
     }
 });
 

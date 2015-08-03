@@ -21,7 +21,7 @@ define(['dInherit', 'dHash'], function(dInherit, dHash){
         forward: function(name, path, page){
             if(this._isCurrentPage(name)) return;
 
-            this._cache.add(name, page);
+            this._cache.set(name, page);
             this._queueCaches.push({
                 name: name,
                 page: page,
@@ -52,12 +52,19 @@ define(['dInherit', 'dHash'], function(dInherit, dHash){
         _isCurrentPage: function(name){
             return _.lastIndexOf(this._history, name) === this._history.length - 1;
         },
-        getPage: function(name) {
+        getPageByViewName: function(name) {
             return this._cache.find(name);
         },
-        getPagePath: function(name){
-            var obj = _.findWhere_(this._queueCaches, {name: name});
+        getPagePathByViewName: function(name){
+            var obj = this._searchQueue({name: name});
             return obj ? obj.path : obj;
+        },
+        getPageByPath: function(path){
+            var obj = this._searchQueue({path: path});
+            return obj ? obj.page : obj;
+        },
+        _searchQueue: function(condition){
+            return _.findWhere(this._queueCaches, condition);
         },
         length: function(){
             return this._queueCaches.length;
