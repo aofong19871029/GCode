@@ -1,6 +1,6 @@
 (function(win, doc){
     win.Ancients = {
-        dir: '',
+        dir: 'http://localhost:8080/',
         isFunction: function(func){
             return Array.prototype.toString.call(func) === '[object Function]';
         },
@@ -30,7 +30,21 @@
         }
     };
 
-    Ancients.loadJs('/common/require.min.js', function(){
-        Ancients.loadJs('config.js');
+    var scripts = document.querySelectorAll('script'),
+        tmp,
+        pageConfigUrl;
+
+    for(var i = 0; i< scripts.length; i++){
+        tmp = scripts[i].getAttribute('pdConfig');
+        if(tmp && tmp.length){
+            pageConfigUrl = tmp;
+            break;
+        }
+    }
+
+    Ancients.loadJs(Ancients.dir + '/external/require.min.js', function(){
+        Ancients.loadJs(Ancients.dir + 'config.js', function(){
+            pageConfigUrl && Ancients.loadJs(pageConfigUrl);
+        });
     });
 })(window, document);

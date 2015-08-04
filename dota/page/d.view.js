@@ -1,4 +1,4 @@
-define(['dStore', 'dGuid'], function(dStore, dGuid){
+define(['dStore', 'dGuid', 'dValidate'], function(dStore, dGuid, dValidate){
     var BaseView = Backbone.View.extend({
         __propertys__: function(){
         },
@@ -6,15 +6,15 @@ define(['dStore', 'dGuid'], function(dStore, dGuid){
         initialize: function(){},
 
         create: function(options){
-            this.onCreate();
+            dValidate.isFunction(this.onCreate) && this.onCreate();
         },
 
         load: function(options){
-            this.onLoad();
+            dValidate.isFunction(this.onLoad) && this.onLoad();
         },
 
         hide: function(options){
-            this.onHide();
+            Validate.isFunction(this.onHide) && this.onHide();
         },
 
         forward: function(){},

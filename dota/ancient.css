@@ -42,7 +42,7 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
     left: 0;
     top: 0;
     z-index: 80;
-    background-color: #383838;
+    background-color: #3D98FF;
     font-weight: 600;
     color: #FFF;
     line-height: 44px;
@@ -92,4 +92,10 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+.button-slarge{
+    width: 150px;
+    height: 150px;
+    margin: 8px;
 }
