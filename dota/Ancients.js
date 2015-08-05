@@ -2,11 +2,13 @@
     win.Ancients = {
         dir: 'http://localhost:8080/',
         isFunction: function(func){
+            if(typeof func === 'undefined') return false;
+
             return Array.prototype.toString.call(func) === '[object Function]';
         },
 
         loadJs : function(url, callback){
-            var isCallbackFunc = this.isFunction(callback),
+            var isCallbackFunc = this.isFunction(callback);
                 script = doc.createElement("script");
 
             script.type = "text/javascript";
@@ -35,7 +37,7 @@
         pageConfigUrl;
 
     for(var i = 0; i< scripts.length; i++){
-        tmp = scripts[i].getAttribute('pdConfig');
+        tmp = scripts[i].getAttribute('pgConfig');
         if(tmp && tmp.length){
             pageConfigUrl = tmp;
             break;

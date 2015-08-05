@@ -23,12 +23,12 @@ define(['dInherit', 'dBaseLog', 'dDate'], function(dInherit, dBaseLog, dDate){
             this.wrap = $('body');
         },
         initialize: function(){
-            this._super.call(this);
+            this.__superInitialize.call(this);
 
             this.dom = $(this.tpl)[0];
             this._addStyle(this.style);
             this.hide();
-            this.wrap.appendChild(this.dom);
+            this.wrap.append(this.dom);
             this.bindEvents();
         },
         bindEvents: function(){

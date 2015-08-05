@@ -1,5 +1,5 @@
 define(['dInherit'], function(dInherit){
-    var Controlelr = dInherit({
+    var BaseControlelr = dInherit({
         __propertys__: function(){
             this.model = null;
 
@@ -19,7 +19,7 @@ define(['dInherit'], function(dInherit){
         }
     });
 
-    Controlelr.extend = $.proxy(Backbone.Model.extend, Controlelr);
+    BaseControlelr.extend = $.proxy(Backbone.Model.extend, BaseControlelr);
 
-    return Controlelr;
+    return BaseControlelr;
 });

@@ -5,7 +5,7 @@ define(function(undefined){
         }
     };
 
-    ['Function', 'String', 'Object', 'Array', 'Number'].each(function (item) {
+    ['Function', 'String', 'Object', 'Array', 'Number'].forEach(function (item) {
         validate['is' + item] = function (data) {
             return $.type(data) === item.toLowerCase();
         }

@@ -5,11 +5,10 @@ define(['dView'], function(dView){
         },
 
         onCreate: function(){
-            debugger;
         },
 
         onLoad: function(){
-
+            this.$el.append(this.T['js-wrap']);
         },
 
         onHide: function(){

@@ -1,0 +1,16 @@
+body{background: #fff;}
+@media only screen and (max-width: 320px){
+    fieldset button[type="submit"]{
+        margin: 5px !important;
+    }
+
+    .qa{
+        margin: -10px !important;
+    }
+}
+
+.form-wrapper{padding: 42px 30px;}
+.pure-control-group label{width: 56px; margin-top: 4.2px; vertical-align: middle}
+.pure-controls{margin-left: 1%;}
+fieldset .pure-button-primary{width: 175px; margin-left: 56px;}
+.qa{margin-left: 40px;}

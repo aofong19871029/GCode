@@ -28,6 +28,8 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
             $.extend(this, options || {});
 
             this.bindEvent();
+
+            this.forward(location.href);
         },
 
         /**
@@ -68,11 +70,10 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
          * @param opt
          */
         loadViewFromUrl: function(url, opt){
-            var self = this,
-                path = this._getRootAbsolutePath(url);
+            var self = this;
 
-            require(['text!' + path], function(html){
-                self.loadView(self._collectPageOption(html), path, opt.action);
+            require(['text!' + url], function(html){
+                self.loadView(self._collectPageOption(html), url, opt.action);
             });
         },
 
@@ -86,11 +87,11 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
          */
         _collectPageOption: function(html){
             var pageDom = $(html),
-                config = JSON.parse(pageDom.find('script[type="text/config"]').html()),
-                title = pageDom.find('title').html(),
+                config = JSON.parse(pageDom.filter('script[type="text/config"]').html()),
+                title = pageDom.filter('title').html(),
                 tpl = {};
 
-            pageDom.find('script[type="text/tpl"][id]').map(function(script) {
+            pageDom.filter('script[type="text/tpl"][id]').map(function(i ,script) {
                 tpl[script.id] = script.innerHTML.trim();
             });
 
@@ -107,19 +108,19 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
                 controllerPath = opt.controllerPath,
                 ctrl;
 
-            this._freshUrlAndTitle();
+//            this._freshUrlAndTitle(opt.title, path, action);
 
             // 现有取缓存中的
 
             ctrl = this.pageCache.getPageByPath(controllerPath);
 
             if(ctrl == null) {
-                require(controllerPath, function (ctrl) {
-                    self._handlerCntroller(ctrl, opt.path, opt.viewName, opt.tpl, action);
+                require([controllerPath], function (ctrl) {
+                    self._handlerCntroller(ctrl, path, opt.viewName, opt.tpl, action);
                 });
             }
             else {
-                this._handlerCntroller(ctrl, opt.path, opt.viewName, opt.tpl, action);
+                this._handlerCntroller(ctrl, path, opt.viewName, opt.tpl, action);
             }
         },
 
@@ -144,24 +145,29 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
             if( this.curController) {
                 this.lastController = this.curController;
             }
-            self.curController =  new controller();
+            this.curController =  new controller();
 
             // 将template 注入目标view, 以供其调用
             this.curController.view.viewName = viewName;
             this.curController.view.T = tpl;
 
             // 存储view cache
-            this.pageCache[action](this.curController.view.viewName, path, controller.view);
+            this.pageCache[action](this.curController.view.viewName, path, this.curController);
 
             this._createViewPort();
             this._switchView();
         },
 
         _switchView: function(){
-            // 执行lastview.onHide
-            self.lastController.hide();
+            if(this.lastController) {
+                // 执行lastview.onHide
+                this.lastController.hide();
+                this.lastController.view.$el.hide();
+            }
+
             // curview 已构造，仅执行reload
-            self.curController.load();
+            this.curController.load();
+            this.curController.view.$el.show();
         },
 
         /**
@@ -172,22 +178,25 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
          * @private
          */
         _freshUrlAndTitle: function(title, path, action){
-            var url = location.protocol + '//' + location.host + '/' + path;
+            var url = location.protocol + '//' + location.host + '/' + path,
+                noSuffixPath = this._getRootAbsolutePathWithoutSuffix(path);
+
+
 
             if(action === 'forward'){
                 history.pushState({
                     title: title,
                     url: url,
-                    path: path,
+                    path: noSuffixPath,
                     action: action
-                }, title, url);
+                }, title, noSuffixPath);
             } else if(action === 'back'){
                 history.replaceState({
                     title: title,
                     url: url,
-                    path: path,
+                    path: noSuffixPath,
                     action: action
-                }, title, url);
+                }, title, noSuffixPath);
             }
         },
 
@@ -196,7 +205,7 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
          * view.$el 存在: 则无需构建新的dom
          */
         _createViewPort: function () {
-            if(this.curController.view.$el.length) return;
+            if(this.curController.view.$el.parent().length) return;
 
             var mainViewHtml = '<div class="main-viewport"></div>',
                 subViewId = this.curController.view.viewName + '_' + dGuid.newGuid(),
@@ -210,12 +219,12 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
             if(!this.mainframe || !this.mainframe.length){
                 container.html(mainViewHtml);
 
-                this.mainframe = $('#main-viewport');
+                this.mainframe = $('.main-viewport');
             }
 
             this.mainframe.append(subViewHtml);
 
-            this.curController.view.$el = $('#' + subViewId);
+            this.curController.view.el = (this.curController.view.$el = $('#' + subViewId))[0];
             // 创建好view dom后触发controller create函数
             this.curController.create();
         },
@@ -242,27 +251,45 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
                 targetPath = this._getRootAbsolutePath(url);
 
             // 如果goto的路径是当前url, 则什么都不做
-            if(currentPath !== targetPath){
+            if(currentPath !== targetPath || !this.curController){
                 this.loadViewFromUrl(targetPath, opt);
             }
         },
 
         /**
-         * 跟目录下的 相对路径
+         * 跟目录下的 相对路径+文件名
          * @param url
          * @returns {*}
          * @private
          */
         _getRootAbsolutePath: function(url){
-            var pathName = dUrl.parseUrl(url).pathname;
+            var pathParams = dUrl.parseUrl(url),
+                pathName = pathParams.pathname,
+                filename = pathParams.filename;
 
             if(url.charAt(0) === '/'){
                 pathName = url;
             } else{
-                pathName = pathName.slice(0, pathName.lastIndexOf('/')) + url;
+                pathName = pathName.slice(0, pathName.lastIndexOf('/'));
             }
 
+            pathName += '/' + filename;
+
             return pathName;
+        },
+
+        /**
+         * 跟目录下的 相对路径 + 文件名(不带后缀)
+         * @param url
+         * @private
+         */
+        _getRootAbsolutePathWithoutSuffix: function(url){
+            debugger;
+            var params = dUrl.parseUrl(url),
+                directory = params.directory,
+                fileName = params.filename;
+
+            return directory + fileName.split('.')[0];
         }
 
     });

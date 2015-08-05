@@ -50,7 +50,7 @@ define(['dInherit', 'dHash'], function(dInherit, dHash){
             }
         },
         _isCurrentPage: function(name){
-            return _.lastIndexOf(this._history, name) === this._history.length - 1;
+            return _.lastIndexOf(this._history, name) === this._history.length - 1 && this._queueCaches.length;
         },
         getPageByViewName: function(name) {
             return this._cache.find(name);

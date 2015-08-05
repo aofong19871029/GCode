@@ -33,7 +33,9 @@ define(function() {
 
                 // load __propertys__
                 _super.__propertys__.call(this);
-                this.__propertys__.call(this);
+                self.__propertys__.call(this);
+
+                self.__superInitialize = _super.initialize;
                 // init the class
                 self.initialize.apply(self, arguments);
                 return self;

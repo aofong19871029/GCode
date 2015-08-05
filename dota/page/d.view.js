@@ -25,5 +25,5 @@ define(['dStore', 'dGuid', 'dValidate'], function(dStore, dGuid, dValidate){
 
     });
 
-    return Model;
+    return BaseView;
 });

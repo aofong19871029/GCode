@@ -4,7 +4,7 @@ define(['dInherit', 'dBaseLog', 'dDate'], function(dInherit, dBaseLog, dDate){
      */
     var ConsoleAdapter = dInherit(dBaseLog.AbstractAdapter, {
         initialize: function(){
-            this._super.call(this);
+            this.__superInitialize.call(this);
         },
         /**
          * 输出log提示

@@ -60,7 +60,7 @@ define(['dInherit'], function(dInherit){
             }
         },
         addAdapter: function(adapter)   {
-            if(adapter instanceof JsLog.Adapter) {
+            if(adapter instanceof JsLog.AbstractAdapter) {
                 adapter.setLogger(this);
                 this.adapters.push(adapter);
             }

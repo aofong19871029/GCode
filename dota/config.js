@@ -51,9 +51,12 @@
             '_': Ancients.dir + 'external/underscore',
             'B': Ancients.dir + 'external/backbone.custom',
             'F': Ancients.dir + 'external/fastclick',
-            'text': Ancients.dir + 'external/require.text'
+            'text': Ancients.dir + 'external/require.text',
+            'css': Ancients.dir + 'external/require.css'
         }
     });
 
-    require(['libs']);
+    require(['dApp', 'libs'], function(dApp){
+        var app = new dApp();
+    });
 })();

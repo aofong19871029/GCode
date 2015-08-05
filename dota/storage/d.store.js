@@ -23,8 +23,6 @@ define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dLog', 'dVali
             // 代理storage
             this.iProxy = dLocalStorage.getInstance();
 
-            this.base = this._super;
-
             this.error = $.proxy(dLog.defaultLog.error, dLog.defaultLog);
 
             // 存储数据
