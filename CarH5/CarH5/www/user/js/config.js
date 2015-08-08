@@ -3,6 +3,8 @@ require.config({
     waitSeconds: 20,
     paths: {
         'loginView': 'view/loginview',
-        'loginModel': 'model/loginmodel'
+        'loginModel': 'model/loginmodel',
+        'signupView': 'view/signupview',
+        'signupModel': 'model/signupmodel'
     }
 });

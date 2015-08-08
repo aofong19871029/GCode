@@ -1,11 +1,11 @@
 define(['dView'], function(dView){
     var View = dView.extend({
         events: {
-          'submit #js-login-form'  : 'login'
+            'click .js-back'  : 'backToLogin'
         },
 
         onCreate: function(){
-            this.$el.append(this.T['js-wrap']);
+            this.$el.append(this.T['js-signup-wrap']);
         },
 
         onLoad: function(){
@@ -16,13 +16,8 @@ define(['dView'], function(dView){
 
         },
 
-        /**
-         * 登录
-         */
-        login: function(e){
-            debugger;
-
-            e.preventDefault();
+        backToLogin: function(){
+            Ancients.back();
         }
     });
 

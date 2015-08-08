@@ -6,7 +6,7 @@
  * 3. Page的history控制
  */
 
-define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCache, dUrl, dGuid) {
+define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate'], function (dInherit, dPageCache, dUrl, dGuid, dValidate) {
 
     var AbstractApp = dInherit({
         __propertys__: function () {
@@ -29,6 +29,18 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
 
             this.bindEvent();
 
+            Ancients.forward = $.proxy(this.forward, this);
+            Ancients.back = $.proxy(function(url){
+                if(!url || !dValidate.isString(url)){
+                    url = this.pageCache.getLastPageUrl();
+
+                    // 回退上一页
+                    debugger;
+                }
+
+                this.back(url);
+            }, this);
+
             this.forward(location.href);
         },
 
@@ -37,31 +49,38 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
          */
         bindEvent: function(){
             $('body').on('click', $.proxy(function (e) {
-                    var el = $(e.target);
-                    var needhandle = false;
+                var el = $(e.target);
+                var needhandle = false;
 
-                    while (true) {
-                        if (!el[0]) {
-                            break;
-                        }
-                        if (el[0].nodeName == 'BODY') {
-                            break;
-                        }
-                        if (el.hasClass('sub-viewport')) {
-                            break;
-                        }
-
-                        if (el[0].nodeName == 'A') {
-                            needhandle = true;
-                            break;
-                        }
-                        el = el.parent();
+                while (true) {
+                    if (!el[0]) {
+                        break;
+                    }
+                    if (el[0].nodeName == 'BODY') {
+                        break;
+                    }
+                    if (el.hasClass('sub-viewport')) {
+                        break;
                     }
 
-                    if (needhandle) {
-                        this.forward(el.attr('href'));
+                    if (el[0].nodeName == 'A') {
+                        needhandle = true;
+                        break;
                     }
-                }, this));
+                    el = el.parent();
+                }
+
+                if (needhandle) {
+                    var href = el.attr('href');
+
+                    if(href.indexOf('javascript') === -1) {
+                        this.forward(href);
+
+                        e.preventDefault();
+                    }
+                }
+
+            }, this));
         },
 
         /**
@@ -108,10 +127,9 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
                 controllerPath = opt.controllerPath,
                 ctrl;
 
-//            this._freshUrlAndTitle(opt.title, path, action);
+            this._freshUrlAndTitle(opt.title, path, action);
 
             // 现有取缓存中的
-
             ctrl = this.pageCache.getPageByPath(controllerPath);
 
             if(ctrl == null) {
@@ -189,14 +207,14 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
                     url: url,
                     path: noSuffixPath,
                     action: action
-                }, title, noSuffixPath);
+                }, title, path);
             } else if(action === 'back'){
                 history.replaceState({
                     title: title,
                     url: url,
                     path: noSuffixPath,
                     action: action
-                }, title, noSuffixPath);
+                }, title, path);
             }
         },
 
@@ -224,21 +242,18 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
 
             this.mainframe.append(subViewHtml);
 
-            this.curController.view.el = (this.curController.view.$el = $('#' + subViewId))[0];
+            this.curController.view._setRootEl($('#' + subViewId));
+//            this.curController.view.el = (this.curController.view.$el = $('#' + subViewId))[0];
             // 创建好view dom后触发controller create函数
             this.curController.create();
         },
 
         forward: function (url) {
            this.directTo(url, {action: 'forward'});
-
-            Ancients &&! Ancients.forward && (Ancients.forward = $.proxy(arguments.callee, this));
         },
 
         back: function (url) {
             this.directTo(url, {action: 'back'});
-
-            Ancients &&! Ancients.back && (Ancients.back = $.proxy(arguments.callee, this));
         },
 
         /**
@@ -267,9 +282,18 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
                 pathName = pathParams.pathname,
                 filename = pathParams.filename;
 
+            // 跟路径 /xx/aa/bb.html
             if(url.charAt(0) === '/'){
-                pathName = url;
-            } else{
+                pathName = pathName.slice(0, pathName.lastIndexOf('/'));
+            }
+            // 完整的http径  http://xxx/xxx/xx.html
+            else if (url.indexOf('/') !== -1){
+                pathName = pathName.slice(0, pathName.lastIndexOf('/'));
+            }
+            // 同目录下跳转 login.html => signup.html
+            else if(url.indexOf('/') === -1) {
+                filename = url;
+                pathName = dUrl.parseUrl(location.href).directory;
                 pathName = pathName.slice(0, pathName.lastIndexOf('/'));
             }
 
@@ -284,7 +308,6 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid'], function (dInherit, dPageCac
          * @private
          */
         _getRootAbsolutePathWithoutSuffix: function(url){
-            debugger;
             var params = dUrl.parseUrl(url),
                 directory = params.directory,
                 fileName = params.filename;

@@ -68,6 +68,16 @@ define(['dInherit', 'dHash'], function(dInherit, dHash){
         },
         length: function(){
             return this._queueCaches.length;
+        },
+        /**
+         * 取上一次的 url
+         *
+         * 即length -2 的page信息
+         * length -1 是当前page
+         * @returns {*}
+         */
+        getLastPageUrl: function(){
+            return this._queueCaches[this.length() - 2]['path'];
         }
     });
 
