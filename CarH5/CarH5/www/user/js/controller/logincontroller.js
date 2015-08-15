@@ -2,7 +2,10 @@ define(['dController', 'loginView', 'loginModel', 'css!../../css/login.css'], fu
     var Controller = dController.extend({
         initialize: function(){
             var model = new loginModel(this),
-                view = new loginView(model, this);
+                view = new loginView({
+                    model: model,
+                    controller: this
+                });
 
             this.model = model;
             this.view = view;

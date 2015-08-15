@@ -1,11 +1,11 @@
 @media only screen and (max-width: 320px){
    .sub-viewport .signup-wrapper{
-        padding: 0.3rem;
+        padding: 2rem 0.3rem;
     }
 }
 
 .signup-wrapper{
-    padding: 1.87rem;
+    padding: 2rem 1.87rem;
 }
 .signup-wrapper .pure-control-group label{
     float: left;
@@ -27,5 +27,8 @@
     margin-left: 0.8rem;
     width: 8.321rem;
 }
-.signup-wrapper .pure-form  .submit-signup{margin-left: 4.12rem; width: 14.5rem;}
+.signup-wrapper .pure-form  .submit-signup{margin-left: 4.12rem; width: 14.5rem; background-color: #FF851B;}
 .signup-wrapper .otherway{margin-left: 4rem;}
+.signup-wrapper .security-code button {
+    background-color: #2ECC40;
+}

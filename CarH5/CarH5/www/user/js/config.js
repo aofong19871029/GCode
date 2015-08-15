@@ -8,3 +8,8 @@ require.config({
         'signupModel': 'model/signupmodel'
     }
 });
+
+Ancients.config({
+    dir: 'http://localhost:8080/',
+    serviceDir: 'http://localhost/restful/'
+});

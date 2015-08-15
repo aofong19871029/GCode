@@ -1,4 +1,4 @@
-define(['dStore', 'dGuid'], function(dStore, dGuid){
+define(['dStore', 'dGuid', 'dAjax'], function(dStore, dGuid, dAjax){
     var BaseModel = Backbone.Model.extend({
         __propertys__: function(){
             this.store = new dStore({
@@ -7,20 +7,16 @@ define(['dStore', 'dGuid'], function(dStore, dGuid){
             });
         },
 
+        initialize: function(controller){
+            this.controller = controller;
+        },
+
         /**
-         * 将fetch的数据保存起来
+         * 封装ajax
          * @param options
          */
         request: function(options){
-            var onsuccess = options.success;
-
-            if(options) {
-                options.success = $.proxy(function(data){
-                    this.store.set(data);
-
-                    onsuccess.apply(this, arguments);
-                }, this);
-            }
+            dAjax.post(options.url, options.success, options.error, options.store);
         }
 
     });

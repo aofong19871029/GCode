@@ -90,10 +90,19 @@ define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dLog', 'dVali
             return date;
         },
         set: function(value){
-            this.iProxy.set(this.key, value, this.expir.getTime());
+            this.iProxy.set(this.key, JSON.stringify(value), this.expir.getTime());
+        },
+        setAttr: function(name, value){
+            var data = this.get();
+
+            data[name + ''] = value;
+            this.set(data);
         },
         get: function(){
-            return this.iProxy.get(this.key);
+            return JSON.parse(this.iProxy.get(this.key));
+        },
+        getAttr: function(name){
+            return this.get()[name];
         }
     });
 

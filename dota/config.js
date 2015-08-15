@@ -19,13 +19,16 @@
             },
             F: {
                 exports: 'F'
+            },
+            stickit: {
+                exports: 'F'
             }
         },
         paths: {
             'libs': baseDir + 'external/libs',
             'dApp': baseDir + 'app/d.abstract.app',
             'dInherit': baseDir + 'common/d.class',
-            //'dAjax': baseDir + 'common/d.ajax',
+            'dAjax': baseDir + 'common/d.ajax',
             'dValidate': baseDir + 'util/d.util.validate',
             'dDate': baseDir + 'util/d.util.date',
             'dAbstractStorage': baseDir + 'storage/d.abstract.storage',
@@ -46,17 +49,23 @@
             'dController': baseDir + 'page/d.controller',
             'dModel': baseDir + 'page/d.model',
             'dView': baseDir + 'page/d.view',
+            'dUIView': baseDir + 'ui/d.ui.view',
+
+            'dBaseUI': baseDir + 'ui/d.ui.base',
+            'dUIHeader': baseDir + 'ui/d.ui.header',
+            'dUIToast': baseDir + 'ui/d.ui.toast',
             // 基础框架
-            '$': Ancients.dir + 'external/zepto',
-            '_': Ancients.dir + 'external/underscore',
-            'B': Ancients.dir + 'external/backbone.custom',
-            'F': Ancients.dir + 'external/fastclick',
-            'text': Ancients.dir + 'external/require.text',
-            'css': Ancients.dir + 'external/require.css'
+            '$': baseDir + 'external/zepto',
+            '_': baseDir + 'external/underscore',
+            'B': baseDir + 'external/backbone.custom',
+            'F': baseDir + 'external/fastclick',
+            'text': baseDir + 'external/require.text',
+            'css': baseDir + 'external/require.css',
+            'stickit': baseDir + 'external/backbone.stickit'
         }
     });
 
-    require(['dApp', 'libs'], function(dApp){
+    require(['dApp', 'libs', 'stickit'], function(dApp){
         var app = new dApp();
     });
 })();

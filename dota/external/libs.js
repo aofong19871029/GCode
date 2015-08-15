@@ -1,4 +1,4 @@
-define('libs', ['$', '_', 'B', 'F'], function ($, _, B, F) {
+define('libs', ['$', '_', 'B', 'F', 'stickit'], function ($, _, B, F, S) {
     // 绑定fastclick
     $(function() {
         F.attach(document.body);

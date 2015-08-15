@@ -3,7 +3,8 @@
     .sub-viewport .form-wrapper .login-otherway{margin-left: 1.7rem;}
 }
 
-.form-wrapper{padding: 2.62rem 1.87rem;}
+.form-wrapper{padding: 2rem 1rem;}
+.form-wrapper .pure-form{margin-top: 2rem;}
 .form-wrapper .pure-control-group label{width: 3.5rem; margin: 0.26rem 0.62rem 0 0; vertical-align: middle}
 {margin-left: 4.12rem;}
 .form-wrapper fieldset .pure-button-primary{width: 10.93rem; margin-left: 3.5rem;}
@@ -11,7 +12,7 @@
 .form-wrapper .moreopt-login {margin-left: 4.12rem;}
 .form-wrapper .moreopt-login label{margin-right: 0.62rem;}
 .form-wrapper .login-otherway{margin-left: 2.5rem;}
-.form-wrapper .submit-login{margin-left: 4.12rem; width: 12rem;}
+.form-wrapper .submit-login{margin-left: 4.12rem; width: 12rem; background-color: #FF851B;}
 
 .form-wrapper .pure-control-group input{ width: 13rem;}
 .form-wrapper .security-code input{
@@ -23,3 +24,5 @@
     margin-left: 0.8rem;
     width: 8.321rem;
 }
+.form-wrapper .security-code button{background-color: #2ECC40;}
+.form-wrapper .pure-form-aligned .pure-control-group{height: 2.5rem;}

@@ -1,28 +1,33 @@
-define(['dStore', 'dGuid', 'dValidate'], function(dStore, dGuid, dValidate){
+define(['dStore', 'dGuid', 'dValidate', 'dUIHeader', 'dUIToast'], function(dStore, dGuid, dValidate, dUIHeader, dUIToast){
     var BaseView = Backbone.View.extend({
         __propertys__: function(){
+            // 蓝色头部
+            this.header;
         },
 
-        initialize: function(){
+        initialize: function(opt){
+            this.controller = opt.controller;
+
             dValidate.isFunction(this.init) && this.init();
         },
 
         create: function(options){
             dValidate.isFunction(this.onCreate) && this.onCreate();
-
-//            this.delegateEvents();
         },
 
         load: function(options){
-            dValidate.isFunction(this.onLoad) && this.onLoad();
+            //用于切换页面时，让当前input失去焦点
+            document.body && (document.body.tabIndex = 10000);
+            this.stickit();
 
-//            this.delegateEvents();
+            dValidate.isFunction(this.onLoad) && this.onLoad();
+            this.$el.show();
+
         },
 
         hide: function(options){
             dValidate.isFunction(this.onHide) && this.onHide();
-
-//            this.undelegateEvents();
+            this.$el.hide();
         },
 
         forward: function(){},
@@ -40,6 +45,43 @@ define(['dStore', 'dGuid', 'dValidate'], function(dStore, dGuid, dValidate){
             this.$el = el;
             this.el = el[0];
             this._ensureElement();
+        },
+
+        /**
+         * 嵌入头部
+         * @param opt
+         *
+         * {
+         *    titleHtml: 中间文字
+         *    back: true
+         *    moreHtml: 右侧文字
+         *    listener: {
+         *      backHandler:
+         *      moreHandler:
+         *      'selector': 'handler
+         *    }
+         * }
+         */
+        embedHeader: function(opt){
+            if(!this.header){
+                this.header = new dUIHeader(this.$el);
+            }
+
+            this.header.setOpt(opt);
+
+            this.header.show();
+        },
+
+        showToast: function(message){
+            if(!this.toast){
+                this.toast = new dUIToast(this.$el);
+            }
+
+            this.toast.setOpt({
+                message: message
+            });
+
+            this.toast.show();
         }
 
     });

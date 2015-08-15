@@ -1,5 +1,5 @@
 // 暂时废弃，用Backbone.ajax 替代
-define(['dValidate'], function(dValidate){
+define(['dValidate', 'dStore', 'libs'], function(dValidate, dStore){
     var contentTypeMap = {
             'json': 'application/json',
             'jsonp': 'application/json'
@@ -26,14 +26,15 @@ define(['dValidate'], function(dValidate){
         };
 
     // 全局ajax
-    $.ajaxSettings = globalAjaxSetting;
-    $(document.body)
-        .ajaxStart(globalAjaxEvent.ajaxStart)
-        .ajaxSend(globalAjaxEvent.ajaxSend)
-        .ajaxSuccess(globalAjaxEvent.ajaxSuccess)
-        .ajaxError(globalAjaxEvent.ajaxError)
-        .ajaxComplete(globalAjaxEvent.ajaxComplete)
-        .ajaxStop(globalAjaxEvent.ajaxStop);
+//    $.extend($.ajaxSettings, globalAjaxSetting);
+
+//    $(document.body)
+//        .ajaxStart(globalAjaxEvent.ajaxStart)
+//        .ajaxSend(globalAjaxEvent.ajaxSend)
+//        .ajaxSuccess(globalAjaxEvent.ajaxSuccess)
+//        .ajaxError(globalAjaxEvent.ajaxError)
+//        .ajaxComplete(globalAjaxEvent.ajaxComplete)
+//        .ajaxStop(globalAjaxEvent.ajaxStop);
 
     /**
      * 发送ajax请求
@@ -41,6 +42,10 @@ define(['dValidate'], function(dValidate){
      * @private
      */
     function sendReq(opt){
+        if(!opt.url.startsWith('http://') && !opt.url.startsWith('https://')){
+            opt.url = Ancients.serviceDir + opt.url;
+        }
+
         var config = {
             url: opt.url,
             type: getContentType(opt.type),
@@ -60,9 +65,13 @@ define(['dValidate'], function(dValidate){
             //-1…2014-08-19
             // success: function (res) {
             //+1…2014-08-19
-            success: function (res, status, xhr) {
+            success: function (data, status, xhr) {
+                if(opt.store instanceof  dStore){
+                    opt.store.set(data);
+                }
+
                 if ($.type(opt.success) === 'function') {
-                    opt.success(res);
+                    opt.success(data);
                 }
             },
             error: function (err) {
@@ -76,24 +85,26 @@ define(['dValidate'], function(dValidate){
     }
 
     return {
-        get: function(url, success, error){
+        get: function(url, success, error, store){
             var opt = {
                 url: url,
                 success: dValidate.isFunction(success) ? success : function(){},
                 error: dValidate.isFunction(error) ? error : function(){},
                 dataType: contentTypeMap.json,
-                type: 'GET'
+                type: 'GET',
+                store: store
             };
 
             return sendReq(opt)
         },
-        post: function(url, success, error){
+        post: function(url, success, error, store){
             var opt = {
                 url: url,
                 success: dValidate.isFunction(success) ? success : function(){},
                 error: dValidate.isFunction(error) ? error : function(){},
                 dataType: contentTypeMap.json,
-                type: 'POST'
+                type: 'POST',
+                store: store
             };
 
             return sendReq(opt)

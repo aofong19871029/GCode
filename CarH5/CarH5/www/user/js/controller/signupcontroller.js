@@ -2,7 +2,10 @@ define(['dController', 'signupView', 'signupModel', 'css!../../css/signup.css'],
     var Controller = dController.extend({
         initialize: function(){
             var model = new signupModel(this),
-                view = new signupView(model, this);
+                view = new signupView({
+                    model: model,
+                    controller: this
+                });
 
             this.model = model;
             this.view = view;

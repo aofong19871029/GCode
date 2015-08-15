@@ -11,65 +11,41 @@
     <link href="css/signup.css" rel="stylesheet" />
 </head>
 <body>
-
-<div id="main"/>
-
 <script type="text/tpl" id="js-signup-wrap">
-<div class="headerview">
-    <header class="header-fixed">
+<article class="signup-wrapper">
+    <form class="pure-form pure-form-aligned" onsubmit="return false">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="js-phone">手机号:</label>
+                <input id="js-phone" type="text" placeholder="15800000">
+            </div>
 
-        <span class="func_icon func_return js-back">
-            <i class="ui-icon arrow_l"></i>
-            <span>返回</span>
-        </span>
+            <div class="pure-control-group">
+                <label for="js-pwd">密 码:</label>
+                <input id="js-pwd" type="password" placeholder="">
+            </div>
 
-        <span class="func_icon func_more"></span>
-        <h2>注册会员</h2>
-    </header>
-</div>
+            <div class="pure-control-group">
+                <label for="js-confirmPwd" class="confirm-password">确认密码:</label>
+                <input id="js-confirmPwd" type="password" placeholder="">
+            </div>
 
-<div id="main">
-    <div class="main-viewport">
-        <div class="sub-viewport">
-            <article class="signup-wrapper">
-                <form class="pure-form pure-form-aligned" >
-                    <fieldset>
-                        <div class="pure-control-group">
-                            <label for="name">手机号:</label>
-                            <input id="name" type="text" placeholder="15800000">
-                        </div>
-
-                        <div class="pure-control-group">
-                            <label for="password">密 码:</label>
-                            <input id="password" type="password" placeholder="">
-                        </div>
-
-                        <div class="pure-control-group">
-                            <label for="confirmPassword" class="confirm-password">确认密码:</label>
-                            <input id="confirmPassword" type="password" placeholder="">
-                        </div>
-
-                        <div class="pure-control-group security-code clearfix">
-                            <label for="check">验证码:</label>
-                            <input id="check" type="text">
-                            <button class="pure-button-primary">获取短信验证码</button>
-                        </div>
+            <div class="pure-control-group security-code clearfix">
+                <label for="js-code">验证码:</label>
+                <input id="js-code" type="text">
+                <button class="pure-button-primary" id="js-security">获取短信验证码</button>
+            </div>
 
 
-                        <button type="submit" class="pure-button pure-button-primary submit-signup">注册</button>
+            <button type="submit" class="pure-button pure-button-primary submit-signup" id="js-submit">注册</button>
 
-                    </fieldset>
-                </form>
-                <section class="otherway">
-                    <a href="javascript:;">已有帐号请登录</a> | <a href="javascript:;">登录遇到问题</a>
-                </section>
-            </article>
-        </div>
-    </div>
-</div>
-<footer>
+        </fieldset>
+    </form>
+    <section class="otherway">
+        <a href="login.html">已有帐号请登录</a> | <a href="javascript:;">登录遇到问题</a>
+    </section>
+</article>
 
-</footer>
 </script>
 
 <script type="text/config">

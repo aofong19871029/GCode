@@ -1164,7 +1164,11 @@ window.$ === undefined && (window.$ = Zepto)
         var async = 'async' in settings ? settings.async : true
         xhr.open(settings.type, settings.url, async, settings.username, settings.password)
 
-        for (name in headers) nativeSetHeader.apply(xhr, headers[name])
+        for (name in headers) {
+            if(headers.hasOwnProperty(name)) {
+                nativeSetHeader.apply(xhr, headers[name]);
+            }
+        }
 
         if (settings.timeout > 0) abortTimeout = setTimeout(function(){
             xhr.onreadystatechange = empty

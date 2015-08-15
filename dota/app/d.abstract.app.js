@@ -6,12 +6,15 @@
  * 3. Page的history控制
  */
 
-define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate'], function (dInherit, dPageCache, dUrl, dGuid, dValidate) {
+define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], function (dInherit, dPageCache, dUrl, dGuid, dValidate, dUIView) {
 
-    var AbstractApp = dInherit({
+    var AbstractApp = dInherit(dUIView, {
         __propertys__: function () {
             // 视图集
             this.pageCache = new dPageCache();
+
+            // 最外层结构 #main
+            this.baseframe;
 
             // sub view-port公共容器
             this.mainframe;
@@ -33,9 +36,6 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate'], function (dInhe
             Ancients.back = $.proxy(function(url){
                 if(!url || !dValidate.isString(url)){
                     url = this.pageCache.getLastPageUrl();
-
-                    // 回退上一页
-                    debugger;
                 }
 
                 this.back(url);
@@ -49,8 +49,8 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate'], function (dInhe
          */
         bindEvent: function(){
             $('body').on('click', $.proxy(function (e) {
-                var el = $(e.target);
-                var needhandle = false;
+                var el = $(e.target),
+                    needhandle = false;
 
                 while (true) {
                     if (!el[0]) {
@@ -130,11 +130,11 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate'], function (dInhe
             this._freshUrlAndTitle(opt.title, path, action);
 
             // 现有取缓存中的
-            ctrl = this.pageCache.getPageByPath(controllerPath);
+            ctrl = this.pageCache.getPageByPath(path);
 
             if(ctrl == null) {
                 require([controllerPath], function (ctrl) {
-                    self._handlerCntroller(ctrl, path, opt.viewName, opt.tpl, action);
+                    self._handlerCntroller(new ctrl(), path, opt.viewName, opt.tpl, action);
                 });
             }
             else {
@@ -163,7 +163,7 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate'], function (dInhe
             if( this.curController) {
                 this.lastController = this.curController;
             }
-            this.curController =  new controller();
+            this.curController =  controller;
 
             // 将template 注入目标view, 以供其调用
             this.curController.view.viewName = viewName;
@@ -173,19 +173,18 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate'], function (dInhe
             this.pageCache[action](this.curController.view.viewName, path, this.curController);
 
             this._createViewPort();
-            this._switchView();
+            this._switchView(action);
         },
 
-        _switchView: function(){
-            if(this.lastController) {
-                // 执行lastview.onHide
-                this.lastController.hide();
-                this.lastController.view.$el.hide();
-            }
-
-            // curview 已构造，仅执行reload
-            this.curController.load();
-            this.curController.view.$el.show();
+        _switchView: function(action){
+            this.slideView(action, this.curController, this.lastController);
+//            if(this.lastController) {
+//                // 执行lastview.onHide
+//                this.lastController.hide();
+//            }
+//
+//            // curview 已构造，仅执行reload
+//            this.curController.load();
         },
 
         /**
@@ -225,17 +224,24 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate'], function (dInhe
         _createViewPort: function () {
             if(this.curController.view.$el.parent().length) return;
 
-            var mainViewHtml = '<div class="main-viewport"></div>',
+            var baseViewHtml = '<div id="main"></div><footer></footer>',
+                mainViewHtml = '<div class="main-viewport"></div>',
                 subViewId = this.curController.view.viewName + '_' + dGuid.newGuid(),
                 subViewHtml = _.template('<div style="display: none" class="sub-viewport" id="<%=id%>" data-idx="<%=idx%>"></div>')({
                     id: subViewId,
                     idx: this.pageCache.length()
-                }),
-                container = $('#main');
+                });
+
+            // 创建view容器 #main footer
+            if(!this.baseframe || this.baseframe.length){
+                $('body').prepend(baseViewHtml);
+
+                this.baseframe = $('#main');
+            }
 
             // 在第一次创建view前，先构建subview容器
             if(!this.mainframe || !this.mainframe.length){
-                container.html(mainViewHtml);
+                this.baseframe.html(mainViewHtml);
 
                 this.mainframe = $('.main-viewport');
             }

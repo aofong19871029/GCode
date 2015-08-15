@@ -1,6 +1,7 @@
 /**
  * 生成唯一的GUID
  * 与subview的viewname 组合作为subview $el的id
+ * 也可以作为UI组件的唯一编号
  */
 
 define(function () {

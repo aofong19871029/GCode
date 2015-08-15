@@ -20,13 +20,19 @@ define(['dInherit', 'dHash'], function(dInherit, dHash){
          */
         forward: function(name, path, page){
             if(this._isCurrentPage(name)) return;
+            var lastQueueCache = this._queueCaches.length && this._queueCaches[this._queueCaches.length - 1];
+
 
             this._cache.set(name, page);
-            this._queueCaches.push({
-                name: name,
-                page: page,
-                path: path
-            });
+
+            // 过滤2次重复的插入, 来保证查询页面顺序的正确性
+            if(!lastQueueCache || lastQueueCache.name !== name) {
+                this._queueCaches.push({
+                    name: name,
+                    page: page,
+                    path: path
+                });
+            }
             this._history.push(name);
         },
         /**
@@ -38,14 +44,15 @@ define(['dInherit', 'dHash'], function(dInherit, dHash){
         back: function(name, path, page){
             if(this._isCurrentPage(name)) return;
 
-            var lastIdx = _.lastIndexOf(this._history.slice(1 - this._history.length), name);
+            var lastIdx = _.lastIndexOf(this._history.slice(0, this._history.length - 1), name);
 
             if(lastIdx === -1 ) {
                 this.forward(name, page);
             } else {
                 while (lastIdx < this._history.length - 1) {
                     this._history.pop();
-                    this._queueCaches.pop();
+                    // back 不能删除queueCaches, 因为删除后subview-port的dom就不能重复利用了
+                    //this._queueCaches.pop();
                 }
             }
         },

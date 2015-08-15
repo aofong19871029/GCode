@@ -1,6 +1,7 @@
 (function(win, doc){
     win.Ancients = {
         dir: 'http://localhost:8080/',
+        serviceDir: 'http://localhost/restful/',
         isFunction: function(func){
             if(typeof func === 'undefined') return false;
 
@@ -29,6 +30,16 @@
             }
 
             doc.body.appendChild(script);
+        },
+
+        config: function(options){
+            if(options.dir && typeof options.dir === 'string') {
+                this.dir = options.dir;
+            }
+
+            if(options.serviceDir && typeof options.serviceDir === 'string') {
+                this.dir = options.serviceDir;
+            }
         }
     };
 
