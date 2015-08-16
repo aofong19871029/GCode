@@ -6,45 +6,27 @@
     <meta name="viewport" content="width=320.1,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- CarH5 references -->
-    <link href="http://localhost/data/pure.css" rel="stylesheet" />
-    <link href="http://localhost/data/ancient.css" rel="stylesheet" />
+    <link href="http://localhost/data/pure.css" rel="stylesheet" type="text/css" />
+    <link href="http://localhost/data/ancient.css" rel="stylesheet" type="text/css" />
 
     <link href="css/signupdone.css" rel="stylesheet" />
 
 </head>
 <body>
+<script type="text/tpl" id="js-signup-wrap">
+<article class="view-wrapper clearfix">
+    <button class=" pure-button button-slarge fl" id="js-index">直接进入平台</button>
+    <button class=" pure-button button-slarge fl" id="js-newcar">+添加您的新车</button>
+</article>
+</script>
 
-<div class="headerview">
-    <header class="header-fixed">
+<script type="text/config">
+    {
+        "controller": "/GCode/CarH5/CarH5/www/user/js/controller/signupdonecontroller.js",
+        "viewName": "signupdone"
+    }
+</script>
+<script type="text/javascript" src="http://localhost:8080/Ancients.js" pgConfig="/GCode/CarH5/CarH5/www/user/js/config.js"></script>
 
-        <span class="func_icon func_return">
-           <!-- <i class="ui-icon arrow_l"></i>
-            <span>返回</span>-->
-        </span>
-
-        <span class="func_icon func_more"></span>
-        <h2>Car H5</h2>
-    </header>
-</div>
-
-<div id="main">
-    <div class="main-viewport">
-        <div class="sub-viewport">
-            <article class="view-wrapper clearfix">
-                <button class=" pure-button button-slarge fl">直接进入平台</button>
-                <button class=" pure-button button-slarge fl">添加您的新车</button>
-            </article>
-        </div>
-    </div>
-</div>
-<footer>
-
-</footer>
-
-<!-- Cordova reference, this is added to your app when it's built. -->
-<script src="cordova.js"></script>
-<script src="scripts/platformOverrides.js"></script>
-
-<script src="scripts/index.js"></script>
 </body>
 </html> 

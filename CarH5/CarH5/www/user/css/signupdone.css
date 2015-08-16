@@ -5,7 +5,12 @@
 }
 
 .view-wrapper :first-child{
-    margin-right: 5%;
+     margin-right: 5%;
+     background-color: #FF851B;
+ }
+
+.view-wrapper :last-child{
+    background-color: #2ECC40;
 }
 
 .view-wrapper{

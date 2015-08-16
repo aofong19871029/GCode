@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CarH5</title>
+    <meta name="viewport" content="width=320.1,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- CarH5 references -->
+    <link href="http://localhost/data/pure.css" rel="stylesheet" type="text/css" />
+    <link href="http://localhost/data/ancient.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<script type="text/tpl" id="js-realname-wrap">
+<article class="real-wrapper">
+    <form class="pure-form pure-form-aligned" onsubmit="return false">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="js-phone">昵称:</label>
+                <input id="js-phone" type="text">
+            </div>
+
+            <div class="pure-control-group">
+                <label for="js-pwd">姓名:</label>
+                <input id="js-pwd" type="password" placeholder="真实姓名">
+            </div>
+
+            <div class="pure-control-group">
+                <label for="js-confirmPwd">头像:</label>
+                <input id="js-confirmPwd" type="password" placeholder="">
+            </div>
+
+            <div class="pure-control-group clearfix">
+                <label for="js-confirmPwd" class="long-text">驾驶证号:</label>
+                <input id="js-confirmPwd" type="password" placeholder="">
+            </div>
+
+            <div class="pure-control-group">
+                <label for="js-confirmPwd" class="long-text">驾驶证照片:</label>
+                <input id="js-confirmPwd" type="password" placeholder="">
+            </div>
+        </fieldset>
+    </form>
+</article>
+</script>
+
+<script type="text/config">
+    {
+        "controller": "/GCode/CarH5/CarH5/www/user/js/controller/realnamecontroller.js",
+        "viewName": "realname"
+    }
+</script>
+<script type="text/javascript" src="http://localhost:8080/Ancients.js" pgConfig="/GCode/CarH5/CarH5/www/user/js/config.js"></script>
+
+</body>
+</html> 

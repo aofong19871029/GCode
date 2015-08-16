@@ -5,7 +5,11 @@ require.config({
         'loginView': 'view/loginview',
         'loginModel': 'model/loginmodel',
         'signupView': 'view/signupview',
-        'signupModel': 'model/signupmodel'
+        'signupModel': 'model/signupmodel',
+        'signupdoneView': 'view/signupdoneview',
+        'signupdoneModel': 'model/signupdonemodel',
+        'realnameView': 'view/realnameview',
+        'realnameModel': 'model/realnamemodel'
     }
 });
 

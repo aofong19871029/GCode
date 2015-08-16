@@ -94,6 +94,8 @@ define(['dView', 'dValidate'], function(dView, dValidate){
                     self.showToast('系统错误， 登录失败');
                 }
             });
+
+            Ancients.forward('signupdone.html');
         },
 
         smsEnabled: true,
