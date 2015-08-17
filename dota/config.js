@@ -43,6 +43,7 @@
             'dHash': baseDir + 'storage/d.hash',
             'dUIView': baseDir + 'ui/d.ui.view',
             'dUrl': baseDir + 'util/d.util.url',
+            'dCryptMd5': baseDir + 'util/crypt/d.crypt.md5',
             'dPageCache': baseDir + 'page/d.page.cache',
             'dGuid': baseDir + 'util/d.util.guid',
             'dAbstractApp': baseDir + 'app/d.abstract.app',
