@@ -84,7 +84,9 @@ define(['dInherit', 'dHash'], function(dInherit, dHash){
          * @returns {*}
          */
         getLastPageUrl: function(){
-            return this._queueCaches[this.length() - 2]['path'];
+            var lastItem = this._queueCaches[this.length() - 2];
+
+            return lastItem ? lastItem['path'] : undefined;
         }
     });
 

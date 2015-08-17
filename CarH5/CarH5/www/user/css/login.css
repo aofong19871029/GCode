@@ -1,28 +1,21 @@
-
-@media only screen and (max-width: 320px){
-    .sub-viewport .form-wrapper .login-otherway{margin-left: 1.7rem;}
-}
-
-.form-wrapper{padding: 2rem 1rem;}
+.form-wrapper{padding: 2rem 0.4rem;}
+.form-wrapper .register{margin-right: 1rem;}
 .form-wrapper .pure-form{margin-top: 2rem;}
 .form-wrapper .pure-control-group label{width: 3.5rem; margin: 0.26rem 0.62rem 0 0; vertical-align: middle}
-{margin-left: 4.12rem;}
-.form-wrapper fieldset .pure-button-primary{width: 10.93rem; margin-left: 3.5rem;}
 
 .form-wrapper .moreopt-login {margin-left: 4.12rem;}
 .form-wrapper .moreopt-login label{margin-right: 0.62rem;}
-.form-wrapper .login-otherway{margin-left: 2.5rem;}
-.form-wrapper .submit-login{margin-left: 4.12rem; width: 12rem; background-color: #FF851B;}
+.form-wrapper .login-otherway{margin-left: 4.5rem;}
+.form-wrapper fieldset .submit-login{width: calc(100% - 5rem); margin-left: 4.1rem; background-color: #FF851B;}
 
-.form-wrapper .pure-control-group input{ width: 13rem;}
+.form-wrapper .pure-control-group input{ width: calc(100% - 4.8rem);}
 .form-wrapper .security-code input{
-    width: 4rem;
-    float: left;
+    width: calc(100% - 4.8rem - 10.4rem);
 }
 .form-wrapper .security-code button{
     float: left;
     margin-left: 0.8rem;
-    width: 8.321rem;
+    width: 9.5rem;
+    background-color: #2ECC40;
 }
-.form-wrapper .security-code button{background-color: #2ECC40;}
 .form-wrapper .pure-form-aligned .pure-control-group{height: 2.5rem;}

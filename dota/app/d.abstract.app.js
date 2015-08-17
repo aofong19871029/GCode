@@ -38,6 +38,8 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
                     url = this.pageCache.getLastPageUrl();
                 }
 
+                if(!url || !url.length) return;
+
                 this.back(url);
             }, this);
 
@@ -233,7 +235,7 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
                 });
 
             // 创建view容器 #main footer
-            if(!this.baseframe || this.baseframe.length){
+            if(!this.baseframe || !this.baseframe.length){
                 $('body').prepend(baseViewHtml);
 
                 this.baseframe = $('#main');

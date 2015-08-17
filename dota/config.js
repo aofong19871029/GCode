@@ -1,5 +1,8 @@
 (function() {
-    var baseDir = Ancients.dir || '';
+    var baseDir = Ancients.dir || '',
+        relativeCss = function(relative){
+            return 'css!' + baseDir + relative + '.css';
+        };
 
     require.config({
         waitSeconds: 20,
@@ -66,7 +69,7 @@
         }
     });
 
-    require(['dApp', 'libs', 'stickit'], function(dApp){
+    require(['dApp', 'libs', 'stickit', relativeCss('pure'), relativeCss('ancient')], function(dApp){
         var app = new dApp();
     });
 })();

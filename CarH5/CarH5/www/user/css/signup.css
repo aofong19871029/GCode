@@ -1,11 +1,5 @@
-@media only screen and (max-width: 320px){
-   .sub-viewport .signup-wrapper{
-        padding: 2rem 0.3rem;
-    }
-}
-
 .signup-wrapper{
-    padding: 2rem 1.87rem;
+    padding: 2rem 0.3rem;
 }
 .signup-wrapper .pure-control-group label{
     float: left;
@@ -17,18 +11,16 @@
     width: 4.5rem;
     margin-right: 0.8rem;
 }
-.signup-wrapper .pure-control-group input{ width: 13rem;}
+.signup-wrapper .pure-control-group input{ width: calc(100% - 6rem);}
 .signup-wrapper .security-code input{
-    width: 4rem;
+    width: calc(100% - 8.925rem - 6.3rem);
     float: left;
 }
 .signup-wrapper .security-code button{
     float: left;
     margin-left: 0.8rem;
-    width: 8.321rem;
-}
-.signup-wrapper .pure-form  .submit-signup{margin-left: 4.12rem; width: 14.5rem; background-color: #FF851B;}
-.signup-wrapper .otherway{margin-left: 4rem;}
-.signup-wrapper .security-code button {
+    width: 8.5rem;
     background-color: #2ECC40;
 }
+.signup-wrapper .pure-form  .submit-signup{width: calc(100% - 5.5rem); margin-left: 5.1rem; background-color: #FF851B;}
+.signup-wrapper .otherway{margin-left: 5rem;}

@@ -4,19 +4,12 @@
     <meta charset="utf-8" />
     <title>CarH5</title>
     <meta name="viewport" content="width=320.1,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <!-- CarH5 references -->
-    <link href="http://localhost/data/pure.css" rel="stylesheet" type="text/css" />
-    <link href="http://localhost/data/ancient.css" rel="stylesheet" type="text/css" />
-
-    <!--<link href="css/login.css" rel="stylesheet" type="text/css" />-->
-
 </head>
 <body>
 <script type="text/tpl" id="js-wrap">
 <article class="form-wrapper">
     <section class="pure-u-1 pure-u-md-1-3">
-        <a href="signup.html" class="fr">注册</a>
+        <a href="signup.html" class="fr register">注册</a>
     </section>
     <form class="pure-form pure-form-aligned" id="js-login-form" onsubmit="return false">
         <fieldset>
@@ -32,7 +25,7 @@
 
             <div class="pure-control-group security-code clearfix js-codePanel" style="display:none">
                 <label for="js-code" class="fl">验证码:</label>
-                <input id="js-code" type="text">
+                <input id="js-code" type="text" class="fl">
                 <button class="pure-button-primary" id="js-security">发送短信验证码</button>
             </div>
 
