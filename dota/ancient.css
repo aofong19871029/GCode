@@ -90,13 +90,13 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
     -ms-transform: translate(0, -50%);
     transform: translate(0, -50%);
     overflow: hidden;
-    background: url(http://pic.c-ctrip.com/cpms/h5/un_icon.png) no-repeat;
-    background-size: 320px auto;
+    background: url('http://simg1.qunarzz.com/site/images/wap/touch/images/v2/images2x/header_sprites_4.png') 0 0 no-repeat;
+    background-size: 255px 42px;
+    width: 2.62rem;
+    height: 2.62rem;
 }
 
-.ui-header-fixed .ui-icon.ui-arrow-l {
-    left: 10px;
-}
+
 
 .ui-header-fixed .ui-func-more {
     right: 0;
@@ -372,6 +372,7 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
     height: 1.31rem;
     display: block;
 }
+.ui-icon-camera{width: 1.5rem; height: 1.5rem;}
 .ui-icon-camera:before{
     content: "\f030";
 }

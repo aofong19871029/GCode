@@ -12,29 +12,28 @@
     <form class="pure-form pure-form-aligned" onsubmit="return false">
         <fieldset>
             <div class="pure-control-group">
-                <label for="js-phone">昵称:</label>
-                <input id="js-phone" type="text">
+                <label for="js-nickName">昵称:</label>
+                <input id="js-nickName" type="text">
             </div>
 
             <div class="pure-control-group">
-                <label for="js-pwd">姓名:</label>
-                <input id="js-pwd" type="password" placeholder="真实姓名">
+                <label for="js-name">姓名:</label>
+                <input id="js-name" type="text" placeholder="真实姓名">
             </div>
 
             <div class="pure-control-group">
-                <label for="js-confirmPwd">头像:</label>
-                <input id="js-confirmPwd" type="password" placeholder="">
-                <span class="ui-icon ui-icon-camera"/>
+                <label>头像:</label>
+                <div class="forge-input"><span></span><i class="ui-icon ui-icon-camera fr"/><input type="file"/></div>
             </div>
 
             <div class="pure-control-group clearfix">
-                <label for="js-confirmPwd" class="long-text">驾驶证号:</label>
-                <input id="js-confirmPwd" type="password" placeholder="">
+                <label for="js-license" class="long-text">驾驶证号:</label>
+                <input id="js-license" type="password" placeholder="">
             </div>
 
             <div class="pure-control-group">
-                <label for="js-confirmPwd" class="long-text">驾驶证照片:</label>
-                <input id="js-confirmPwd" type="password" placeholder="">
+                <label class="long-text">驾驶证照片:</label>
+                <div class="forge-input"><span></span><i class="ui-icon ui-icon-camera fr"/><input type="file"/></div>
             </div>
         </fieldset>
     </form>

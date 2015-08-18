@@ -6,7 +6,6 @@ define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValida
                 <%if(back){%>\
                 <span class="ui-func-icon ui-func-return js-back">\
                     <i class="ui-icon ui-arrow-l"></i>\
-                    <span>返回</span>\
                 </span>\
                 <%}%>\
                 <%if(moreHtml.trim().length){%>\
