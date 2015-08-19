@@ -1,0 +1,1 @@
+define(["dInherit"],function(e){var t=e({__propertys__:function(){this.model=null,this.view=null},create:function(){this.view.create()},load:function(){this.view.load()},hide:function(){this.view.hide()}});return t.extend=$.proxy(Backbone.Model.extend,t),t});

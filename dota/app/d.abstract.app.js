@@ -117,7 +117,7 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
             });
 
             return {
-                controllerPath: config.controller,
+                controllerPath: Ancients.dir + config.controller,
                 viewName: config.viewName,
                 tpl: tpl,
                 title: title

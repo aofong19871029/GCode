@@ -57,6 +57,8 @@
             'dBaseUI': baseDir + 'ui/d.ui.base',
             'dUIHeader': baseDir + 'ui/d.ui.header',
             'dUIToast': baseDir + 'ui/d.ui.toast',
+
+            'dBridge': baseDir + 'hybrid/d.bridge',
             // 基础框架
             '$': baseDir + 'external/zepto',
             '_': baseDir + 'external/underscore',
@@ -64,8 +66,7 @@
             'F': baseDir + 'external/fastclick',
             'text': baseDir + 'external/require.text',
             'css': baseDir + 'external/require.css',
-            'stickit': baseDir + 'external/backbone.stickit',
-            'dBridge': baseDir + 'hybrid/d.bridge'
+            'stickit': baseDir + 'external/backbone.stickit'
         }
     });
 

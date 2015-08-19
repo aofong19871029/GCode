@@ -1,0 +1,1 @@
+define(["dBaseLog","dConsoleAdapter","dUIAdapter"],function(e,t,n){return e.ConsoleAdapter=t,e.UIAdapter=n,e.defaultLog=(new e.Logger("__FRAME_WORK__")).addAdapter(new e.ConsoleAdapter).addAdapter(new e.UIAdapter),e});

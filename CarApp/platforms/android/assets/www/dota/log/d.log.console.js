@@ -1,0 +1,1 @@
+define(["dInherit","dBaseLog","dDate"],function(e,t,n){var r=e(t.AbstractAdapter,{initialize:function(){this.__superInitialize.call(this)},dispatch:function(e){if(this.isOff()||win.console==undefined)return;var t=(new n(e.startTime)).toString(),r="["+e.level.toUpperCase()+"]"+t+"     "+e.message;window.console[e.level](r)}});return r});

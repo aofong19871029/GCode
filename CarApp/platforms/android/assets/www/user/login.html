@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>CarH5</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com http://libs.baidu.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="width=320.1,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -43,12 +43,18 @@
 </article>
 </script>
 
+<script type="text/javascript" src="cordova.js"></script>
 <script type="text/config">
     {
-        "controller": "/GCode/CarApp/www/user/js/controller/loginController.js",
+        "controller": "user/js/controller/loginController.js",
         "viewName": "login"
     }
 </script>
-<script type="text/javascript" src="http://10.32.148.1:8080/Ancients.js" pgConfig="/GCode/CarApp/www/user/js/config.js"></script>
+<script type="text/javascript" src="/android_asset/www/dota/Ancients.js" pgConfig="/android_asset/www/user/js/config.js"></script>
+<script type="application/javascript" src="/www/data/external/require.min.js"></script>
+<script src="/android_asset/www/user/test.js"></script>
+<script>
+    alert(location.href);
+</script>
 </body>
 </html> 

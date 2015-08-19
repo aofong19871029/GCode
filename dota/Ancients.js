@@ -1,8 +1,9 @@
 (function(win, doc){
     win.Ancients = {
         init: false,
-        dir: '/www/dota/',
-        serviceDir: 'http://localhost/restful/',
+        dir: '/android_asset/www/',
+        ancientDir: 'dota/',
+        serviceDir: 'http://www.ctrip.com/restful/',
         isFunction: function(func){
             if(typeof func === 'undefined') return false;
 
@@ -39,7 +40,7 @@
             }
 
             if(options.serviceDir && typeof options.serviceDir === 'string') {
-                this.dir = options.serviceDir;
+                this.serviceDir = options.serviceDir;
             }
         }
     };
@@ -56,8 +57,9 @@
         }
     }
 
-    Ancients.loadJs(Ancients.dir + '/external/require.min.js', function(){
-        Ancients.loadJs(Ancients.dir + 'config.js', function(){
+    Ancients.loadJs(Ancients.dir+ Ancients.ancientDir +'/external/require.min.js', function(){
+        alert('requirejs load')
+        Ancients.loadJs(Ancients.dir + Ancients.ancientDir +'/config.js', function(){
             pageConfigUrl && Ancients.loadJs(pageConfigUrl);
         });
     });

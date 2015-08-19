@@ -14,6 +14,5 @@ require.config({
 });
 
 Ancients.config({
-    dir: 'http://10.32.148.1:8080/',
     serviceDir: 'http://10.32.148.1/restful/'
 });

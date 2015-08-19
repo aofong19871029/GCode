@@ -49,7 +49,7 @@ var app = {
         alert('即将跳转login.html');
 
         alert(location.href)
-        location.href = "user/login.html";
+        //location.href = "user/login.html";
     }
 };
 
