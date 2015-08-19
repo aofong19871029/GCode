@@ -1,6 +1,7 @@
 (function(win, doc){
     win.Ancients = {
-        dir: 'http://localhost:8080/',
+        init: false,
+        dir: '/www/dota/',
         serviceDir: 'http://localhost/restful/',
         isFunction: function(func){
             if(typeof func === 'undefined') return false;

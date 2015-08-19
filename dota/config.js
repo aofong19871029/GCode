@@ -44,7 +44,6 @@
             'dUIAdapter': baseDir + 'log/d.log.ui',
             'dLog': baseDir + 'log/d.log',
             'dHash': baseDir + 'storage/d.hash',
-            'dUIView': baseDir + 'ui/d.ui.view',
             'dUrl': baseDir + 'util/d.util.url',
             'dCryptMd5': baseDir + 'util/crypt/d.crypt.md5',
             'dPageCache': baseDir + 'page/d.page.cache',
@@ -65,11 +64,12 @@
             'F': baseDir + 'external/fastclick',
             'text': baseDir + 'external/require.text',
             'css': baseDir + 'external/require.css',
-            'stickit': baseDir + 'external/backbone.stickit'
+            'stickit': baseDir + 'external/backbone.stickit',
+            'dBridge': baseDir + 'hybrid/d.bridge'
         }
     });
 
-    require(['dApp', 'libs', 'stickit', relativeCss('pure'), relativeCss('ancient')], function(dApp){
+    require(['dApp', 'dBridge', 'libs', relativeCss('pure'), relativeCss('ancient')], function(dApp){
         var app = new dApp();
     });
 })();

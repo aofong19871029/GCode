@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CarH5</title>
+    <meta name="viewport" content="width=320.1,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+
+<script type="text/tpl" id="js-realname-wrap">
+<article class="real-wrapper">
+    <form class="pure-form pure-form-aligned" onsubmit="return false">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="js-nickName">昵称:</label>
+                <input id="js-nickName" type="text">
+            </div>
+
+            <div class="pure-control-group">
+                <label for="js-name">姓名:</label>
+                <input id="js-name" type="text" placeholder="真实姓名">
+            </div>
+
+            <div class="pure-control-group">
+                <label>头像:</label>
+                <div class="forge-input"><span></span><i class="ui-icon ui-icon-camera fr"/><input type="file"/></div>
+            </div>
+
+            <div class="pure-control-group clearfix">
+                <label for="js-license" class="long-text">驾驶证号:</label>
+                <input id="js-license" type="password" placeholder="">
+            </div>
+
+            <div class="pure-control-group">
+                <label class="long-text">驾驶证照片:</label>
+                <div class="forge-input"><span></span><i class="ui-icon ui-icon-camera fr"/><input type="file"/></div>
+            </div>
+        </fieldset>
+    </form>
+</article>
+</script>
+
+<script type="text/config">
+    {
+        "controller": "/www/user/js/controller/realnamecontroller.js",
+        "viewName": "realname"
+    }
+</script>
+<script type="text/javascript" src="/www/dota/Ancients.js" pgConfig="/www/user/js/config.js"></script>
+
+</body>
+</html> 

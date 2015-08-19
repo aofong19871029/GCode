@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CarH5</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com http://libs.baidu.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="width=320.1,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+<p>login</p>
+<script type="text/tpl" id="js-wrap">
+<article class="form-wrapper">
+    <section class="pure-u-1 pure-u-md-1-3">
+        <a href="signup.html" class="fr register">注册</a>
+    </section>
+    <form class="pure-form pure-form-aligned" id="js-login-form" onsubmit="return false">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="js-phone" class="fl">手机号:</label>
+                <input id="js-phone" type="text" placeholder="15800000">
+            </div>
+
+            <div class="pure-control-group js-pwdPanel">
+                <label for="js-pwd" class="fl">密 码:</label>
+                <input id="js-pwd" type="password" placeholder="">
+            </div>
+
+            <div class="pure-control-group security-code clearfix js-codePanel" style="display:none">
+                <label for="js-code" class="fl">验证码:</label>
+                <input id="js-code" type="text" class="fl">
+                <button class="pure-button-primary" id="js-security">发送短信验证码</button>
+            </div>
+
+            <button id="js-submit" type="submit" class="pure-button pure-button-primary submit-login" >登录</button>
+
+        </fieldset>
+    </form>
+    <section class="login-otherway">
+        <a href="javascript:;" data-type="P" id="js-loginType">短信验证码登录</a> | <a href="javascript:;" id="js-changePwd">修改密码?</a>
+    </section>
+</article>
+</script>
+
+<script type="text/config">
+    {
+        "controller": "/www/user/js/controller/loginController.js",
+        "viewName": "login"
+    }
+</script>
+<script type="text/javascript" src="/www/dota/Ancients.js" pgConfig="/www/user/js/config.js"></script>
+</body>
+</html> 

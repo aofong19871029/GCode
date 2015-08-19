@@ -1,0 +1,18 @@
+
+.button-slarge{
+    width: 47%;
+    height: 9.37rem;
+}
+
+.view-wrapper :first-child{
+     margin-right: 5%;
+     background-color: #FF851B;
+ }
+
+.view-wrapper :last-child{
+    background-color: #2ECC40;
+}
+
+.view-wrapper{
+    margin: 9.37rem 0.62rem;
+}
