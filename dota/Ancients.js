@@ -1,7 +1,7 @@
 (function(win, doc){
     win.Ancients = {
         init: false,
-        dir: '/android_asset/www/',
+        dir: '',
         ancientDir: 'dota/',
         serviceDir: 'http://www.ctrip.com/restful/',
         isFunction: function(func){
