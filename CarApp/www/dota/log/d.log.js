@@ -1,1 +1,12 @@
-define(["dBaseLog","dConsoleAdapter","dUIAdapter"],function(e,t,n){return e.ConsoleAdapter=t,e.UIAdapter=n,e.defaultLog=(new e.Logger("__FRAME_WORK__")).addAdapter(new e.ConsoleAdapter).addAdapter(new e.UIAdapter),e});
+/**
+ * log 整合类
+ */
+define(['dBaseLog', 'dConsoleAdapter', 'dUIAdapter'], function(dBaseLog, dConsoleAdapter, dUIAdapter){
+    dBaseLog.ConsoleAdapter = dConsoleAdapter;
+    dBaseLog.UIAdapter = dUIAdapter;
+
+    dBaseLog.defaultLog =  new dBaseLog.Logger('__FRAME_WORK__').addAdapter(new dBaseLog.ConsoleAdapter).addAdapter(new dBaseLog.UIAdapter);
+
+
+    return dBaseLog;
+});

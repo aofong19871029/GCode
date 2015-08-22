@@ -1,0 +1,22 @@
+页面结构
+body
+    header
+        页面头部
+    main
+        main-viewport
+            sub-viewport
+    footer
+
+页面切换
+当前页面执行view onHide
+
+url -> 下载page
+        -> 获取页面的tpl script -> 将tpl script 存入页面tpl hash中
+        -> 读取controller
+            -> 加载 view js 和 model js
+                -> 执行view 的onCreate, onShow
+        -> 下载css
+
+
+
+page: 每个子页. 也是control  内附model 与 view

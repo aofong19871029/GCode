@@ -1,18 +1,14 @@
 require.config({
-    baseUrl: 'js',
-    waitSeconds: 20,
+    waitSeconds: 60,
     paths: {
-        'loginView': 'view/loginview',
-        'loginModel': 'model/loginmodel',
-        'signupView': 'view/signupview',
-        'signupModel': 'model/signupmodel',
-        'signupdoneView': 'view/signupdoneview',
-        'signupdoneModel': 'model/signupdonemodel',
-        'realnameView': 'view/realnameview',
-        'realnameModel': 'model/realnamemodel'
+        // ---------------- 用户模块 -------------
+        'loginView': 'js/view/loginview',
+        'loginModel': 'js/model/loginmodel',
+        'signupView': 'js/view/signupview',
+        'signupModel': 'js/model/signupmodel',
+        'signupdoneView': 'js/view/signupdoneview',
+        'signupdoneModel': 'js/model/signupdonemodel',
+        'realnameView': 'js/view/realnameview',
+        'realnameModel': 'js/model/realnamemodel'
     }
-});
-
-Ancients.config({
-    serviceDir: 'http://10.32.148.1/restful/'
 });
