@@ -9,7 +9,9 @@ define(['dView'], function(dView){
         },
 
         onLoad: function(){
-            Ancients.forward('../user/login.html');
+            setTimeout(function() {
+                Ancients.forward('../user/login.html');
+            }, 500);
         },
 
         onHide: function(){

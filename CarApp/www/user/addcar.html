@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com http://simg1.qunarzz.com http://libs.baidu.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>新增车辆</title>
+</head>
+<body>
+
+<script type="text/tpl" id="js-addcar-wrap">
+<article class="addcar-wrapper">
+    <form class="pure-form pure-form-aligned" onsubmit="return false">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="js-nickName">汽车型号</label>
+                <select class="download" id="J_brand">
+                    <option>品牌</option>
+                    <option>大众</option>
+                    <option>起亚</option>
+                    <option>丰田</option>
+                    <option>奥迪</option>
+                    <option>宝马</option>
+                    <option>奔驰</option>
+                    <option>别克</option>
+                    <option>路虎</option>
+                    <option>雷克萨斯</option>
+                </select>
+                <select class="download" id="J_models">
+                    <option>车型</option>
+                    <option>微型车</option>
+                    <option>小型车</option>
+                    <option>紧凑型车</option>
+                    <option>中型车</option>
+                    <option>豪华车</option>
+                    <option>SUN</option>
+                    <option>MPV</option>
+                    <option>跑车</option>
+                    <option>皮卡</option>
+                </select>
+            </div>
+
+            <div class="pure-control-group">
+                <label class="long-text">汽车照片</label>
+                <div class="forge-input"><span></span><i class="ui-icon ui-icon-camera fr"/><input type="file"/></div>
+            </div>
+
+            <div class="pure-control-group">
+                <label for="js-name">车牌号码</label>
+                <input id="js-name" type="text">
+            </div>
+
+            <div class="pure-control-group">
+                <label>发动机编号</label>
+                <input id="js-name" type="text">
+            </div>
+
+            <div class="pure-control-group">
+                <label class="long-text">行驶证号</label>
+                <input id="js-name" type="text">
+            </div>
+
+            <div class="pure-control-group">
+                <label class="long-text">保险到期</label>
+                <div class="forge-input time"><span class="time-span">选择日期</span></div>
+            </div>
+        </fieldset>
+    </form>
+</article>
+</script>
+
+<script type="text/config">
+    {
+        "controller": "/user/js/controller/addcarcontroller.js",
+        "viewName": "realname"
+    }
+</script>
+<script type="text/javascript" src="/dota/Ancients.js" pgConfig="/user/js/config.js"></script>
+</body>
+</html> 

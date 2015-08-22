@@ -24,7 +24,7 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
             this.lastController;
 
             // view 切换动画
-            this.switchAnimation;
+            this.switchAnimation = Ancients.animation;
         },
 
         initialize: function (options) {

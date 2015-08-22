@@ -25,6 +25,8 @@ define(['dInherit', 'dValidate'], function(dInherit, dValidate) {
 
             this.$el;
 
+            this.animation = Ancients.animation;
+
             this.eventQueue = [];
         },
 

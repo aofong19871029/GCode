@@ -106,6 +106,51 @@ define(['dInherit', 'dValidate', 'libs'], function(dInherit, dValidate){
 
         _getControllerRootElement: function(controller){
             return dValidate.isObject(controller) && controller.view && controller.view.$el ? controller.view.$el : undefined;
+        },
+
+        slideLeft: function(inEl, outEl){
+            body.addClass('hiddenx');
+            inEl.addClass('animatestart');
+            inEl.addClass('sliderightin');
+            inEl.show();
+
+            return setTimeout(function () {
+                body.removeClass('hiddenx');
+                inEl.removeClass('animatestart');
+                inEl.removeClass('sliderightin');
+
+                if (outEl) outEl.hide();
+
+                dValidate.isFunction(callback) && callback.call(scope, inView, outView);
+            }, 190);
+        },
+
+        slideRight: function(inEl, outEl){
+            body.addClass('hiddenx');
+
+            if (outEl) {
+                outEl.addClass('animatestart');
+                outEl.addClass('sliderightout');
+            }
+            inEl.show();
+
+            return setTimeout(function () {
+                body.removeClass('hiddenx');
+                if (outEl) {
+                    outEl.removeClass('animatestart');
+                    outEl.removeClass('sliderightout');
+                    outEl.hide();
+                }
+            }, 190);
+        },
+
+        noAnimateSlide: function(inEl, outEl){
+            body.hide();
+
+            outEl && outEl.hide();
+            inEl.show();
+
+            body.show();
         }
     });
 

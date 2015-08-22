@@ -3,6 +3,8 @@
         init: false,
         dir: '',
         serviceDir: 'http://www.ctrip.com/restful/',
+        // 开启view切换 和 部分UI组件的动画效果
+        animation: true,
         isFunction: function(func){
             if(typeof func === 'undefined') return false;
 
@@ -60,7 +62,7 @@
 
     Ancients.loadJs(Ancients.frameworkDir +'external/require.min.js', function(){
         Ancients.loadJs(Ancients.frameworkDir +'config.js', function(){
-            pageConfigUrl && Ancients.loadJs(pageConfigUrl);
+//            pageConfigUrl && Ancients.loadJs(pageConfigUrl);
         });
     });
 })(window, document);

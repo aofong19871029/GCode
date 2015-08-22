@@ -141,6 +141,7 @@ define(['dInherit', 'libs'], function(dInherit){
                 this.date = new Date(date);
             }
         },
+
         /**
          * 格式化时间
          * @param pattern
@@ -167,6 +168,7 @@ define(['dInherit', 'libs'], function(dInherit){
 
             return result;
         },
+
         /**
          * 当前时间加n天
          * @param n
@@ -177,6 +179,7 @@ define(['dInherit', 'libs'], function(dInherit){
             this.date.setDate(this.date.getDate() + n);
             return this;
         },
+
         /**
          * 当前天数加n月
          * @param n
@@ -187,6 +190,7 @@ define(['dInherit', 'libs'], function(dInherit){
             this.date.setMonth(this.date.getMonth() + n);
             return this;
         },
+
         /**
          * 当前天数加n小时
          * @param n
@@ -197,6 +201,7 @@ define(['dInherit', 'libs'], function(dInherit){
             this.date.setHours(this.date.getHours() + n);
             return this;
         },
+
         /**
          * 当前天数加n分钟
          * @param n
@@ -207,19 +212,93 @@ define(['dInherit', 'libs'], function(dInherit){
             this.date.setMinutes(this.date.getMinutes() + n);
             return this;
         },
+
         getTime: function () {
             return this.date.valueOf();
         },
+
+        /**
+         * 得到原生 Date
+         * @returns {*|ClientDate.date}
+         */
         getDate: function(){
             return this.date;
         },
+
         /**
          * 日期格式化输出为 yyyy-MM-dd hh:mm:ss
          * @returns {string}
          */
         toString: function(){
             return this.format('yyyy-MM-dd hh:mm:ss');
+        },
+
+        /**
+         * year-mm-dd
+         * @returns {string}
+         */
+        toShortDateString: function(){
+            return this.format('yyyy-MM-dd');
+        },
+
+        /**
+         * 年
+         * @returns {number}
+         */
+        getYear: function(){
+            return this.date.getFullYear();
+        },
+
+        /**
+         * 月
+          * @returns {*}
+         */
+        getMonth: function(){
+            return this.date.getMonth() + 1;
+        },
+
+        /**
+         * 日
+         * @returns {*|number}
+         */
+        getDay: function(){
+            return this.date.getDate();
+        },
+
+        /**
+         * 星期几
+         * @returns {*|number|number}
+         */
+        getWeekDay: function(){
+            return this.date.getDay();
+        },
+
+        /**
+         * 是否为闰年
+         * @returns {boolean}
+         */
+        isLeapYear: function(){
+            var year = this.getYear();
+            return (year % 4 === 0 && year % 100 !== 0) || (year % 100 === 0 && year % 400 === 0);
+        },
+
+        /**
+         * 一个月有几天
+         * @param date
+         * @returns {number}
+         */
+        getDaysOfMonth: function(){
+            return new Date(this.getYear(), this.getMonth(), 0).getDate();
+        },
+
+        isToday: function(){
+            var now = new ClientDate();
+
+            return now.getYear() === this.getYear
+                && now.getMonth() === this.getMonth()
+                && now.getDay() === this.getDay;
         }
+
     });
 
     $.extend(ClientDate, {
@@ -249,6 +328,10 @@ define(['dInherit', 'libs'], function(dInherit){
             }
 
             return new ClientDate(str);
+        },
+
+        getDaysOfMonth: function(date){
+            return new Date(date.getFullYear(), (date.getMonth() + 1), 0).getDate();
         }
     });
 
