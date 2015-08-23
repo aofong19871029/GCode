@@ -1,14 +1,16 @@
-define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView'], function(dInherit, dBaseUI, dDate, dUIHeader, dUIView) {
+define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], function(dInherit, dBaseUI, dDate, dUIHeader, dUIView, dValidate) {
     var headerTpl =
-            '<p class="ui-label-date">\
+            '<div class="ui-label-view">\
+            <p class="ui-label-date">\
                 <span class="fl">选择日期</span>\
                 <span class="fr"><%=currentDay%></span>\
-            </p>',
+            </p>\
+            </div>',
         monthTpl =
             '<div class="ui-calendar">\
                 <table>\
-                  <tbody>\
-                     <tr class="ui-week">\
+                  <tbody class="ui-week">\
+                     <tr>\
                      <td>日</td>\
                      <td>一</td>\
                      <td>二</td>\
@@ -22,16 +24,16 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView'], function(dInher
                      <span><%=m.year%></span> 年\
                      <span><%=m.month%></span> 月\
                   </caption>\
-                  <tbody>\
+                  <tbody class="ui-calendar-tbody">\
                   <%_.each(m.data, function(day, i){%>\
                     <%if(i%7 === 0){%><tr><%}%>\
+                    <td class="<%if(!day || day.invalid){%>ui-invalid<%}%><%if(day && day.tag){%> ui-tagtd<%}%>">\
                     <%if(day){%>\
-                    <td>\
                     <em><%=day.num%></em>\
                     <%if(day.tag){%><i><%=day.tag%></i><%}%>\
-                    </td>\
                     <%}%>\
-                    <%if(i !== 0 && i%6 === 0){%><tr><%}%>\
+                    </td>\
+                    <%if(i !== 0 && (i+1)%7 === 0){%><tr><%}%>\
                   <%})%>\
                   </tbody>\
                 </table>\
@@ -48,13 +50,21 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView'], function(dInher
         __propertys__: function () {
             this.tplFunc = _.template(calendarTpl);
 
-            this.monthCount = 36; // 3year
+            this.monthCount = 4; // 3year
 
             this.root = $('body');
 
-            this.callContainer; // 哪个view 调用的日历
+            this.callContainer = $('#main'); // view容器
 
             this.uiswitch = new dUIView();
+
+            this.selectedDate;
+
+            this.init = false;
+        },
+
+        events: {
+            'click ui-calendar-tbody td'
         },
 
         setOpt: function(options) {
@@ -64,23 +74,19 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView'], function(dInher
                 title: options.title || ''
             }));
 
-            this.callContainer = options.callContainer;
+            this.setHeader();
         },
 
         show: function(){
-            this.setHeader();
+            if(!this.init) {
+                this.root.append(this.$el);
+                this.init = true;
+            } else {
+                this.$el.show();
+            }
 
-            this.$el.hide();
-            this.root.append(this.$el);
 
-            this.uiswitch[this.animation ? this.uiswitch.slideLeft : this.uiswitch.noAnimateSlide](self.$el, self.callContainer);
-        },
-
-        hide: function(){
-            delete this.header;
-            delete this._tagComplete;
-
-            this.destory();
+            this.uiswitch[this.animation ? 'slideLeft' : 'noAnimateSlide'](this.$el, this.callContainer);
         },
 
         setHeader: function(){
@@ -94,9 +100,12 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView'], function(dInher
                 back: true,
                 listener: {
                     backHandler: function () {
-                        self.uiswitch[this.animation ? self.uiswitch.slideLeft : self.uiswitch.noAnimateSlide](self.callContainer, self.$el);
+                        self.uiswitch[this.animation ?'slideLeft' : 'noAnimateSlide'](self.callContainer, self.$el);
+                        self.hide();
+                        dValidate.isFunction(self.opt.getVal) && self.opt.getVal(self.selectedDate);
                     }
-                }
+                },
+                titleHtml: this.opt.title
             }, this.opt));
             this.header.show();
         },
@@ -108,21 +117,23 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView'], function(dInher
                 m = [];
 
             for(var i = 0; i < this.monthCount; i++){
-                if(curMonth + i > 12) {
+                if(curMonth> 12) {
                     curMonth = 1;
                     curYear++;
                 }
 
                 m.push(this.getMonthData(curYear, curMonth));
+                curMonth++;
             }
 
             return {
-                m: m,
+                months: m,
                 currentDay: new dDate().toShortDateString()
             };
         },
 
         getMonthData: function(year, month){
+            // 2015-11-1 有bug
             var firstDay = new dDate(year + '/' + month + '/1'),
                 days = firstDay.getDaysOfMonth(),
                 weekDayOfFirstDay = firstDay.getWeekDay(),
@@ -135,7 +146,7 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView'], function(dInher
                     break;
                 }
 
-                months.push(undefined);
+                months.push(null);
                 i++;
             }
             i = 0;
@@ -143,12 +154,17 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView'], function(dInher
             while(i < days){
                 i++;
                 months.push({
-                    num: i < 10 ? i : '0' + i,
-                    tag: !this._tagComplete && this.getTag(new dDate(year + month + '/' + i))
+                    num: i >= 10 ? i : '0' + i,
+                    tag: !this._tagComplete && this.getTag(new dDate(year + '/' + month + '/' + i)),
+                    invalid: !this._tagComplete && this.getTag(new dDate(year + '/' + month + '/' + i)) === 0
                 });
             }
 
-            return month;
+            return {
+                data: months,
+                year: year,
+                month: month
+            };
         },
 
         getTag: function(date){
@@ -160,6 +176,9 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView'], function(dInher
                 tag;
 
             switch (true){
+                case todayShortDateString > dateShortDateString:
+                    tag = 0;
+                    break;
                 case todayShortDateString === dateShortDateString:
                     tag = '今天';
                     break;

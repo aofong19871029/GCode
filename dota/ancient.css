@@ -41,7 +41,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,if
 }
 input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 
-/*********  头部  *********/
+/*********  UI headerview  *********/
 .ui-header-fixed {
     position: fixed;
     left: 0;
@@ -96,8 +96,6 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
     height: 2.62rem;
 }
 
-
-
 .ui-header-fixed .ui-func-more {
     right: 0;
     width: 52px;
@@ -111,7 +109,7 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
     transform: translate(-50%, -50%);
 }
 
-
+/*********  切换动画  *********/
 @-webkit-keyframes sliderightout {
     from {
         -webkit-transform: translateX(0px);
@@ -298,6 +296,8 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 
 .hiddenx{ overflow-x: hidden;}
 .disabled{background-color: #AAAAAA !important;}
+
+/*********  UI toast *********/
 .ui-layer{
     position: fixed;
     top: 45%;
@@ -384,3 +384,53 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
     font-weight: normal;
     font-style: normal;
 }
+
+/*********  UI calendar *********/
+.ui-calendar-wrap {height: 100%; position: relative;}
+.ui-calendar-wrap .ui-label-view{height: 1.75rem; width: 100%}
+.ui-calendar-wrap .ui-label-date{
+    position: fixed;
+    left: 0;
+    top: 2.75rem;
+    width: calc(100% - 1.86rem);
+    height: 1.75rem;
+    line-height: 1.75rem;
+    background-color: #f0f6ff;
+    padding: 0 0.93rem;
+    color: #666;
+    font-size: 13px;
+
+}
+.ui-calendar-wrap .ui-calendar{
+    width: 100%;
+    padding: 0;
+    font-size: 16px;
+    font-family: "Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.ui-calendar-wrap .ui-calendar>table{
+    width: 100%;
+    text-align: center;
+    font-family: "microsoft yahei","Helvetica Neue Light",HelveticaNeue-Light,"Helvetica Neue",Calibri,Helvetica,Arial;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.ui-calendar-wrap .ui-calendar>table caption{font-size: 20px;}
+.ui-calendar-wrap .ui-calendar>table td{
+    height: 3.5rem;
+    width: 14.286%;
+    -moz-transition: background .2s ease-in,color .2s ease-out;
+    -webkit-transition: background .2s ease-in,color .2s ease-out;
+    -o-transition: background .2s ease-in,color .2s ease-out;
+    transition: background .2s ease-in,color .2s ease-out;
+}
+.ui-calendar-wrap .ui-calendar>table tr.ui-week td{
+    color: #666;
+    height: 2.25rem;
+    border-bottom: 1px solid #d3d3d3;
+}
+.ui-calendar-wrap .ui-calendar .ui-invalid{color: #cfcfcf !important;}
+.ui-calendar-wrap em, .ui-calendar-wrap i{font-style: normal; font-weight: 40px;}
+.ui-calendar-tbody td{width: 14%;}
+.ui-calendar-tbody td.ui-tagtd em{font-size: 12px; line-height: 1.2rem; display: block;}
+.ui-calendar-tbody td.ui-tagtd i{font-size: 11px; line-height: 0.88rem; display: block;}
+.ui-calendar-tbody td:nth-of-type(7n), .ui-calendar-tbody td:nth-of-type(7n+1){color: #ff902d}

@@ -12,13 +12,22 @@ define(['dModel'], function(dModel){
          */
         sendSMSCode: function(){
             this.request({
-                url: ''
+                url: '',
+                data: {
+                    phoneNumber: this.get('mobile')
+                }
             });
         },
 
         register: function(options){
             this.request($.extend({
-                url: 'adduserService'
+                url: 'adduserService',
+                data: {
+                    mobile: this.get('mobile'),
+                    password: this.get('password'),
+                    confirmPassword: this.get('confirmPassword'),
+                    code: this.get('code')
+                }
             }, options || {}));
         }
     });

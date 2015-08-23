@@ -120,8 +120,6 @@ define(['dInherit', 'dValidate', 'libs'], function(dInherit, dValidate){
                 inEl.removeClass('sliderightin');
 
                 if (outEl) outEl.hide();
-
-                dValidate.isFunction(callback) && callback.call(scope, inView, outView);
             }, 190);
         },
 

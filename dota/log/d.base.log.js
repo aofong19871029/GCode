@@ -33,7 +33,7 @@ define(['dInherit'], function(dInherit){
             this.startTime = new Date();
             this.categoryName = categoryName || 'Default';
             this.level = level || JsLog.Level.LOG;
-            this.message = message;
+            this.message = JSON.stringify(message);
         }
     });
 

@@ -54,62 +54,62 @@ define(['dInherit', 'libs'], function(dInherit){
                 return this.format.toFixedWidth(this.getFullYear(), 2);
             },
             yyyy: function () {
-                return this.getFullYear().toString();
+                return this.getYear().toString();
             },
             MMMM: function () {
-                return this.format.monthNames[this.getMonth()];
+                return dateFormatHelper.monthNames[this.getMonth()];
             },
             MMM: function () {
-                return this.format.monthShortNames[this.getMonth()];
+                return dateFormatHelper.monthShortNames[this.getMonth()];
             },
             MM: function () {
-                return this.format.toFixedWidth(this.getMonth() + 1, 2);
+                return dateFormatHelper.toFixedWidth(this.getMonth(), 2);
             },
             M: function () {
-                return this.getMonth() + 1;
+                return this.getMonth();
             },
             dd: function () {
-                return this.format.toFixedWidth(this.getDate(), 2);
+                return dateFormatHelper.toFixedWidth(this.getDate(), 2);
             },
             d: function () {
                 return this.getDate();
             },
             EEEE: function () {
-                return this.format.dayNames[this.getDay()];
+                return dateFormatHelper.dayNames[this.getDay()];
             },
             EEE: function () {
-                return this.format.dayShortNames[this.getDay()];
+                return dateFormatHelper.dayShortNames[this.getDay()];
             },
             HH: function () {
-                return this.format.toFixedWidth(this.getHours(), 2);
+                return dateFormatHelper.toFixedWidth(this.getHours(), 2);
             },
             H: function () {
                 return this.getHours();
             },
             hh: function () {
-                return this.format.toFixedWidth(this.getHours() % 12 || 12, 2);
+                return dateFormatHelper.toFixedWidth(this.getHours() % 12 || 12, 2);
             },
             h: function () {
                 var hours = this.getHours() % 12;
                 return (hours == 0) ? 12 : hours;
             },
             mm: function () {
-                return this.format.toFixedWidth(this.getMinutes(), 2);
+                return dateFormatHelper.toFixedWidth(this.getMinutes(), 2);
             },
             m: function () {
                 return this.getMinutes();
             },
             ss: function () {
-                return this.format.toFixedWidth(this.getSeconds(), 2);
+                return dateFormatHelper.toFixedWidth(this.getSeconds(), 2);
             },
             s: function () {
                 return this.getSeconds();
             },
             S: function () {
-                return this.format.toFixedWidth(this.getMilliseconds(), 3);
+                return dateFormatHelper.toFixedWidth(this.getMilliseconds(), 3);
             },
             a: function () {
-                return this.format.ampm[this.getHours() < 12 ? 0 : 1];
+                return dateFormatHelper.ampm[this.getHours() < 12 ? 0 : 1];
             }
         },
         toFixedWidth: function (value, length, fill) {
@@ -151,7 +151,7 @@ define(['dInherit', 'libs'], function(dInherit){
         format: function(pattern, escaped){
             var result = '',
                 startNdx = 0,
-                regex = this.date.format[escaped ? "reEsc" : "reRaw"],
+                regex = dateFormatHelper[escaped ? "reEsc" : "reRaw"],
                 match;
 
             if (pattern) {
@@ -159,7 +159,7 @@ define(['dInherit', 'libs'], function(dInherit){
                     if (match.index > startNdx) {
                         result += pattern.substr(startNdx, match.index - startNdx);
                     }
-                    result += dateFormatHelper.patternValue[match[1]].call(this.date);
+                    result += dateFormatHelper.patternValue[match[1]].call(this);
                     startNdx = regex.lastIndex;
                 }
 
@@ -222,7 +222,7 @@ define(['dInherit', 'libs'], function(dInherit){
          * @returns {*|ClientDate.date}
          */
         getDate: function(){
-            return this.date;
+            return this.date.getDate();
         },
 
         /**
@@ -239,6 +239,22 @@ define(['dInherit', 'libs'], function(dInherit){
          */
         toShortDateString: function(){
             return this.format('yyyy-MM-dd');
+        },
+
+        /**
+         * 小时
+         * @returns {*|number}
+         */
+        getHours: function(){
+            return this.date.getHours();
+        },
+
+        getMinutes: function(){
+            return this.date.getMinutes();
+        },
+
+        getSeconds: function(){
+            return this.date.getSeconds();
         },
 
         /**

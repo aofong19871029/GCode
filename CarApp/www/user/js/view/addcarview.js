@@ -1,7 +1,7 @@
-define(['dView'], function(dView){
+define(['dView', 'dCalendar'], function(dView, dCalendar){
     var View = dView.extend({
         events: {
-
+            'click .js-time': 'selectInvoiceDeadline'
         },
 
         onCreate: function(){
@@ -19,6 +19,10 @@ define(['dView'], function(dView){
                     }
                 }
             });
+
+            this.els = {
+                selectDate: this.$el.find('#js-select-date')
+            };
         },
 
         onLoad: function(){
@@ -27,6 +31,34 @@ define(['dView'], function(dView){
 
         onHide: function(){
 
+        },
+
+        bindings: {
+            "#js-select-date": {
+                "observe": "insureDate",
+                "getVal": function($el) {
+                    return $el.text() === '选择日期' ? null : $el.text();
+                },
+                "update": function($el, val, model, options) {
+                    var date = model.get('insureDate');
+                    $el.text(date || '选择日期')
+                }
+            }
+        },
+
+        selectInvoiceDeadline: function(){
+            if(!this.calendar) {
+                this.calendar = new dCalendar();
+            }
+
+            this.calendar.setOpt({
+                getVal: function (val) {
+                    this.els.selectDate.text(val);
+                },
+                title: '保险到期时间'
+            });
+
+            this.calendar.show();
         }
     });
 

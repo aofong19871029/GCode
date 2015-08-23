@@ -5,18 +5,18 @@ define(['dView'], function(dView){
         },
 
         onCreate: function(){
+            var self = this;
+
             this.$el.append(this.T['js-realname-wrap']);
             this.embedHeader({
-                titleHtml: '实名登记,',
+                titleHtml: '实名登记',
                 moreHtml: '下一步',
                 back: true,
                 listener: {
                     backHandler: function(){
                         Ancients.back('login.html');
                     },
-                    moreHandler: function(){
-
-                    }
+                    moreHandler: self.save
                 }
             });
         },
@@ -27,6 +27,10 @@ define(['dView'], function(dView){
 
         onHide: function(){
 
+        },
+
+        save: function(){
+            Ancients.forward('addcar.html');
         }
     });
 

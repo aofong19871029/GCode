@@ -8,5 +8,6 @@ define(['dBaseLog', 'dConsoleAdapter', 'dUIAdapter'], function(dBaseLog, dConsol
     dBaseLog.defaultLog =  new dBaseLog.Logger('__FRAME_WORK__').addAdapter(new dBaseLog.ConsoleAdapter).addAdapter(new dBaseLog.UIAdapter);
 
 
+    Ancients.syslog = dBaseLog.defaultLog;
     return dBaseLog;
 });

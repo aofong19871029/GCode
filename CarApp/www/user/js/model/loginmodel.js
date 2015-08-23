@@ -12,7 +12,10 @@ define(['dModel', 'dCryptMd5'], function(dModel, dCryptMd5){
          */
         sendSMSCode: function(){
             this.request({
-                url: ''
+                url: '',
+                data: {
+                    phoneNumber: this.get('mobile')
+                }
             });
         },
 

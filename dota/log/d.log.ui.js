@@ -60,7 +60,7 @@ define(['dInherit', 'dBaseLog', 'dDate'], function(dInherit, dBaseLog, dDate){
                 msg = '[' + entity.level.toUpperCase() + ']' + startTime + '     ' + entity.message,
                 ul = this.dom.children[this.dom.children.length - 1].children[0];
 
-            $(ul).appendChild('<li class="' + entity.level.toLowerCase() + '">' + msg + '</li>');
+            $(ul).append('<li class="' + entity.level.toLowerCase() + '">' + msg + '</li>');
             this.show();
         },
         setStyle: function(styles){

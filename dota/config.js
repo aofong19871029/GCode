@@ -60,6 +60,7 @@
             'dBaseUI': baseDir + 'ui/d.ui.base',
             'dUIHeader': baseDir + 'ui/d.ui.header',
             'dUIToast': baseDir + 'ui/d.ui.toast',
+            'dCalendar': baseDir + 'ui/d.ui.calendar',
 
             'dBridge': baseDir + 'hybrid/d.bridge',
             // 基础框架
@@ -74,7 +75,7 @@
         }
     });
 
-    require(['dApp', 'dBridge', 'libs', relativeCss('pure'), relativeCss('ancient')], function(dApp){
+    require(['dApp', 'dBridge', 'libs', 'dLog', relativeCss('pure'), relativeCss('ancient')], function(dApp){
         var app = new dApp();
     });
 })();

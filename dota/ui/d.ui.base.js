@@ -27,15 +27,27 @@ define(['dInherit', 'dValidate'], function(dInherit, dValidate) {
 
             this.animation = Ancients.animation;
 
-            this.eventQueue = [];
+            this._eventQueue = [];
         },
+
+        events: {},
 
         initialize: function(){
             this._id = config.prefix +  new Date().getTime();
+
+            this.initEvents();
         },
 
         getUniqueId: function(){ return this._id;},
 
+        /**
+         * 参数设置函数
+         *
+         * 1. 设置参数
+         * 2. 根据参数整合模板数据
+         * 3. 模板+数据=>html , $el
+         * @param options
+         */
         setOptions: function(options){
             var self = this;
 
@@ -47,15 +59,17 @@ define(['dInherit', 'dValidate'], function(dInherit, dValidate) {
                         'display': 'none'
                     });
 
-                $.each(this.eventQueue, function(i, item){
+                $.each(this._eventQueue, function(i, item){
                     self.bindEvent(item.type, item.selector, item.handler);
                 });
             }
             catch(e){
+                Ancients.syslog.error(e.stack);
+
                 this.$el = $();
             }
             finally {
-                this.eventQueue = [];
+                this._eventQueue = [];
             }
         },
 
@@ -83,21 +97,64 @@ define(['dInherit', 'dValidate'], function(dInherit, dValidate) {
             if(arguments.length === 2) {
                 // type, handler
                 handler = selector;
+                selector = null;
             }
 
             if(!isFunction(handler)) return;
 
             if(!this.$el){
-                this.eventQueue.push({type: type, selector: selector, handle: $.proxy(handler, this)});
+                this._eventQueue.push({type: type, selector: selector, handle: $.proxy(handler, this)});
             } else {
-                this.$el.on(type, selector, handler);
+                selector ? this.$el.on(type, selector, handler) : this.$el.on(type, handler);
+            }
+        },
+
+        /**
+         * 将events 中注册的事件注入到_eventQueue 中
+         * 待dom初始化再绑定
+         */
+        initEvents: function(){
+            var type,
+                selector,
+                handler,
+                tmp;
+
+            if(this.hasOwnProperty('events')) {
+                for (var i in this.events) {
+                    i = i.trim();
+                    // key为空无效
+                    if (dValidate.isEmptyStr(i)) continue;
+
+                    tmp = i.split(' ');
+
+                    // $el 绑定事件
+                    if (tmp.length === 1) {
+                        type = i;
+                        selector = null;
+                    }
+                    // 委托绑定
+                    else if (tmp.length === 2) {
+                        type = tmp[0];
+                        selector = tmp[1]
+                    }
+
+                    handler = this.events[i];
+                    if (dValidate.isString(handler)) {
+                        handler = this[handler];
+                    }
+
+                    // 找不到handler 无效
+                    if (!dValidate.isFunction(handler)) continue;
+
+                    this._eventQueue.push({type: type, selector: selector, handle: $.proxy(handler, this)});
+                }
             }
         },
 
         destory: function(){
             this.$el.off();
             this.$el.remove();
-            this.eventQueue = undefined;
+            this._eventQueue = undefined;
         }
     });
 
