@@ -43,19 +43,20 @@
 
 .addcar-wrapper label{color: #666;}
 
-.addcar-wrapper .download{
-    font-size: 10px;
+.addcar-wrapper .dropdown{
+    font-size: 13px;
     width: calc((100% - 7rem) / 2);
     padding: 0;
     text-align: center;
+    height: 2rem;
 }
-.addcar-wrapper .download:first-child{
+.addcar-wrapper .dropdown:first-child{
     margin-right: 1rem;
 }
 
-.addcar-wrapper .download option:first-child{ color: #aaa;}
+.addcar-wrapper .dropdown option:first-child{ color: #aaa;}
 
-.addcar-wrapper .download:after{
+.addcar-wrapper .dropdown:after{
     display: inline-block;
     width: 8px;
     height: 8px;

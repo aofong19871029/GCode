@@ -9,6 +9,8 @@ require.config({
         'signupdoneView': 'js/view/signupdoneview',
         'signupdoneModel': 'js/model/signupdonemodel',
         'realnameView': 'js/view/realnameview',
-        'realnameModel': 'js/model/realnamemodel'
+        'realnameModel': 'js/model/realnamemodel',
+        'addcarModel': 'js/model/addcarmodel',
+        'addcarView': 'js/view/addcarview'
     }
 });

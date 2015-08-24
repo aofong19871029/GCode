@@ -1,7 +1,9 @@
 define(['dView'], function(dView){
     var View = dView.extend({
         events: {
-
+            'click #js-login': function(){
+                Ancients.forward('../user/login.html');
+            }
         },
 
         onCreate: function(){
@@ -9,9 +11,7 @@ define(['dView'], function(dView){
         },
 
         onLoad: function(){
-            setTimeout(function() {
-                Ancients.forward('../user/login.html');
-            }, 500);
+
         },
 
         onHide: function(){

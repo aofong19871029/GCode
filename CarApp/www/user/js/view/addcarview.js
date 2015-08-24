@@ -6,15 +6,16 @@ define(['dView', 'dCalendar'], function(dView, dCalendar){
 
         onCreate: function(){
             this.$el.append(this.T['js-addcar-wrap']);
+
             this.embedHeader({
                 titleHtml: '新增车辆',
                 moreHtml: '完成',
                 back: true,
                 listener: {
-                    backHandler: function(){
+                    backHandler: function () {
                         Ancients.back('login.html');
                     },
-                    moreHandler: function(){
+                    moreHandler: function () {
 
                     }
                 }

@@ -54,7 +54,8 @@
         'dUIHeader': 'ui/d.ui.header',
         'dUIToast': 'ui/d.ui.toast',
 
-        'dBridge': 'hybrid/d.bridge'
+        'dBridge': 'hybrid/d.bridge',
+        'dCordova': 'cordova'
     },
 
     shim: {
@@ -76,6 +77,9 @@
         },
         stickit: {
             exports: 'F'
+        },
+        dCordova: {
+            exports: 'cordova'
         }
     }
 })

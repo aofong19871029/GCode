@@ -59,12 +59,10 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], fu
             this.uiswitch = new dUIView();
 
             this.selectedDate;
-
-            this.init = false;
         },
 
         events: {
-            'click ui-calendar-tbody td'
+            'click ui-calendar-tbody td': ''
         },
 
         setOpt: function(options) {
@@ -74,18 +72,13 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], fu
                 title: options.title || ''
             }));
 
-            this.setHeader();
+            if(this._hasChanged) {
+                this.setHeader();
+                this.root.append(this.$el.hide());
+            }
         },
 
         show: function(){
-            if(!this.init) {
-                this.root.append(this.$el);
-                this.init = true;
-            } else {
-                this.$el.show();
-            }
-
-
             this.uiswitch[this.animation ? 'slideLeft' : 'noAnimateSlide'](this.$el, this.callContainer);
         },
 
@@ -100,8 +93,10 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], fu
                 back: true,
                 listener: {
                     backHandler: function () {
-                        self.uiswitch[this.animation ?'slideLeft' : 'noAnimateSlide'](self.callContainer, self.$el);
-                        self.hide();
+                        self.uiswitch[self.animation ?'slideRight' : 'noAnimateSlide'](self.callContainer, self.$el);
+                        setTimeout(function(){
+                            self.hide();
+                        }, 200);
                         dValidate.isFunction(self.opt.getVal) && self.opt.getVal(self.selectedDate);
                     }
                 },
@@ -141,7 +136,7 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], fu
                 row = [7, 1, 2, 3, 4, 5, 6],
                 i = 0;
 
-            while(i < row.length){
+            while(i !== 0 && i < row.length){
                 if(weekDayOfFirstDay === row[i]){
                     break;
                 }

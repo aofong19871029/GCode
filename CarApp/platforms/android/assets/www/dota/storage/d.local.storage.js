@@ -1,17 +1,1 @@
-define(['dInherit', 'dAbstractStorage'], function(dInherit, dAbstractStorage){
-    var LocalStorage = dInherit(dAbstractStorage, {
-        __propertys__: function(){
-            this.proxy = window.localStorage;
-        }
-    });
-
-    LocalStorage.getInstance = function () {
-        if (this.instance) {
-            return this.instance;
-        } else {
-            return this.instance = new this();
-        }
-    };
-
-    return LocalStorage;
-});
+define(["dInherit","dAbstractStorage"],function(e,t){var n=e(t,{__propertys__:function(){this.proxy=window.localStorage}});return n.getInstance=function(){return this.instance?this.instance:this.instance=new this},n});

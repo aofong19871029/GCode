@@ -35,8 +35,6 @@ define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValida
             this.tplFunc = _.template(headerTpl);
 
             this.root;
-
-            this.inited;
         },
         initialize: function(root){
             this.__superInitialize();
@@ -57,11 +55,10 @@ define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValida
             this.onShow = dValidate.isFunction(options.onShow) ? options.onShow : undefined;
             this.onHide = dValidate.isFunction(options.onHide) ? options.onHide : undefined;
 
-            this.attachEvent();
-
-            if(!this.inited) {
+            // opt 改变重新注册事件和渲染UI
+            if(this._hasChanged) {
+                this.attachEvent();
                 this.root.prepend(this.$el);
-                this.inited = true;
             }
         },
 

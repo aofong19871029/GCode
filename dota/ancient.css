@@ -386,7 +386,7 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 }
 
 /*********  UI calendar *********/
-.ui-calendar-wrap {height: 100%; position: relative;}
+.ui-calendar-wrap {height: 100%; }
 .ui-calendar-wrap .ui-label-view{height: 1.75rem; width: 100%}
 .ui-calendar-wrap .ui-label-date{
     position: fixed;

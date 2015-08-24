@@ -1,4 +1,4 @@
-define(['dInherit', 'dValidate'], function(dInherit, dValidate) {
+define(['dInherit', 'dCompare', 'dValidate'], function(dInherit, dCompare, dValidate) {
     var config = {
             prefix: 'ui-',
             /**
@@ -28,6 +28,8 @@ define(['dInherit', 'dValidate'], function(dInherit, dValidate) {
             this.animation = Ancients.animation;
 
             this._eventQueue = [];
+
+            this._hasChanged; //与上一次相比有改变
         },
 
         events: {},
@@ -42,6 +44,8 @@ define(['dInherit', 'dValidate'], function(dInherit, dValidate) {
 
         /**
          * 参数设置函数
+         * 比较options 与 this.opt 如果不一样则删除原dom, 重新render, 如果一样就什么都不做
+         * 不可被子类重写
          *
          * 1. 设置参数
          * 2. 根据参数整合模板数据
@@ -49,8 +53,16 @@ define(['dInherit', 'dValidate'], function(dInherit, dValidate) {
          * @param options
          */
         setOptions: function(options){
-            var self = this;
+            var self = this,
+                el = this.$el;
 
+            if(this.opt && dValidate.isObject(this.opt) && dCompare(this.opt, options || {}, true)){
+                this._hasChanged = false;
+                // opt 一样就不渲染
+                return;
+            }
+
+            this._hasChanged = true;
             this.opt = options || {};
 
             try {
@@ -69,6 +81,8 @@ define(['dInherit', 'dValidate'], function(dInherit, dValidate) {
                 this.$el = $();
             }
             finally {
+                // opt变化则删除前dom 重新渲染UI
+                el && el.remove && dValidate.isFunction(el.remove) && el.remove();
                 this._eventQueue = [];
             }
         },
@@ -105,7 +119,7 @@ define(['dInherit', 'dValidate'], function(dInherit, dValidate) {
             if(!this.$el){
                 this._eventQueue.push({type: type, selector: selector, handle: $.proxy(handler, this)});
             } else {
-                selector ? this.$el.on(type, selector, handler) : this.$el.on(type, handler);
+                selector ? this.$el.off(type, selector, handler).on(type, selector, handler) : this.$el.off(type, handler).on(type, handler);
             }
         },
 

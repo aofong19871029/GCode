@@ -5,6 +5,7 @@
         };
 
     require.config({
+        //baseUrl: '/android_asset/www/',
         waitSeconds: 20,
         shim: {
             $: {
@@ -51,6 +52,7 @@
             'dCryptMd5': baseDir + 'util/crypt/d.crypt.md5',
             'dPageCache': baseDir + 'page/d.page.cache',
             'dGuid': baseDir + 'util/d.util.guid',
+            'dCompare': baseDir + 'util/d.util.compare',
             'dAbstractApp': baseDir + 'app/d.abstract.app',
             'dController': baseDir + 'page/d.controller',
             'dModel': baseDir + 'page/d.model',
@@ -71,11 +73,11 @@
             'text': baseDir + 'external/require.text',
             'css': baseDir + 'external/require.css',
             'stickit': baseDir + 'external/backbone.stickit',
-            'dCordova': '../cordova'
+            'dCordova': baseDir + 'cordova'
         }
     });
 
-    require(['dApp', 'dBridge', 'libs', 'dLog', relativeCss('pure'), relativeCss('ancient')], function(dApp){
+    require(['dApp', 'dBridge', 'libs', 'dLog', 'dBridge', relativeCss('pure'), relativeCss('ancient')], function(dApp){
         var app = new dApp();
     });
 })();
