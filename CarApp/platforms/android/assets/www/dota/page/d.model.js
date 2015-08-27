@@ -1,1 +1,0 @@
-define(["dStore","dGuid","dAjax"],function(e,t,n){var r=Backbone.Model.extend({__propertys__:function(){this.store=new e({key:t.newGuid(),expir:"30I"})},initialize:function(e){this.controller=e},request:function(e){n.post(e.url,e.success,e.error,e.store)}});return r});

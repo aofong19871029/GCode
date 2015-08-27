@@ -32,10 +32,10 @@ define(function() {
                     _super = this._super;
 
                 // load __propertys__
-                _super.__propertys__.call(this);
+                _super &&  _super.__propertys__.call(this);
                 self.__propertys__.call(this);
 
-                self.__superInitialize = _super.initialize;
+                self.__superInitialize = _super ? _super.initialize : noop;
                 // init the class
                 self.initialize.apply(self, arguments);
                 return self;
@@ -84,6 +84,21 @@ define(function() {
                 }
                 // parent constructor
                 proto._super = _super;
+
+                // properties from self own and prototype except parent
+                proto.hasProperty = function(attr){
+                    if(Object.prototype.toString.call(attr) === '[object String]') {
+                        for (var i in this) {
+                            if (i.toLowerCase() === '_super') continue;
+
+                            if (i === attr) {
+                                return true;
+                            }
+                        }
+                    }
+
+                    return false;
+                };
 
                 // if no initialize, assume we're inheriting from a non-Pjs class, so
                 // default to using the superclass constructor.

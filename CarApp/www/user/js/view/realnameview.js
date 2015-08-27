@@ -31,6 +31,14 @@ define(['dView'], function(dView){
 
         save: function(){
             Ancients.forward('addcar.html');
+        },
+
+        bindings: {
+            '#js-nickName': 'nickName',
+            '#js-name': 'name',
+            '#js-portrait': 'portrait',
+            '#js-license': 'drivingLicense',
+            '#js-drivingPhoto': 'drivingPhoto'
         }
     });
 

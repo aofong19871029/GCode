@@ -1,4 +1,4 @@
-define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], function(dInherit, dBaseUI, dDate, dUIHeader, dUIView, dValidate) {
+define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate', 'dCompare'], function(dInherit, dBaseUI, dDate, dUIHeader, dUIView, dValidate, dCompare) {
     var headerTpl =
             '<div class="ui-label-view">\
             <p class="ui-label-date">\
@@ -27,7 +27,7 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], fu
                   <tbody class="ui-calendar-tbody">\
                   <%_.each(m.data, function(day, i){%>\
                     <%if(i%7 === 0){%><tr><%}%>\
-                    <td class="<%if(!day || day.invalid){%>ui-invalid<%}%><%if(day && day.tag){%> ui-tagtd<%}%>">\
+                    <td class="<%if(!day || day.invalid){%>ui-invalid<%}%><%if(day && day.tag){%> ui-tagtd<%}%><%if(day.selected){%> ui-calendar-selected<%}%>" <%if(day && day.date && !day.invalid){%>data-date="<%=day.date%>"<%}%>>\
                     <%if(day){%>\
                     <em><%=day.num%></em>\
                     <%if(day.tag){%><i><%=day.tag%></i><%}%>\
@@ -48,6 +48,8 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], fu
 
     var Calendar = dInherit(dBaseUI, {
         __propertys__: function () {
+            this._name = 'Calendar';
+
             this.tplFunc = _.template(calendarTpl);
 
             this.monthCount = 4; // 3year
@@ -62,20 +64,21 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], fu
         },
 
         events: {
-            'click ui-calendar-tbody td': ''
+            'click td[data-date]': 'selectDate'
         },
 
         setOpt: function(options) {
             options = options || {};
 
             this.setOptions($.extend(true, this.buildCalendarData(), {
-                title: options.title || ''
+                title: options.title || '',
+                selectedDate: options.selectedDate,
+                getVal: options.getVal
             }));
+            this.selectedDate = this.opt.selectedDate;
 
-            if(this._hasChanged) {
-                this.setHeader();
-                this.root.append(this.$el.hide());
-            }
+            this.setHeader();
+            this.root.append(this.$el.hide());
         },
 
         show: function(){
@@ -83,22 +86,12 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], fu
         },
 
         setHeader: function(){
-            var self = this;
-
-            if(!this.header){
-                this.header = new dUIHeader(this.$el);
-            }
+            this.header = new dUIHeader(this.$el);
 
             this.header.setOpt($.extend(true, {
                 back: true,
                 listener: {
-                    backHandler: function () {
-                        self.uiswitch[self.animation ?'slideRight' : 'noAnimateSlide'](self.callContainer, self.$el);
-                        setTimeout(function(){
-                            self.hide();
-                        }, 200);
-                        dValidate.isFunction(self.opt.getVal) && self.opt.getVal(self.selectedDate);
-                    }
+                    backHandler: $.proxy(this.submit, this)
                 },
                 titleHtml: this.opt.title
             }, this.opt));
@@ -150,8 +143,10 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], fu
                 i++;
                 months.push({
                     num: i >= 10 ? i : '0' + i,
-                    tag: !this._tagComplete && this.getTag(new dDate(year + '/' + month + '/' + i)),
-                    invalid: !this._tagComplete && this.getTag(new dDate(year + '/' + month + '/' + i)) === 0
+                    tag: !this._tagComplete && this.getTag(this.createDateByYMD(year, month, i)),
+                    invalid: !this._tagComplete && this.getTag(this.createDateByYMD(year, month, i)) === 0,
+                    date: this.createDateByYMD(year, month, i).toShortDateString(),
+                    selected: dCompare(this.createDateByYMD(year, month, i).toShortDateString(), new dDate(this.selectedDate).toShortDateString())
                 });
             }
 
@@ -189,6 +184,48 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate'], fu
             }
 
             return tag;
+        },
+
+        selectDate: function(e){
+            var target = e.currentTarget;
+
+            this.selectedDate = target.getAttribute('data-date');
+
+            this.submit();
+        },
+
+        /**
+         * 月或日的 补全  3 => 03  15 => 15
+         * @param num
+         * @returns {string}
+         */
+        zerofill: function(num){
+            return num < 10 ? '0' + num : num;
+        },
+
+        /**
+         * y/m/d => dDate
+         * @param y 年
+         * @param m 月
+         * @param d 日
+         * @returns {*}
+         */
+        createDateByYMD: function(y, m, d){
+            return dDate([y, this.zerofill(m), this.zerofill(d)].join('/'));
+        },
+
+        /**
+         * 选择日期完成，并且回退
+         */
+        submit: function(){
+            var self = this;
+
+            this.uiswitch[this.animation ?'slideRight' : 'noAnimateSlide'](this.callContainer, this.$el);
+            setTimeout(function(){
+                self.hide();
+            }, 200);
+
+            dValidate.isFunction(this.opt.getVal) && this.opt.getVal(this.selectedDate);
         }
 
     });

@@ -242,6 +242,14 @@ define(['dInherit', 'libs'], function(dInherit){
         },
 
         /**
+         * hh:mm:ss
+         * @returns {string}
+         */
+        toShortTimeString: function(){
+            return this.format('hh:mm:ss');
+        },
+
+        /**
          * 小时
          * @returns {*|number}
          */

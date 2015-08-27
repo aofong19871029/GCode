@@ -32,6 +32,8 @@ define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValida
      */
     var Header = dInherit(dBaseUI, {
         __propertys__: function () {
+            this._name = 'Header';
+
             this.tplFunc = _.template(headerTpl);
 
             this.root;
@@ -41,7 +43,7 @@ define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValida
 
             root && (this.root = root);
         },
-        setOpt: function(options){
+        setOpt: function(options) {
             options = options || {};
 
             this.setOptions({
@@ -56,10 +58,8 @@ define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValida
             this.onHide = dValidate.isFunction(options.onHide) ? options.onHide : undefined;
 
             // opt 改变重新注册事件和渲染UI
-            if(this._hasChanged) {
-                this.attachEvent();
-                this.root.prepend(this.$el);
-            }
+            this.attachEvent();
+            this.root.prepend(this.$el);
         },
 
         attachEvent: function(){

@@ -1,7 +1,13 @@
-define(['dModel'], function(dModel){
+define(['dModel', 'dDate'], function(dModel, dDate){
     var Model = dModel.extend({
         defaults: {
-                insureDate: null
+            insureDate: '',
+            brandId: '',
+            modelId: '',
+            carPhoto: '',
+            carId: '',
+            engineNum: '',
+            dirLicense: ''
         }
     });
 

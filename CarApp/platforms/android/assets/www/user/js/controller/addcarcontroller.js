@@ -1,8 +1,8 @@
-define(['dController', 'loginView', 'loginModel', 'css!/user/css/login.css'], function(dController, loginView, loginModel){
+define(['dController', 'addcarView', 'addcarModel', 'css!../../css/addcar.css'], function(dController, addcarView, addcarModel){
     var Controller = dController.extend({
         initialize: function(){
-            var model = new loginModel(this, 'login'),
-                view = new loginView({
+            var model = new addcarModel(this),
+                view = new addcarView({
                     model: model,
                     controller: this
                 });

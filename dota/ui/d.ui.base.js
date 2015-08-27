@@ -29,15 +29,10 @@ define(['dInherit', 'dCompare', 'dValidate'], function(dInherit, dCompare, dVali
 
             this._eventQueue = [];
 
-            this._hasChanged; //与上一次相比有改变
         },
-
-        events: {},
 
         initialize: function(){
             this._id = config.prefix +  new Date().getTime();
-
-            this.initEvents();
         },
 
         getUniqueId: function(){ return this._id;},
@@ -56,22 +51,24 @@ define(['dInherit', 'dCompare', 'dValidate'], function(dInherit, dCompare, dVali
             var self = this,
                 el = this.$el;
 
-            if(this.opt && dValidate.isObject(this.opt) && dCompare(this.opt, options || {}, true)){
-                this._hasChanged = false;
-                // opt 一样就不渲染
-                return;
-            }
-
-            this._hasChanged = true;
             this.opt = options || {};
 
             try {
-                this.$el = $(this.tplFunc(this.opt)).css({
-                        'z-index': config.getBiggerZindex(),
-                        'display': 'none'
-                    });
+                this.$el = $(this.tplFunc(this.opt));
+                this.$el.html($(this.tplFunc(this.opt)).html());
 
-                $.each(this._eventQueue, function(i, item){
+
+                this.$el.css({
+                    'z-index': config.getBiggerZindex(),
+                    'display': 'none'
+                });
+
+
+                // 初始化events
+                this.initEvents();
+
+                // 注册事件
+                $.each(this._eventQueue, function (i, item) {
                     self.bindEvent(item.type, item.selector, item.handler);
                 });
             }
@@ -117,7 +114,7 @@ define(['dInherit', 'dCompare', 'dValidate'], function(dInherit, dCompare, dVali
             if(!isFunction(handler)) return;
 
             if(!this.$el){
-                this._eventQueue.push({type: type, selector: selector, handle: $.proxy(handler, this)});
+                this._eventQueue.push({type: type, selector: selector, handler: $.proxy(handler, this)});
             } else {
                 selector ? this.$el.off(type, selector, handler).on(type, selector, handler) : this.$el.off(type, handler).on(type, handler);
             }
@@ -131,25 +128,25 @@ define(['dInherit', 'dCompare', 'dValidate'], function(dInherit, dCompare, dVali
             var type,
                 selector,
                 handler,
-                tmp;
+                spaceIdx;
 
-            if(this.hasOwnProperty('events')) {
+            if(this.hasProperty('events')) {
                 for (var i in this.events) {
                     i = i.trim();
                     // key为空无效
                     if (dValidate.isEmptyStr(i)) continue;
 
-                    tmp = i.split(' ');
+                    spaceIdx = i.indexOf(' ');
 
                     // $el 绑定事件
-                    if (tmp.length === 1) {
+                    if (spaceIdx == -1) {
                         type = i;
                         selector = null;
                     }
                     // 委托绑定
-                    else if (tmp.length === 2) {
-                        type = tmp[0];
-                        selector = tmp[1]
+                    else{
+                        type = i.slice(0, spaceIdx);
+                        selector = i.slice(spaceIdx + 1).trim();
                     }
 
                     handler = this.events[i];
@@ -160,7 +157,7 @@ define(['dInherit', 'dCompare', 'dValidate'], function(dInherit, dCompare, dVali
                     // 找不到handler 无效
                     if (!dValidate.isFunction(handler)) continue;
 
-                    this._eventQueue.push({type: type, selector: selector, handle: $.proxy(handler, this)});
+                    this._eventQueue.push({type: type, selector: selector, handler: $.proxy(handler, this)});
                 }
             }
         },

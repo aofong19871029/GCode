@@ -6,6 +6,8 @@ define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValida
 
     var Toast = dInherit(dBaseUI, {
         __propertys__: function () {
+            this._name = 'Toast';
+
             this.tplFunc = _.template(toastTpl);
 
             this.timeout = 2500;

@@ -18,7 +18,7 @@ define(function () {
             ce = arguments.callee;
 
         if (pt.test(typeof a) || pt.test(typeof b) || a === null || b === null) {
-            return a === b || (isNaN(a) && isNaN(b)); //为了方便，此处假定NaN == NaN
+            return a == b;
         }
 
         if (a[cr] !== b[cr]) {
@@ -57,13 +57,10 @@ define(function () {
                 if (alen !== blen) {
                     return false;
                 }
+
                 for (d in a) {
-                    if(ownproperty){
-                        if(!a.hasOwnProperty(d) || !b.hasOwnProperty(d)){
-                            console.log(d);
-                            continue;
-                        }
-                    }
+                    if(ownproperty && (!a.hasOwnProperty(d) || !b.hasOwnProperty(d))) continue;
+
                     if (!ce(a[d], b[d], ownproperty)) {
                         return false;
                     }

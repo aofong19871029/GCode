@@ -1,14 +1,20 @@
-define(['dStore', 'dGuid', 'dAjax'], function(dStore, dGuid, dAjax){
+define(['dStore', 'dAjax', 'dValidate'], function(dStore, dAjax, dValidate){
     var BaseModel = Backbone.Model.extend({
         __propertys__: function(){
-            this.store = new dStore({
-                key: dGuid.newGuid(),
-                expir: '30I'
-            });
+
         },
 
-        initialize: function(controller){
+        initialize: function(controller, storeName){
             this.controller = controller;
+
+            if(dValidate.isString(storeName)){
+                this.store = new dStore({
+                    key: storeName,
+                    expir: '30I'
+                });
+            }
+
+            dValidate.isFunction(this.init) && this.init();
         },
 
         /**
