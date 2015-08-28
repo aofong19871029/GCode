@@ -5,7 +5,7 @@
         };
 
     require.config({
-        //baseUrl: '/android_asset/www/',
+        baseUrl: Ancients.dir,
         waitSeconds: 20,
         shim: {
             $: {

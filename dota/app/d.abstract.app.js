@@ -275,6 +275,8 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
          * @param opt history方向
          */
         directTo: function(url, opt){
+
+
             var currentPath = this._getRootAbsolutePath(location.href),
                 targetPath = this._getRootAbsolutePath(url);
 
@@ -291,7 +293,8 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
          * @private
          */
         _getRootAbsolutePath: function(url){
-            var pathParams = dUrl.parseUrl(url),
+            var url = url + '',
+                pathParams = dUrl.parseUrl(url),
                 pathName = pathParams.pathname,
                 filename = pathParams.filename;
 
@@ -300,7 +303,7 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
                 pathName = pathName.slice(0, pathName.lastIndexOf('/'));
             }
             // 完整的http径  http://xxx/xxx/xx.html
-            else if (url.indexOf('/') !== -1){
+            else if (/^https?:\/\/|file:\/\/\//.test(url.toLowerCase())){
                 pathName = pathName.slice(0, pathName.lastIndexOf('/'));
             }
             // 同目录下跳转 login.html => signup.html
