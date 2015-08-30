@@ -2,15 +2,15 @@ require.config({
     waitSeconds: 60,
     paths: {
         // ---------------- 用户模块 -------------
-        'loginView': 'js/view/loginview',
-        'loginModel': 'js/model/loginmodel',
-        'signupView': 'js/view/signupview',
-        'signupModel': 'js/model/signupmodel',
-        'signupdoneView': 'js/view/signupdoneview',
-        'signupdoneModel': 'js/model/signupdonemodel',
-        'realnameView': 'js/view/realnameview',
-        'realnameModel': 'js/model/realnamemodel',
-        'addcarModel': 'js/model/addcarmodel',
-        'addcarView': 'js/view/addcarview'
+        'loginView': 'user/js/view/loginview',
+        'loginModel': 'user/js/model/loginmodel',
+        'signupView': 'user/js/view/signupview',
+        'signupModel': 'user/js/model/signupmodel',
+        'signupdoneView': 'user/js/view/signupdoneview',
+        'signupdoneModel': 'user/js/model/signupdonemodel',
+        'realnameView': 'user/js/view/realnameview',
+        'realnameModel': 'user/js/model/realnamemodel',
+        'addcarModel': 'user/js/model/addcarmodel',
+        'addcarView': 'user/js/view/addcarview'
     }
 });

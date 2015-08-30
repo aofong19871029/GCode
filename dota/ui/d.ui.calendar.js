@@ -27,7 +27,7 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate', 'dC
                   <tbody class="ui-calendar-tbody">\
                   <%_.each(m.data, function(day, i){%>\
                     <%if(i%7 === 0){%><tr><%}%>\
-                    <td class="<%if(!day || day.invalid){%>ui-invalid<%}%><%if(day && day.tag){%> ui-tagtd<%}%><%if(day.selected){%> ui-calendar-selected<%}%>" <%if(day && day.date && !day.invalid){%>data-date="<%=day.date%>"<%}%>>\
+                    <td class="<%if(!day || day.invalid){%>ui-invalid<%}%><%if(day && day.tag){%> ui-tagtd<%}%><%if(day && day.selected){%> ui-calendar-selected<%}%>" <%if(day && day.date && !day.invalid){%>data-date="<%=day.date%>"<%}%>>\
                     <%if(day){%>\
                     <em><%=day.num%></em>\
                     <%if(day.tag){%><i><%=day.tag%></i><%}%>\
@@ -129,7 +129,7 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate', 'dC
                 row = [7, 1, 2, 3, 4, 5, 6],
                 i = 0;
 
-            while(i !== 0 && i < row.length){
+            while(i < row.length){
                 if(weekDayOfFirstDay === row[i]){
                     break;
                 }

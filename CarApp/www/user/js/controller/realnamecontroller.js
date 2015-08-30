@@ -1,7 +1,7 @@
 define(['dController', 'realnameView', 'realnameModel', 'css!../../css/realname.css'], function(dController, realnameView, realnameModel){
     var Controller = dController.extend({
         initialize: function(){
-            var model = new realnameModel(this, 'realname'),
+            var model = new realnameModel(this),
                 view = new realnameView({
                     model: model,
                     controller: this

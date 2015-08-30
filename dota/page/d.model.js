@@ -4,15 +4,8 @@ define(['dStore', 'dAjax', 'dValidate'], function(dStore, dAjax, dValidate){
 
         },
 
-        initialize: function(controller, storeName){
+        initialize: function(controller){
             this.controller = controller;
-
-            if(dValidate.isString(storeName)){
-                this.store = new dStore({
-                    key: storeName,
-                    expir: '30I'
-                });
-            }
 
             dValidate.isFunction(this.init) && this.init();
         },
