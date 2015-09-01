@@ -49,8 +49,7 @@ define(['dView', 'dCalendar', 'dDate'], function(dView, dCalendar, dDate){
             '#J_model': 'modelId',
             '#js-carPhoto': 'carPhoto',
             '#js-carId': 'carId',
-            '#js-engineNum': 'engineNum',
-            '#js-dirLicense': 'dirLicense'
+            '#js-engineNum': 'engineNum'
         },
 
         selectInvoiceDeadline: function(){

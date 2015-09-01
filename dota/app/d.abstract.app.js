@@ -32,16 +32,7 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
 
             this.bindEvent();
 
-            Ancients.forward = $.proxy(this.forward, this);
-            Ancients.back = $.proxy(function(url){
-                if(!url || !dValidate.isString(url)){
-                    url = this.pageCache.getLastPageUrl();
-                }
-
-                if(!url || !url.length) return;
-
-                this.back(url);
-            }, this);
+            this.extensionToAncients();
 
             this.forward(location.href);
         },
@@ -75,7 +66,7 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
                 if (needhandle) {
                     var href = el.attr('href');
 
-                    if(href.indexOf('javascript') === -1) {
+                    if(href && href.indexOf('javascript') === -1) {
                         this.forward(href);
 
                         e.preventDefault();
@@ -185,13 +176,6 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
 
         _switchView: function(action){
             this.slideView(action, this.curController, this.lastController);
-//            if(this.lastController) {
-//                // 执行lastview.onHide
-//                this.lastController.hide();
-//            }
-//
-//            // curview 已构造，仅执行reload
-//            this.curController.load();
         },
 
         /**
@@ -256,7 +240,6 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
             this.mainframe.append(subViewHtml);
 
             this.curController.view._setRootEl($('#' + subViewId));
-//            this.curController.view.el = (this.curController.view.$el = $('#' + subViewId))[0];
             // 创建好view dom后触发controller create函数
             this.curController.create();
         },
@@ -270,13 +253,21 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
         },
 
         /**
+         * 相对于根目录的跨频道跳转
+         * @param url
+         */
+        cros: function(url, action) {
+            url = Ancients.dir + url; //修正为相对跟目录的路径
+
+            this.directTo(url, {action: action || 'forward'});
+        },
+
+        /**
          * 跳转核心方法
          * @param url
          * @param opt history方向
          */
         directTo: function(url, opt){
-
-
             var currentPath = this._getRootAbsolutePath(location.href),
                 targetPath = this._getRootAbsolutePath(url);
 
@@ -329,6 +320,24 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
                 fileName = params.filename;
 
             return directory + fileName.split('.')[0];
+        },
+
+        /**
+         * 扩展方法
+         * 将跳转函数 公开给全局对象，以方便view跳转
+         */
+        extensionToAncients: function(){
+            Ancients.forward = $.proxy(this.forward, this);
+            Ancients.back = $.proxy(function(url){
+                if(!url || !dValidate.isString(url)){
+                    url = this.pageCache.getLastPageUrl();
+                }
+
+                if(!url || !url.length) return;
+
+                this.back(url);
+            }, this);
+            Ancients.cros = $.proxy(this.cros, this);
         }
 
     });

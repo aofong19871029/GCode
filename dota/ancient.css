@@ -45,6 +45,24 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,if
 }
 input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 
+.base-list{border-top: 1px solid #bcbcbc; width: 100%;}
+.base-list li{
+    position: relative;
+    z-index: 1;
+    padding: 0 1.87rem 0 6.25rem;
+    border-bottom: 1px solid #bcbcbc;
+    min-height: 2.68rem;
+    background-color: #fff;
+}
+.base-list .title{
+    float: left;
+    width: 5.31rem;
+    margin-left: -5.31rem;
+    padding-top: 0.625rem;
+    font-size: 15px;
+    color: #333;
+}
+
 /*********  UI headerview  *********/
 .ui-header-fixed {
     position: fixed;

@@ -6,8 +6,7 @@ define(['dModel', 'dDate'], function(dModel, dDate){
             modelId: '',
             carPhoto: '',
             carId: '',
-            engineNum: '',
-            dirLicense: ''
+            engineNum: ''
         }
     });
 

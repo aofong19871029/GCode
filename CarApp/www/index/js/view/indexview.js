@@ -2,7 +2,10 @@ define(['dView', 'swipe'], function(dView, swipe){
     var View = dView.extend({
         events: {
             'click .js-login': function(){
-                Ancients.forward('/user/login.html');
+                Ancients.cros('user/login.html');
+            },
+            'click .js-penalties': function(){
+                Ancients.cros('penalties/search.html');
             }
         },
 

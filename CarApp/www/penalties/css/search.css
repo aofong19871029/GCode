@@ -1,0 +1,91 @@
+.penalties-wrapper {background-color: #efefef;}
+.penalties-wrapper .slogan{color: #666; font-size: 13px; padding: 0.43rem 0.93rem}
+
+.base-list{border-top: 1px solid #bcbcbc; width: 100%;}
+.base-list li{
+    position: relative;
+    z-index: 1;
+    padding: 0 1.87rem 0 6.25rem;
+    border-bottom: 1px solid #bcbcbc;
+    min-height: 2.68rem;
+    background-color: #fff;
+}
+.base-list .title{
+    float: left;
+    width: 5.31rem;
+    margin-left: -5.31rem;
+    padding-top: 0.625rem;
+    font-size: 15px;
+    color: #333;
+}
+
+.base-list input{
+    width: 100%;
+    height: 2.625rem;
+    border: 0;
+    padding: 0.03rem;
+    background: transparent;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+.penalties-wrapper .base-list .pre-car{
+    position: absolute;
+    display: block;
+    top: 0;
+    height: 100%;
+    line-height: 2.68rem;
+    width: 2rem;
+}
+.penalties-wrapper .base-list .pre-car:after{
+    margin-bottom: 2px;
+    -webkit-transform: rotateZ(-45deg);
+    -ms-transform: rotateZ(-45deg);
+    transform: rotateZ(-45deg);
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-left: 5px;
+    overflow: hidden;
+    content: '\20';
+    font-size: 15px;
+    box-shadow: inset 2px -2px 0 #099fde;
+}
+
+
+.penalties-wrapper .base-list .carnum{
+    padding-left: 3rem;
+}
+
+.penalties-wrapper .base-list .city{
+    padding-right: 0.3rem;
+    float: right;
+    height: 2.86rem;
+    line-height: 2.86rem;
+    display: inline-block;
+}
+
+.penalties-wrapper .base-list .city:after{
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    background: url(http://simg1.qunarzz.com/site/images/wap/touch/images/v2/images2x/arrow_grey_sprites.png) 0 0 no-repeat;
+    width: 9px;
+    height: 14px;
+    margin-top: -7px;
+    background-size: 500% 100%;
+    background-position: -9px 0;
+}
+
+.penalties-wrapper .search{
+    font-size: 16px;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    width: 80%;
+    background-color: #FF851B;
+    margin:1rem 10%;
+}
