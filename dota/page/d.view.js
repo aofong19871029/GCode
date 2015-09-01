@@ -22,7 +22,10 @@ define(['dStore', 'dGuid', 'dValidate', 'dUIHeader', 'dUIToast'], function(dStor
 
             dValidate.isFunction(this.onLoad) && this.onLoad();
             this.$el.show();
+        },
 
+        show: function(){
+            dValidate.isFunction(this.onShow) && this.onShow();
         },
 
         hide: function(options){

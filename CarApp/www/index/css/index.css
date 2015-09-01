@@ -81,6 +81,8 @@
     letter-spacing: 0.01rem;
     overflow: hidden;
     padding: 0.02rem 0.8rem;
+    font-size: 12px;
+    color: #000;
 }
 
 .index-wrapper .idx-slider{
@@ -92,6 +94,7 @@
 
 .index-wrapper .idx-slider .swipe{
     height: 100%;
+    width: 100%;
     overflow: hidden;
     position: relative;
 }
@@ -142,8 +145,34 @@
 
 .index-wrapper .idx-slider .pic-scroll-ctrl span.cur{ background: #ff8a00;}
 
-.index-wrapper .idx-info .menuitem{
+.index-wrapper .idx-info{
+    border-top: 1px solid #ddd;
+}
+
+.index-wrapper .nav-list{margin: 0.3rem 0; font-weight: bold; color: #fff;}
+
+.index-wrapper .nav-list > div{
+    height: 5.13rem;
+    line-height: 5.13rem;
+    margin: 0.12rem;
+    text-align: center;
+    width: -webkit-calc(50% - 0.24rem);
+    border-radius: 0.5rem;
+}
+
+.index-wrapper .nav-list div:nth-child(1){background-color: #FF5555;}
+.index-wrapper .nav-list div:nth-child(2){background-color: #B10DC9;}
+.index-wrapper .nav-list div:nth-child(3){background-color: #FFDC00;}
+.index-wrapper .nav-list div:nth-child(4){background-color: #0074D9;}
+.index-wrapper .nav-list div:nth-child(5){background-color: #2ECC40;}
+.index-wrapper .nav-list div:nth-child(6){background-color: #FF851B;}
+
+.index-wrapper .idx-info > div{
     width: 23%;
     margin: 0 1%;
     text-align: center;
+    font-size: 12px;
+    height: 2rem;
+    line-height: 2rem;
+    position: relative;
 }

@@ -3,6 +3,7 @@ require.config({
     paths: {
         // ----------------  主页   -------------
         'indexView': 'index/js/view/indexview',
-        'indexModel': 'index/js/model/indexmodel'
+        'indexModel': 'index/js/model/indexmodel',
+        'swipe': 'com/swipe'
     }
 });
