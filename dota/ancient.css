@@ -320,7 +320,7 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 .disabled{background-color: #AAAAAA !important;}
 
 /*********  UI toast *********/
-.ui-layer{
+.ui-tlayer{
     position: fixed;
     top: 45%;
     left: 50%;
@@ -457,3 +457,105 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 .ui-calendar-tbody td.ui-tagtd i{font-size: 11px; line-height: 0.88rem; display: block;}
 .ui-calendar-tbody td:nth-of-type(7n), .ui-calendar-tbody td:nth-of-type(7n+1){color: #ff902d}
 .ui-calendar-wrap .ui-calendar-selected{background-color: #0074D9; color: #fff !important;}
+
+/*********  UI mask *********/
+.ui-layer .ui-mask{-webkit-animation: opacity 550mcubic-bezier(0.680,0,0.265,1);}
+
+.ui-mask{
+    background: rgba(0,0,0,.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 2000 !important;
+}
+
+.ui-layer{
+    color: #eee;
+    border-radius: 10px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 2100 !important;
+    max-height: 80%;
+    max-width: 80%;
+    min-width: 16.25rem;
+    overflow: auto;
+}
+
+.ui-layer .ui-pop-box{
+    background: #fff;
+    width: 17.5rem;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    z-index: 2002;
+}
+
+.ui-layer .ui-pop-box .ui-pop-hd{
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: 15px;
+    color: #fff;
+    background: #003A6D;
+    padding: 0 0.62rem;
+    position: fixed;
+    width: 16.25rem ;
+    z-index: 2003;
+}
+
+.ui-layer .ui-pop-hd .ui-pop-close{
+    position: absolute;
+    width: 3.12rem;
+    height: 100%;
+    right: 0;
+    top: 0;
+}
+
+.ui-layer .ui-pop-hdview{
+    width: 100%;
+    height: 2.5rem;
+}
+
+.ui-layer .ui-pop-hd .ui-top-close{
+    width: 2.5rem;
+    height: 2.5rem;
+    float: right;
+    line-height: 2.5rem;
+    color: transparent;
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+}
+
+.ui-layer .ui-pop-hd .ui-top-close:before,
+.ui-layer .ui-pop-hd .ui-top-close:after
+{
+    width: 0.13rem;
+    height: 1rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -0.5rem 0 0 -0.06rem;
+    background: #fff;
+    content: "";
+}
+
+.ui-layer .ui-pop-hd .ui-top-close:before{
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.ui-layer .ui-pop-hd .ui-top-close:after{
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.ui-layer .ui-pop-bd{
+    background-color: rgb(250, 250, 250);
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}

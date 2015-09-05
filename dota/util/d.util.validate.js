@@ -59,6 +59,42 @@
                 default:
                     return Errors[1];
             }
+        },
+
+        /**
+         * html element
+         *
+         * @param el
+         * @returns {*|boolean|Function|Node}
+         */
+        isHtmlElement: function(el){
+            return el && el.nodeType === 1;
+        },
+
+        /**
+         * is $ dom
+         * @param $el
+         * @returns {*|*|boolean|Function|Node}
+         */
+        isZeptoDom: function($el){
+            $el = $($el);
+
+            return $el.length && this.isHtmlElement($el[0]);
+        },
+
+        /**
+         * dom 元素是否显示
+         * @param el
+         * @returns {boolean}
+         */
+        isElVisible: function(el){
+            el = $(el);
+
+            return !!(el.width() || el.height()) && el.css("display") !== "none"
+        },
+
+        isElHidden: function(el){
+            return !this.isElVisible(el);
         }
     };
 

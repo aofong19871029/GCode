@@ -63,6 +63,9 @@
             'dUIHeader': baseDir + 'ui/d.ui.header',
             'dUIToast': baseDir + 'ui/d.ui.toast',
             'dCalendar': baseDir + 'ui/d.ui.calendar',
+            'dMask': baseDir + 'ui/d.ui.mask',
+            'dLayer': baseDir + 'ui/d.ui.layer',
+            'dPopLayer': baseDir + 'ui/d.ui.poplayer',
 
             'dBridge': baseDir + 'hybrid/d.bridge',
             // 基础框架

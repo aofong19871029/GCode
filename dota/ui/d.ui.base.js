@@ -29,10 +29,13 @@ define(['dInherit', 'dCompare', 'dValidate'], function(dInherit, dCompare, dVali
 
             this._eventQueue = [];
 
+            this._hasChange;
         },
 
         initialize: function(){
             this._id = config.prefix +  new Date().getTime();
+
+            this._eventQueue = [];
         },
 
         getUniqueId: function(){ return this._id;},
@@ -51,11 +54,16 @@ define(['dInherit', 'dCompare', 'dValidate'], function(dInherit, dCompare, dVali
             var self = this,
                 el = this.$el;
 
+            this._hasChange = !dCompare(this.opt , options);
+
             this.opt = options || {};
 
             try {
-                this.$el = $(this.tplFunc(this.opt));
-                this.$el.html($(this.tplFunc(this.opt)).html());
+                if(this._hasChange || !this.$el || !this.$el.length) {
+                    this.$el = $(this.tplFunc(this.opt));
+                } else {
+                    this.$el.html($(this.tplFunc(this.opt)).html());
+                }
 
 
                 this.$el.css({
@@ -134,7 +142,7 @@ define(['dInherit', 'dCompare', 'dValidate'], function(dInherit, dCompare, dVali
                 for (var i in this.events) {
                     i = i.trim();
                     // key为空无效
-                    if (dValidate.isEmptyStr(i)) continue;
+                    if (dValidate.isEmptyStr(i) || i.trim() === '__propertys__') continue;
 
                     spaceIdx = i.indexOf(' ');
 

@@ -65,7 +65,7 @@ define(['dView', 'dValidate'], function(dView, dValidate){
             }
 
             if(error.length){
-                this.showToast(error.join('\r\n'));
+                this.showToast(error.join('<br/>'));
                 return;
             }
 

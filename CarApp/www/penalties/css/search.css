@@ -65,6 +65,8 @@
     height: 2.86rem;
     line-height: 2.86rem;
     display: inline-block;
+    width: -webkit-calc(100% - 0.3rem);
+    text-align: right;
 }
 
 .penalties-wrapper .base-list .city:after{
@@ -88,4 +90,51 @@
     width: 80%;
     background-color: #FF851B;
     margin:1rem 10%;
+}
+
+.penalist{
+    transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+    transition-duration: 0ms;
+    transform: translate(0px, 0px) translateZ(0px);
+    background-color: white;
+
+    border-top: 1px solid #bcbcbc;
+
+    width: 100%;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.penalist li{
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid #bcbcbc;
+    min-height: 2.68rem;
+    padding-left: 0.95rem;
+    padding-right: 1.87rem;
+    background-color: #fff;
+}
+
+.penalist li div{
+    width: 100%;
+    padding-top: 10px;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+    color: #0074D9;
+}
+
+.penalist.citylist{
+    min-height: 30rem;
+}
+
+.city-pop .city-keyword{
+    display: inline-block;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    width: -webkit-calc(100% - 2rem);
+    color: #666;
 }

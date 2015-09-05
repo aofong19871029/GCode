@@ -78,7 +78,8 @@ define(['dInherit', 'dBaseUI', 'dDate', 'dUIHeader', 'dUIView', 'dValidate', 'dC
             this.selectedDate = this.opt.selectedDate;
 
             this.setHeader();
-            this.root.append(this.$el.hide());
+            this.$el.hide();
+            this.root.append(this.$el);
         },
 
         show: function(){

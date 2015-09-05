@@ -37,7 +37,29 @@
 </head>
 <body>
 
+<script type="text/tpl" id="js-plate">
+    <ul class="penalist">
+    <%_.each(plate, function(p, i){%>
+        <li class="js-item" data-item=<%=JSON.stringify(p)%>><div><%=p.short%>           <%=p.full%></div></li>
+    <%});%>
+    </ul>
+</script>
 
+<script type="text/tpl" id="js-searchCity">
+    <div class="ui-pop-hdview city-pop">
+        <div class="ui-pop-hd">
+            <input type="text" maxlength="10" class="js-keyword city-keyword"/>
+            <span class="ui-pop-close js-pop-close"><span class="ui-top-close">x</span></span>
+        </div>
+    </div>
+    <ul class="penalist js-penalist citylist"></ul>
+</script>
+
+<script type="text/tpl" id="js-cityfilter">
+    <%_.each(citylist, function(p, i){%>
+        <li class="js-item" data-item=<%=JSON.stringify(p)%>><div><%=p.city%></div></li>
+    <%});%>
+</script>
 
 <script type="text/tpl" id="js-penalties-search-wrap">
         <article class="penalties-wrapper">
@@ -46,21 +68,21 @@
                 <ul class="base-list">
                     <li>
                         <div class="title">车牌号码</div>
-                        <input type="text" maxlength="10" class="carnum"/>
+                        <input type="text" maxlength="10" class="carnum js-plate"/>
                         <span class="pre-car js-preCar">沪</span>
                     </li>
                     <li>
                         <div class="title">发动机号</div>
-                        <input type="text" maxlength="10"/>
+                        <input type="text" maxlength="10" class="js-engineNum"/>
                     </li>
                     <li>
                         <div class="title">查询城市</div>
-                        <span class="city">上海</span>
+                        <span class="city js-city">上海</span>
                     </li>
                 </ul>
             </section>
             <div class="pure-g">
-                <button class="pure-button pure-button-primary search">查询</button>
+                <button class="pure-button pure-button-primary search js-search">查询</button>
             </div>
         </article>
     </script>

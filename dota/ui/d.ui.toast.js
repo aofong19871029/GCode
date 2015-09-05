@@ -1,6 +1,6 @@
 define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValidate) {
     var toastTpl =
-               '<div class="ui-layer ui-toast">\
+               '<div class="ui-tlayer ui-toast">\
                    <span><%=message%></span>\
                </div>';
 
