@@ -332,7 +332,7 @@ define(['dInherit', 'libs'], function(dInherit){
          * @returns {ClientDate}
          */
         parse: function(str){
-            var rShortDate = /^(\d{4})\-?(\d{1,2})\-?(\d{1,2})/i;;
+            var rShortDate = /^(\d{4})\-?(\d{1,2})\-?(\d{1,2})/i;
 
             switch ($.type(str)){
                 case 'string':
@@ -346,7 +346,13 @@ define(['dInherit', 'libs'], function(dInherit){
                 case 'number':
                     str = new Date(str);
                     break;
+                case 'date':
+                    break;
                 default :
+                    if(str instanceof  ClientDate){
+                        return str;
+                    }
+
                     str = new Date();
                     break;
             }

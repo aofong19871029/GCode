@@ -15,7 +15,7 @@ define(['dStore', 'dAjax', 'dValidate'], function(dStore, dAjax, dValidate){
          * @param options
          */
         request: function(options){
-            dAjax.post(options.url, options.success, options.error, options.store);
+            dAjax.post(options.url, options.data, options.success, options.error, options.store);
         }
 
     });

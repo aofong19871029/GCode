@@ -2,7 +2,7 @@
 define(['dValidate', 'dStore', 'libs'], function(dValidate, dStore){
     var contentTypeMap = {
             'json': 'application/json',
-            'jsonp': 'application/json'
+            'jsonp': 'jsonp'
         },
         getContentType = function(contentType) {
             if (contentType) {
@@ -85,29 +85,45 @@ define(['dValidate', 'dStore', 'libs'], function(dValidate, dStore){
     }
 
     return {
-        get: function(url, success, error, store){
+        get: function(url, data, success, error, store){
             var opt = {
                 url: url,
                 success: dValidate.isFunction(success) ? success : function(){},
                 error: dValidate.isFunction(error) ? error : function(){},
                 dataType: contentTypeMap.json,
                 type: 'GET',
-                store: store
+                store: store,
+                data: data
             };
 
-            return sendReq(opt)
+            return sendReq(opt);
         },
-        post: function(url, success, error, store){
+        post: function(url, data, success, error, store){
             var opt = {
                 url: url,
                 success: dValidate.isFunction(success) ? success : function(){},
                 error: dValidate.isFunction(error) ? error : function(){},
                 dataType: contentTypeMap.json,
                 type: 'POST',
-                store: store
+                store: store,
+                data: data
             };
 
-            return sendReq(opt)
+            return sendReq(opt);
+        },
+        jsonp: function(url, data, success, error, store){
+            var opt = {
+                url: url,
+                success: dValidate.isFunction(success) ? success : function(){},
+                error: dValidate.isFunction(error) ? error : function(){},
+                dataType: contentTypeMap.jsonp,
+                type: 'GET',
+                jsonpCallback: 'zeptoJsonp',
+                store: store,
+                data: data
+            };
+
+            return sendReq(opt);
         }
     };
 });

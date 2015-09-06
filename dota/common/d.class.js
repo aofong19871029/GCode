@@ -8,7 +8,10 @@
 
 define(function() {
     var P = (function (prototype, ownProperty, undefined) {
-        var noop = function(){};
+        var noop = function(){},
+            isFunction = function(func){
+                return Array.prototype.toString.call(func || '') === '[object Function]';
+            };
 
         return function P(_superclass /* = Object */, definition) {
             // handle the case where no superclass is given
@@ -32,8 +35,8 @@ define(function() {
                     _super = this._super;
 
                 // load __propertys__
-                _super &&  _super.__propertys__.call(this);
-                self.__propertys__.call(this);
+                _super && isFunction(_super.__propertys__) && _super.__propertys__.call(this);
+                isFunction(self.__propertys__) && self.__propertys__.call(this);
 
                 self.__superInitialize = _super ? _super.initialize : noop;
                 // init the class
@@ -103,8 +106,6 @@ define(function() {
                 // if no initialize, assume we're inheriting from a non-Pjs class, so
                 // default to using the superclass constructor.
                 if (!('initialize' in proto)) proto.initialize = _superclass;
-                if(!('__propertys__' in _super)) _super.__propertys__ = noop;
-                if(!('__propertys__' in proto)) proto.__propertys__ = noop;
 
                 return C;
             })(definition);

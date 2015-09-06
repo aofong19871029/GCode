@@ -32,7 +32,7 @@ define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dLog', 'dVali
             if(this._checkOpt(options)) {
                 $.extend(this, options);
 
-                this.expir = this._getExpirDate(expir);
+                this.expir = this._getExpirDate();
             }
         },
         /**

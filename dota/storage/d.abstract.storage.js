@@ -11,7 +11,7 @@ define(['dInherit', 'dValidate', 'dDate'], function(dInherit, dValidate, dDate){
         set: function(key, value, expir){
             if(!key || dValidate.isNull(value)) return;
 
-            var lastModifyDate = new dDate.toString();
+            var lastModifyDate = new dDate().toString();
             // 默认保存7天
             expir = expir ? new dDate(expir) : new dDate().addDay(7);
 
@@ -32,7 +32,7 @@ define(['dInherit', 'dValidate', 'dDate'], function(dInherit, dValidate, dDate){
             if(!key) return;
 
             var expir = this._getManagerCache(key),
-                result;
+                result = null;
 
             if(expir) {
                 try {
@@ -75,7 +75,7 @@ define(['dInherit', 'dValidate', 'dDate'], function(dInherit, dValidate, dDate){
          * @private
          */
         _setManagerCache: function(key, timeout){
-            if (!key || !timeout || dDate.parse(timeout).getDate() < new Date()) return;
+            if (!key || !timeout || dDate.parse(timeout).date < new Date()) return;
 
             var currentObj = this.proxy.getItem(this.proxyManagerKey);
 
