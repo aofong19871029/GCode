@@ -4,7 +4,7 @@
 
 
 ;
-define(['Exif'], function (EXIF) {
+define(['exif'], function (EXIF) {
     "use strict";
 
     var EMPTY = "",
@@ -57,7 +57,7 @@ define(['Exif'], function (EXIF) {
                 onProgress: getFunction(opt.listener.onProgress),
                 onBeforeUpload: getFunction(opt.listener.onBeforeUpload),
                 onAnalizyDone: getFunction(opt.listener.onAnalizyDone)
-            }
+            };
 
             return $.extend(true, opt, {
                 size: size,

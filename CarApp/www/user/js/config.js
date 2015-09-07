@@ -11,6 +11,8 @@ require.config({
         'realnameView': 'user/js/view/realnameview',
         'realnameModel': 'user/js/model/realnamemodel',
         'addcarModel': 'user/js/model/addcarmodel',
-        'addcarView': 'user/js/view/addcarview'
+        'addcarView': 'user/js/view/addcarview',
+        'h5upload': 'com/upload',
+        'exif': 'com/exif'
     }
 });

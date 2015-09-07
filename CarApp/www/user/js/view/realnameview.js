@@ -1,4 +1,4 @@
-define(['dView'], function(dView){
+define(['dView', 'h5upload'], function(dView, h5upload){
     var View = dView.extend({
         events: {
 
@@ -18,6 +18,11 @@ define(['dView'], function(dView){
                     },
                     moreHandler: self.save
                 }
+            });
+
+            new h5upload({
+                url: '',
+                container:
             });
         },
 

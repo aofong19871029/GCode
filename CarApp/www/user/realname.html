@@ -15,28 +15,32 @@
     <form class="pure-form pure-form-aligned" onsubmit="return false">
         <fieldset>
             <div class="pure-control-group">
-                <label for="js-nickName">昵称:</label>
+                <label for="js-nickName">昵称</label>
                 <input id="js-nickName" type="text">
             </div>
 
             <div class="pure-control-group">
-                <label for="js-name">姓名:</label>
+                <label for="js-name">姓名</label>
                 <input id="js-name" type="text">
             </div>
 
-            <div class="pure-control-group">
-                <label>头像:</label>
-                <div class="forge-input"><span id="js-portrait"></span><i class="ui-icon ui-icon-camera fr"/><input type="file"/></div>
-            </div>
-
             <div class="pure-control-group clearfix">
-                <label for="js-license" class="long-text">驾驶证号:</label>
+                <label for="js-license" class="long-text">驾驶证号</label>
                 <input id="js-license" type="text" placeholder="">
             </div>
 
             <div class="pure-control-group">
-                <label class="long-text">驾驶证照片:</label>
-                <div class="forge-input"><span id="js-drivingPhoto"></span><i class="ui-icon ui-icon-camera fr"/><input type="file"/></div>
+                <label>头像</label>
+                <div class="add-file-item">
+                    <input type="file" class="inp-file" accept=".jpg, .png, .gif">
+                </div>
+            </div>
+
+            <div class="pure-control-group">
+                <label>驾驶证照片</label>
+                <div class="add-file-item">
+                    <input type="file" class="inp-file" accept=".jpg, .png, .gif">
+                </div>
             </div>
         </fieldset>
     </form>
