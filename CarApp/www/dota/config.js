@@ -1,6 +1,7 @@
 (function() {
     var baseDir = Ancients.frameworkDir || '',
         relativeCss = function(relative){
+            alert('css!' + baseDir + relative + '.css')
             return 'css!' + baseDir + relative + '.css';
         };
 
@@ -76,11 +77,17 @@
             'text': baseDir + 'external/require.text',
             'css': baseDir + 'external/require.css',
             'stickit': baseDir + 'external/backbone.stickit',
-            'dCordova': baseDir + 'cordova'
+            'dCordova': 'cordova'
         }
     });
 
-    require(['dApp', 'dBridge', 'libs', 'dLog', 'dBridge', relativeCss('pure'), relativeCss('ancient')], function(dApp){
-        var app = new dApp();
+    alert('init');
+
+    require(['dValidate'], function(){
+        alert('dValidate');
     });
+
+    //require(['dApp', 'dBridge', 'libs', 'dLog', 'dBridge', relativeCss('pure'), relativeCss('ancient')], function(dApp){
+    //    var app = new dApp();
+    //});
 })();

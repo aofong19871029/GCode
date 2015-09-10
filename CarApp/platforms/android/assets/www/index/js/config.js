@@ -2,7 +2,8 @@ require.config({
     waitSeconds: 60,
     paths: {
         // ----------------  主页   -------------
-        'indexView': 'js/view/indexview',
-        'indexModel': 'js/model/indexmodel'
+        'indexView': 'index/js/view/indexview',
+        'indexModel': 'index/js/model/indexmodel',
+        'swipe': 'com/swipe'
     }
 });

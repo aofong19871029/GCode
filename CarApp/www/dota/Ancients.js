@@ -1,10 +1,11 @@
 (function(doc, exports) {
     var url = location.href,
-        rootIdx = url.indexOf('/www/');
+        rootIdx = url.indexOf('/www/'),
+        Ancients;
 
-    exports.Ancients = {
+    Ancients = {
         init: false,
-        dir: rootIdx === -1 ? '/' : url.slice(0, rootIdx + 5 ),
+        dir: rootIdx === -1 ? '/' : url.slice(0, rootIdx + 5),
         frameworkDir: 'dota/',
         serviceDir: 'http://www.ctrip.com/restful/',
         // 开启view切换 和 部分UI组件的动画效果
@@ -49,7 +50,7 @@
             }
         },
 
-        cssPath: function(relative){
+        cssPath: function (relative) {
             return 'css!' + Ancients.dir + relative;
         }
     };
@@ -66,8 +67,12 @@
         }
     }
 
+
     Ancients.loadJs(Ancients.dir + Ancients.frameworkDir + 'external/require.min.js', function () {
-        Ancients.loadJs(Ancients.dir + Ancients.frameworkDir + 'config.js', function () {
+
+        Ancients.loadJs(Ancients.dir + Ancients.frameworkDir + 'config.js', function(){
         });
     });
+
+    exports.Ancients = Ancients;
 })(document, window);

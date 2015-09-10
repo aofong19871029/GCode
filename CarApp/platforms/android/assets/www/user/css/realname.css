@@ -40,6 +40,76 @@
     opacity: 0;
     top: 0;
 }
+
+.real-wrapper .add-file-item{
+    vertical-align: middle;
+    position: relative;
+    display: inline-block;
+    width: 18.75rem;
+    height: 18.75rem;
+    border: 2px solid #d7d7d7;
+    font-size: 0;
+    text-align: center;
+}
+
+.real-wrapper .add-file-item:before,
+.real-wrapper .add-file-item:after{
+    display: block;
+    background-color: #dcdcdc;
+    content: '\20';
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+.real-wrapper .add-file-item:before{
+    width: 9.37rem;
+    height: 3px;
+    margin-top: 9.3rem;
+}
+.real-wrapper .add-file-item:after{
+    width: 3px;
+    height: 9.37rem;
+    margin-top: -4.65rem;
+}
+
+.real-wrapper .add-file-item .inp-file{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.real-wrapper .add-file-item .upload-img{
+    width: 100%;
+    height: 100%;
+}
+
+.real-wrapper .add-file-item .delete-img{
+    position: absolute;
+    z-index: 2;
+    top: 0.187rem;
+    right: 0.187rem;
+    width: 1.38rem;
+    height: 1.38rem;
+    background: rgba(0,0,0,.5);
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.real-wrapper .add-file-item .delete-img:after{
+    background-image: url(http://pic.c-ctrip.com/h5/hotel_affiliate/un_process.png);
+    background-repeat: no-repeat;
+    background-size: 25px auto;
+    display: block;
+    content: '\20';
+    width: 0.75rem;
+    height: 0.87rem;
+    margin: 4px auto 0;
+    background-position: 0 -169px;
+}
+
 @media only screen and (max-width: 480px){
     .real-wrapper .forge-input{
         margin-bottom: .3em;

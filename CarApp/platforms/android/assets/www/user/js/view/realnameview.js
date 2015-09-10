@@ -1,4 +1,4 @@
-define(['dView'], function(dView){
+define(['dView', 'h5upload'], function(dView, h5upload){
     var View = dView.extend({
         events: {
 
@@ -19,6 +19,11 @@ define(['dView'], function(dView){
                     moreHandler: self.save
                 }
             });
+
+            new h5upload({
+                url: '',
+                container:
+            });
         },
 
         onLoad: function(){
@@ -31,6 +36,14 @@ define(['dView'], function(dView){
 
         save: function(){
             Ancients.forward('addcar.html');
+        },
+
+        bindings: {
+            '#js-nickName': 'nickName',
+            '#js-name': 'name',
+            '#js-portrait': 'portrait',
+            '#js-license': 'drivingLicense',
+            '#js-drivingPhoto': 'drivingPhoto'
         }
     });
 

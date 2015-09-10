@@ -29,29 +29,100 @@
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com http://libs.baidu.com/ http://simg1.qunarzz.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: * 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <title>Car app</title>
     </head>
     <body>
+<p>hello word</p>
+
+
     <script type="text/tpl" id="js-index-wrap">
-        <article class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+        <article class="index-wrapper">
+            <header class="pure-g idx-header">
+                <strong>车友会</strong>
+                <span class="icon-user js-login"></span>
+            </header>
+            <div class="pure-g idx-notice">
+                <ul>
+                    <li>通知:  车友会经过努力的研发正式上线了</li>
+                    <li>通知:  车友会经过努力的研发正式上线了</li>
+                    <li>通知:  车友会经过努力的研发正式上线了</li>
+                    <li>通知:  车友会经过努力的研发正式上线了</li>
+                    <li>通知:  车友会经过努力的研发正式上线了</li>
+                </ul>
             </div>
-            <button id="js-login" style="width: 125px; margin: 0 30px;">login</button>
+            <div class="pure-g idx-slider">
+                <div class="swipe js-slider">
+                    <ul class="pic-scroll swipe-warp">
+                        <li>
+                            <a href="">
+                                <img src="http://image.bitautoimg.com/newsimg_375x185/bitauto/focuspic/2015/8/201583173042475.jpg"/>
+                                <span>视频：《易车体验 MPV界神奇小钢炮》1</spa>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="http://image.bitautoimg.com/newsimg_375x185/bitauto/focuspic/2015/8/201583173042475.jpg"/>
+                                <span>视频：《易车体验 MPV界神奇小钢炮》2</spa>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="http://image.bitautoimg.com/newsimg_375x185/bitauto/focuspic/2015/8/201583173042475.jpg"/>
+                                <span>视频：《易车体验 MPV界神奇小钢炮》3</spa>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="http://image.bitautoimg.com/newsimg_375x185/bitauto/focuspic/2015/8/201583173042475.jpg"/>
+                                <span>视频：《易车体验 MPV界神奇小钢炮》4</spa>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="http://image.bitautoimg.com/newsimg_375x185/bitauto/focuspic/2015/8/201583173042475.jpg"/>
+                                <span>视频：《易车体验 MPV界神奇小钢炮》5</spa>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="pic-scroll-ctrl js-pager">
+                        <span class="cur"></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <nav class="pure-g nav-list">
+                <div class="pure-u-1-2"><a title="拼车" class="carpool">拼车</a></div>
+                <div class="pure-u-1-2 js-penalties"><a title="违章查询" class="illegal-inquiry">违章查询</a></div>
+                <div class="pure-u-1-2"><a title="保险理赔" class="insure-claims">保险理赔</a></div>
+                <div class="pure-u-1-2"><a title="维修保养" class="maintenance">维修保养</a></div>
+                <div class="pure-u-1-2"><a title="SOS道路救援" class="sos">SOS道路救援</a></div>
+                <div class="pure-u-1-2"><a title="4s" class="4s">4S 店维修</a></div>
+            </nav>
+            <footer class="pure-g idx-info">
+                <div class="pure-u-1-4 car-order">我的拼车单</div>
+                <div class="pure-u-1-4 car-service">汽车服务</div>
+                <div class="pure-u-1-4 car-friend">车友会</div>
+                <div class="pure-u-1-4 person">个人中心</div>
+            </footer>
         </article>
     </script>
     <script type="text/config">
         {
-            "controller": "/index/js/controller/indexController.js",
+            "controller": "index/js/controller/indexController.js",
             "viewName": "index"
         }
     </script>
-    <script type="text/javascript" src="/dota/Ancients.js" pgConfig="/index/js/config.js"></script>
+    <!--<script type="text/javascript" src="/Android_asset/www/cordova.js"></script>-->
+    <script type="text/javascript" src="/android_asset/www/dota/Ancients.js" pgConfig="index/js/config.js"></script>
+    <script >
+        alert(location.href)
+    </script>
     </body>
 </html>

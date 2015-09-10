@@ -1,4 +1,4 @@
-define(['dView', 'dCalendar'], function(dView, dCalendar){
+define(['dView', 'dCalendar', 'dDate'], function(dView, dCalendar, dDate){
     var View = dView.extend({
         events: {
             'click .js-time': 'selectInvoiceDeadline'
@@ -6,15 +6,16 @@ define(['dView', 'dCalendar'], function(dView, dCalendar){
 
         onCreate: function(){
             this.$el.append(this.T['js-addcar-wrap']);
+
             this.embedHeader({
                 titleHtml: '新增车辆',
                 moreHtml: '完成',
                 back: true,
                 listener: {
-                    backHandler: function(){
-                        Ancients.back('login.html');
+                    backHandler: function () {
+                        Ancients.back('realname.html');
                     },
-                    moreHandler: function(){
+                    moreHandler: function () {
 
                     }
                 }
@@ -43,19 +44,27 @@ define(['dView', 'dCalendar'], function(dView, dCalendar){
                     var date = model.get('insureDate');
                     $el.text(date || '选择日期')
                 }
-            }
+            },
+            '#J_brand': 'brandId',
+            '#J_model': 'modelId',
+            '#js-carPhoto': 'carPhoto',
+            '#js-carId': 'carId',
+            '#js-engineNum': 'engineNum'
         },
 
         selectInvoiceDeadline: function(){
+            var self = this;
+
             if(!this.calendar) {
                 this.calendar = new dCalendar();
             }
 
             this.calendar.setOpt({
                 getVal: function (val) {
-                    this.els.selectDate.text(val);
+                    self.els.selectDate.text(val);
                 },
-                title: '保险到期时间'
+                title: '保险到期时间',
+                selectedDate: new dDate().toShortDateString()
             });
 
             this.calendar.show();
