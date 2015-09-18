@@ -83,11 +83,7 @@
 
     alert('init');
 
-    require(['dValidate'], function(){
-        alert('dValidate');
+    require(['dApp', 'dBridge', 'libs', 'dLog', 'dBridge', relativeCss('pure'), relativeCss('ancient')], function(dApp){
+        var app = new dApp();
     });
-
-    //require(['dApp', 'dBridge', 'libs', 'dLog', 'dBridge', relativeCss('pure'), relativeCss('ancient')], function(dApp){
-    //    var app = new dApp();
-    //});
 })();
