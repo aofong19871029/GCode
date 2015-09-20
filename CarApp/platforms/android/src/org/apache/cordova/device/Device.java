@@ -1,4 +1,4 @@
-﻿/*
+/*
        Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
        distributed with this work for additional information
@@ -20,19 +20,23 @@ package org.apache.cordova.device;
 
 import java.util.TimeZone;
 
-import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 
 public class Device extends CordovaPlugin {
     public static final String TAG = "Device";
 
+    public static String cordovaVersion = "dev";              // Cordova version
     public static String platform;                            // Device OS
     public static String uuid;                                // Device UUID
 
@@ -72,8 +76,8 @@ public class Device extends CordovaPlugin {
             r.put("uuid", Device.uuid);
             r.put("version", this.getOSVersion());
             r.put("platform", this.getPlatform());
+            r.put("cordova", Device.cordovaVersion);
             r.put("model", this.getModel());
-            r.put("manufacturer", this.getManufacturer());
             r.put("imei", this.imei());
             callbackContext.success(r);
         }
@@ -86,8 +90,8 @@ public class Device extends CordovaPlugin {
     //--------------------------------------------------------------------------
     // LOCAL METHODS
     //--------------------------------------------------------------------------
-
- // 获取本地Imei号码 
+    
+    // 获取本地Imei号码 
     private String imei() {
 //    	String 	Imei = ((TelephonyManager) cordova.getActivity().getSystemService(cordova.getActivity().TELEPHONY_SERVICE))
 //    			.getDeviceId();
@@ -100,7 +104,7 @@ public class Device extends CordovaPlugin {
 		return systemService.getDeviceId();
 	}
 
-    /**
+	/**
      * Get the OS name.
      * 
      * @return
@@ -125,6 +129,15 @@ public class Device extends CordovaPlugin {
         return uuid;
     }
 
+    /**
+     * Get the Cordova version.
+     *
+     * @return
+     */
+    public String getCordovaVersion() {
+        return Device.cordovaVersion;
+    }
+
     public String getModel() {
         String model = android.os.Build.MODEL;
         return model;
@@ -135,10 +148,6 @@ public class Device extends CordovaPlugin {
         return productname;
     }
 
-    public String getManufacturer() {
-        String manufacturer = android.os.Build.MANUFACTURER;
-        return manufacturer;
-    }
     /**
      * Get the OS version.
      *
