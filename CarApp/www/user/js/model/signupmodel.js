@@ -1,10 +1,11 @@
-define(['dModel'], function(dModel){
+define(['dModel', 'dBridge'], function(dModel, dBridge){
     var Model = dModel.extend({
         defaults: {
             mobile: '',
             password: '',
             confirmPassword: '',
-            code: ''
+            code: '',
+            imei: dBridge.deviceInfo()['imei']
         },
 
         /**
@@ -26,7 +27,8 @@ define(['dModel'], function(dModel){
                     mobile: this.get('mobile'),
                     password: this.get('password'),
                     confirmPassword: this.get('confirmPassword'),
-                    code: this.get('code')
+                    code: this.get('code'),
+                    imei: this.get('imei')
                 }
             }, options || {}));
         }

@@ -1,4 +1,7 @@
 define(['dModel', 'dCryptMd5', 'dBridge'], function(dModel, dCryptMd5, dBridge){
+
+    alert(JSON.stringify(dBridge.deviceInfo()))
+
     var Model = dModel.extend({
         defaults: {
             mobile: '',

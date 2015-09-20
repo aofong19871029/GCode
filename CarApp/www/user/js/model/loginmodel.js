@@ -4,7 +4,8 @@ define(['dModel', 'dCryptMd5', 'dBridge'], function(dModel, dCryptMd5, dBridge){
             mobile: '',
             password: '',
             code: '',
-            loginType: 'P'
+            loginType: 'P',
+            imei: dBridge.deviceInfo()['imei']
         },
 
         /**
@@ -25,7 +26,7 @@ define(['dModel', 'dCryptMd5', 'dBridge'], function(dModel, dCryptMd5, dBridge){
                 data: {
                     phoneNumber: this.get('mobile'),
                     passwd: dCryptMd5(this.get('password')),
-                    smsCode: this.get('code')
+                    imei: this.get('imei')
                 }
             }, options || {}));
         },
@@ -35,8 +36,8 @@ define(['dModel', 'dCryptMd5', 'dBridge'], function(dModel, dCryptMd5, dBridge){
                 url: 'smsloginService',
                 data: {
                     phoneNumber: this.get('mobile'),
-                    passwd: dCryptMd5(this.get('password')),
-                    smsCode: this.get('code')
+                    smsCode: this.get('code'),
+                    imei: this.get('imei')
                 }
             }, options || {}));
         }
