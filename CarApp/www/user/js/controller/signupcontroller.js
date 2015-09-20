@@ -1,4 +1,4 @@
-define(['dController', 'signupView', 'signupModel', 'css!../../css/signup.css'], function(dController, signupView, signupModel){
+define(['dController', 'signupView', 'signupModel', Ancients.cssPath('user/css/signup.css')], function(dController, signupView, signupModel){
     var Controller = dController.extend({
         initialize: function(){
             var model = new signupModel(this),

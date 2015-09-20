@@ -1,4 +1,4 @@
-define(['dModel', 'dCryptMd5'], function(dModel, dCryptMd5){
+define(['dModel', 'dCryptMd5', 'dBridge'], function(dModel, dCryptMd5, dBridge){
     var Model = dModel.extend({
         defaults: {
             mobile: '',

@@ -1,7 +1,6 @@
 (function() {
     var baseDir = Ancients.frameworkDir || '',
         relativeCss = function(relative){
-            alert('css!' + baseDir + relative + '.css')
             return 'css!' + baseDir + relative + '.css';
         };
 
@@ -81,9 +80,10 @@
         }
     });
 
-    alert('init');
 
-    require(['dApp', 'dBridge', 'libs', 'dLog', 'dBridge', relativeCss('pure'), relativeCss('ancient')], function(dApp){
-        var app = new dApp();
+    require(['dApp', 'dBridge', 'libs', 'dLog', 'dBridge', relativeCss('pure'), relativeCss('ancient')], function(dApp, dBridge){
+        document.addEventListener('deviceready', function(){
+            new dApp();
+        }, false);
     });
 })();

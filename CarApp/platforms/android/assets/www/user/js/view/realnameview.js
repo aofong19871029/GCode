@@ -20,10 +20,10 @@ define(['dView', 'h5upload'], function(dView, h5upload){
                 }
             });
 
-            new h5upload({
-                url: '',
-                container:
-            });
+//            new h5upload({
+//                url: '',
+//                container:
+//            });
         },
 
         onLoad: function(){

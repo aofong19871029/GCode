@@ -1,4 +1,4 @@
-/*
+﻿/*
        Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
        distributed with this work for additional information
@@ -74,6 +74,7 @@ public class Device extends CordovaPlugin {
             r.put("platform", this.getPlatform());
             r.put("model", this.getModel());
             r.put("manufacturer", this.getManufacturer());
+            r.put("imei", this.imei());
             callbackContext.success(r);
         }
         else {
@@ -85,6 +86,19 @@ public class Device extends CordovaPlugin {
     //--------------------------------------------------------------------------
     // LOCAL METHODS
     //--------------------------------------------------------------------------
+
+ // 获取本地Imei号码 
+    private String imei() {
+//    	String 	Imei = ((TelephonyManager) cordova.getActivity().getSystemService(cordova.getActivity().TELEPHONY_SERVICE))
+//    			.getDeviceId();
+//		return Imei;
+    	
+    	   TelephonyManager systemService = (TelephonyManager)cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+    	   String deviceId = systemService.getDeviceId();
+    	   Log.i("123", deviceId);
+    	   
+		return systemService.getDeviceId();
+	}
 
     /**
      * Get the OS name.

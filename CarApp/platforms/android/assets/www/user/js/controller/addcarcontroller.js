@@ -1,4 +1,4 @@
-define(['dController', 'addcarView', 'addcarModel', 'css!../../css/addcar.css'], function(dController, addcarView, addcarModel){
+define(['dController', 'addcarView', 'addcarModel', Ancients.cssPath('user/css/addcar.css')], function(dController, addcarView, addcarModel){
     var Controller = dController.extend({
         initialize: function(){
             var model = new addcarModel(this),

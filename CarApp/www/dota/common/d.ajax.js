@@ -1,5 +1,5 @@
 // 暂时废弃，用Backbone.ajax 替代
-define(['dValidate', 'dStore', 'libs'], function(dValidate, dStore){
+define(['dValidate', 'dStore', 'dUrl', 'libs'], function(dValidate, dStore, dUrl){
     var contentTypeMap = {
             'json': 'application/json',
             'jsonp': 'jsonp'
@@ -42,7 +42,9 @@ define(['dValidate', 'dStore', 'libs'], function(dValidate, dStore){
      * @private
      */
     function sendReq(opt){
-        if(!opt.url.startsWith('http://') && !opt.url.startsWith('https://')){
+        var protocol = dUrl.parseUrl(opt.url).protocol;
+
+        if(protocol !== 'http' && protocol !== 'https'){
             opt.url = Ancients.serviceDir + opt.url;
         }
 

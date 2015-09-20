@@ -40,11 +40,12 @@ define(['dView', 'dValidate'], function(dView, dValidate){
         /**
          * 发送短信验证码
          */
-        getCode: function(){
+        getCode: function(e){
             var self = this,
                 sec = 29,
                 timer;
 
+            e.preventDefault();
             if(!this.smsEnabled) return;
 
             this.model.sendSMSCode();

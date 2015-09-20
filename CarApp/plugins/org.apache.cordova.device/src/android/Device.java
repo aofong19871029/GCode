@@ -74,8 +74,6 @@ public class Device extends CordovaPlugin {
             r.put("platform", this.getPlatform());
             r.put("model", this.getModel());
             r.put("manufacturer", this.getManufacturer());
-            // 添加imei @cj
-            r.put("imei", this.imei());
             callbackContext.success(r);
         }
         else {
@@ -87,21 +85,6 @@ public class Device extends CordovaPlugin {
     //--------------------------------------------------------------------------
     // LOCAL METHODS
     //--------------------------------------------------------------------------
-
-     /**
-      * Get the PHONE IMEI
-      *
-      * @return
-      * @cj 添加获取设备imei
-      */
-     private String imei() {
-        TelephonyManager systemService = (TelephonyManager)cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        String deviceId = systemService.getDeviceId();
-        Log.i("123", deviceId);
-
-        return systemService.getDeviceId();
-     }
-
 
     /**
      * Get the OS name.

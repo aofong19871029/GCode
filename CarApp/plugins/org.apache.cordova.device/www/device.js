@@ -42,8 +42,6 @@ function Device() {
     this.cordova = null;
     this.model = null;
     this.manufacturer = null;
-    // 添加imei @cj
-    this.imei = null;
 
     var me = this;
 
@@ -58,9 +56,6 @@ function Device() {
             me.uuid = info.uuid;
             me.cordova = buildLabel;
             me.model = info.model;
-            // @cj
-            me.imei = info.imei;
-
             me.manufacturer = info.manufacturer || 'unknown';
             channel.onCordovaInfoReady.fire();
         },function(e) {
