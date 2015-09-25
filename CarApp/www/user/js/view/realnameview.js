@@ -1,7 +1,20 @@
-define(['dView', 'h5upload'], function(dView, h5upload){
+define(['dView', 'dBridge', 'h5upload'], function(dView, dBridge, h5upload){
     var View = dView.extend({
         events: {
-
+            'click .js-upload': function(){
+                dBridge.pictureFromCamera(function(data){
+                    alert(data);
+                }, function(e){
+                    alert(e)
+                });
+            },
+            'click .js-camera': function(){
+                dBridge.pictureFromPhotolibrary(function(data){
+                    alert(data);
+                }, function(e){
+                    alert(e)
+                });
+            }
         },
 
         onCreate: function(){
@@ -20,10 +33,6 @@ define(['dView', 'h5upload'], function(dView, h5upload){
                 }
             });
 
-//            new h5upload({
-//                url: '',
-//                container:
-//            });
         },
 
         onLoad: function(){
