@@ -13,6 +13,7 @@ require.config({
         'addcarModel': 'user/js/model/addcarmodel',
         'addcarView': 'user/js/view/addcarview',
         'h5upload': 'com/upload',
+        'appupload': 'com/appupload',
         'exif': 'com/exif'
     }
 });

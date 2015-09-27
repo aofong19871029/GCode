@@ -1,7 +1,8 @@
-define(['dView', 'dCalendar', 'dDate'], function(dView, dCalendar, dDate){
+define(['dView', 'dCalendar', 'dDate', 'dBottomPopLayer'], function(dView, dCalendar, dDate, dBottomPopLayer){
     var View = dView.extend({
         events: {
-            'click .js-time': 'selectInvoiceDeadline'
+            'click .js-time': 'selectInvoiceDeadline',
+            'click .js-camera': 'takePicture'
         },
 
         onCreate: function(){
@@ -27,7 +28,15 @@ define(['dView', 'dCalendar', 'dDate'], function(dView, dCalendar, dDate){
         },
 
         onLoad: function(){
+            if(!this.photoPop) {
+                this.photoPop = new dBottomPopLayer();
 
+                this.photoPop.setOpt({
+                    root: 'body',
+                    onsuccess: $.proxy(this.photoCB.success, this),
+                    onerror: $.proxy(this.photoCB.error, this)
+                });
+            }
         },
 
         onHide: function(){
@@ -68,6 +77,15 @@ define(['dView', 'dCalendar', 'dDate'], function(dView, dCalendar, dDate){
             });
 
             this.calendar.show();
+        },
+
+        takePicture: function(){
+            this.photoPop.show();
+        },
+
+        photoCB: {
+            success: function(){},
+            error: function(){}
         }
     });
 

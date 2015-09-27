@@ -4,10 +4,12 @@
         Ancients;
 
     Ancients = {
+        isH5: rootIdx === -1,
+        isApp: rootIdx !== -1,
         init: false,
         dir: rootIdx === -1 ? '/' : url.slice(0, rootIdx + 5),
         frameworkDir: 'dota/',
-        serviceDir: 'http://www.ctrip.com/restful/',
+        serviceDir: 'http://localhost/restful/',
         // 开启view切换 和 部分UI组件的动画效果
         animation: true,
         isFunction: function (func) {
@@ -68,10 +70,10 @@
     }
 
 
+
     Ancients.loadJs(Ancients.dir + Ancients.frameworkDir + 'external/require.min.js', function () {
 
-        Ancients.loadJs(Ancients.dir + Ancients.frameworkDir + 'config.js', function(){
-        });
+        Ancients.loadJs(Ancients.dir + Ancients.frameworkDir + 'config.js');
     });
 
     exports.Ancients = Ancients;

@@ -10,7 +10,8 @@ define(['dView', 'dValidate'], function(dView, dValidate){
         onCreate: function(){
             this.$el.append(this.T['js-wrap']);
             this.embedHeader({
-                titleHtml: '登录'
+                titleHtml: '登录',
+                back: true
             });
 
             this.els = {

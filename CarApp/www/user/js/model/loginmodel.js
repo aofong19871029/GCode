@@ -5,7 +5,7 @@ define(['dModel', 'dCryptMd5', 'dBridge'], function(dModel, dCryptMd5, dBridge){
             password: '',
             code: '',
             loginType: 'P',
-            imei: dBridge.deviceInfo()['imei']
+            imei: dBridge.imei()
         },
 
         /**

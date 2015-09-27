@@ -41,7 +41,8 @@
     top: 0;
 }
 
-.real-wrapper .add-file-item{
+.real-wrapper .add-file-item,
+.real-wrapper .file-item{
     vertical-align: middle;
     position: relative;
     display: inline-block;
@@ -81,12 +82,12 @@
     opacity: 0;
 }
 
-.real-wrapper .add-file-item .upload-img{
+.real-wrapper .file-item .upload-img{
     width: 100%;
     height: 100%;
 }
 
-.real-wrapper .add-file-item .delete-img{
+.real-wrapper .file-item .delete-img{
     position: absolute;
     z-index: 2;
     top: 0.187rem;
@@ -98,7 +99,7 @@
     border-radius: 50%;
 }
 
-.real-wrapper .add-file-item .delete-img:after{
+.real-wrapper .file-item .delete-img:after{
     background-image: url(http://pic.c-ctrip.com/h5/hotel_affiliate/un_process.png);
     background-repeat: no-repeat;
     background-size: 25px auto;
@@ -108,6 +109,32 @@
     height: 0.87rem;
     margin: 4px auto 0;
     background-position: 0 -169px;
+}
+
+.real-wrapper .file-item .ico_saving{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -9px 0 0 -9px;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -webkit-animation: circling .5s linear infinite;
+    -moz-animation: circling .5s linear infinite;
+    -o-animation: circling .5s linear infinite;
+    animation: circling .5s linear infinite;
+}
+
+@-webkit-keyframes circling {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @media only screen and (max-width: 480px){

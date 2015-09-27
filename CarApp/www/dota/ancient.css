@@ -531,8 +531,7 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 }
 
 .ui-layer .ui-pop-hd .ui-top-close:before,
-.ui-layer .ui-pop-hd .ui-top-close:after
-{
+.ui-layer .ui-pop-hd .ui-top-close:after{
     width: 0.13rem;
     height: 1rem;
     position: absolute;
@@ -558,4 +557,79 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
     overflow: hidden;
     position: relative;
     width: 100%;
+}
+
+/*********  UI bottom layer *********/
+.ui-bottom-layer{
+    color: #eee;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 22.5rem;
+    height: 8rem;
+    line-height: 8rem;
+    background-color: #EFEFEF;
+    z-index: 2100 !important;
+    overflow: auto;
+}
+
+.ui-bottom-layer .ui-pop-box{
+    margin: 1rem 0;
+}
+
+.ui-bottom-layer a{
+    background-color: #fff;
+    color: #099fde;
+    display: block;
+    height: 2.5rem;
+    width: 80%;
+    margin: 0.5rem 10%;
+    font-weight: bolder;
+}
+
+.ui-bottom-layer a.ui-gallery{
+    color: #FF851B;
+}
+
+.ui-bottom-layer .pure-button:active,
+.ui-bottom-layer .pure-button:hover,
+.ui-bottom-layer .pure-button:focus{
+    background-image: none;
+    box-shadow: none;
+}
+
+/*********  UI confirm layer *********/
+.ui-bd{color: #000;}
+.ui-error-tips{color: #000; padding: 20px; text-align: center;}
+.ui-roller-btns {
+    background: #fff;
+    border-top: 1px solid #bcbcbc;
+    line-height: 18px;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.ui-roller, .ui-roller-btns {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+}
+
+.ui-roller-btns .ui-flexbd {
+    padding: 12px 0;
+    color: #099fde;
+}
+.ui-roller-bd, .ui-roller-btns .ui-flexbd {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+.ui-roller-btns .ui-flexbd:nth-of-type(2) {
+    border-left: 1px solid rgba(0,0,0,0.3);
 }

@@ -1,5 +1,7 @@
 (function() {
     var baseDir = Ancients.frameworkDir || '',
+        isH5 = Ancients.isH5,
+        isApp = Ancients.isApp,
         relativeCss = function(relative){
             return 'css!' + baseDir + relative + '.css';
         };
@@ -66,6 +68,8 @@
             'dMask': baseDir + 'ui/d.ui.mask',
             'dLayer': baseDir + 'ui/d.ui.layer',
             'dPopLayer': baseDir + 'ui/d.ui.poplayer',
+            'dBottomPopLayer': baseDir + 'ui/d.ui.bottompoplayer',
+            'dConfirmPopLayer': baseDir + 'ui/d.ui.confirmlayer',
 
             'dBridge': baseDir + 'hybrid/d.bridge',
             // 基础框架
@@ -81,9 +85,17 @@
     });
 
 
-    require(['dApp', 'dBridge', 'libs', 'dLog', 'dBridge', relativeCss('pure'), relativeCss('ancient')], function(dApp, dBridge){
-        document.addEventListener('deviceready', function(){
+    require(['dApp', 'libs', 'dLog', relativeCss('pure'), relativeCss('ancient')], function(dApp){
+        if(isH5){
             new dApp();
-        }, false);
+        } else if(isApp){
+            require(['dBridge'], function(){
+                document.addEventListener('deviceready', function(){
+                    new dApp();
+                }, false);
+            });
+        }
+
+        $.noop = function(){};
     });
 })();
