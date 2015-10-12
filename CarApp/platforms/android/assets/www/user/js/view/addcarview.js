@@ -1,8 +1,9 @@
-define(['dView', 'dCalendar', 'dDate', 'dBottomPopLayer'], function(dView, dCalendar, dDate, dBottomPopLayer){
+define(['dView', 'dCalendar', 'dDate', 'dCameraPopLayer', 'userStore'], function(dView, dCalendar, dDate, dCameraPopLayer, userStore){
     var View = dView.extend({
         events: {
             'click .js-time': 'selectInvoiceDeadline',
-            'click .js-camera': 'takePicture'
+            'click .js-camera': 'takePicture',
+            'click .delete-img': 'deleteImg'
         },
 
         onCreate: function(){
@@ -29,7 +30,7 @@ define(['dView', 'dCalendar', 'dDate', 'dBottomPopLayer'], function(dView, dCale
 
         onLoad: function(){
             if(!this.photoPop) {
-                this.photoPop = new dBottomPopLayer();
+                this.photoPop = new dCameraPopLayer();
 
                 this.photoPop.setOpt({
                     root: 'body',
@@ -37,10 +38,13 @@ define(['dView', 'dCalendar', 'dDate', 'dBottomPopLayer'], function(dView, dCale
                     onerror: $.proxy(this.photoCB.error, this)
                 });
             }
+
+            alert(JSON.stringify(userStore.realNameStore.get()));
         },
 
         onHide: function(){
-
+            this.confirmLayer && this.confirmLayer.destory();
+            this.photoPop && this.photoPop.destory();
         },
 
         bindings: {
@@ -56,7 +60,6 @@ define(['dView', 'dCalendar', 'dDate', 'dBottomPopLayer'], function(dView, dCale
             },
             '#J_brand': 'brandId',
             '#J_model': 'modelId',
-            '#js-carPhoto': 'carPhoto',
             '#js-carId': 'carId',
             '#js-engineNum': 'engineNum'
         },
@@ -84,8 +87,42 @@ define(['dView', 'dCalendar', 'dDate', 'dBottomPopLayer'], function(dView, dCale
         },
 
         photoCB: {
-            success: function(){},
-            error: function(){}
+            success: function(base64, triggerDOM){
+                triggerDOM.removeClass('add-file-item').addClass('file-item');
+                triggerDOM.html('<img class="upload-img" src="' + base64 + '"></img><div class="delete-img"></div>');
+
+                this.model.set(triggerDOM.attr('data-bind'), base64);
+            },
+            error: function(error, triggerDOM){
+                this.model.set(triggerDOM.attr('data-bind'), '');
+                this.showToast(error);
+            }
+        },
+
+        deleteImg: function(e){
+            var self = this,
+                target = $(e.currentTarget),
+                container = target.parent(),
+                binding = container.attr('data-bind');
+
+            if(!this.confirmLayer){
+                this.confirmLayer = new dConfirmPopLayer();
+                this.confirmLayer.setOpt({
+                    title: '您确定要删除此张图片吗?',
+                    root: 'body'
+                });
+            }
+
+            this.confirmLayer.resetOpt({
+                onsure: function(){
+
+                    container.removeClass('file-item').addClass('add-file-item').empty();
+
+                    self.model.set(binding, '');
+                }
+            });
+
+            this.confirmLayer.show();
         }
     });
 

@@ -61,6 +61,7 @@
             'dView': baseDir + 'page/d.view',
             'dUIView': baseDir + 'ui/d.ui.view',
 
+            'dUIQueue': baseDir + 'ui/d.ui.queue',
             'dBaseUI': baseDir + 'ui/d.ui.base',
             'dUIHeader': baseDir + 'ui/d.ui.header',
             'dUIToast': baseDir + 'ui/d.ui.toast',
@@ -68,7 +69,7 @@
             'dMask': baseDir + 'ui/d.ui.mask',
             'dLayer': baseDir + 'ui/d.ui.layer',
             'dPopLayer': baseDir + 'ui/d.ui.poplayer',
-            'dBottomPopLayer': baseDir + 'ui/d.ui.bottompoplayer',
+            'dCameraPopLayer': baseDir + 'ui/d.ui.camerapoplayer',
             'dConfirmPopLayer': baseDir + 'ui/d.ui.confirmlayer',
 
             'dBridge': baseDir + 'hybrid/d.bridge',

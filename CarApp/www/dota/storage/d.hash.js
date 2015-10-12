@@ -1,5 +1,5 @@
-define(['dInherit', 'dAbstractStorage'], function(dInherit, dAbstractStorage){
-    var HashStorage = dInherit(dAbstractStorage, {
+define(['dInherit'], function(dInherit){
+    var HashStorage = dInherit({
         add: function (k, v) {
             if (!this.hasOwnProperty(k)) {
                 this[k] = v;

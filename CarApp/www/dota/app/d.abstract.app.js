@@ -6,7 +6,7 @@
  * 3. Page的history控制
  */
 
-define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], function (dInherit, dPageCache, dUrl, dGuid, dValidate, dUIView) {
+define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView', 'dUIQueue'], function (dInherit, dPageCache, dUrl, dGuid, dValidate, dUIView, dUIQueue) {
 
     var AbstractApp = dInherit(dUIView, {
         __propertys__: function () {
@@ -273,6 +273,10 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView'], func
 
             // 如果goto的路径是当前url, 则什么都不做
             if(currentPath !== targetPath || !this.curController){
+                // 删除UI组件
+                dUIQueue.disposeAll();
+
+                // 加载Next View
                 this.loadViewFromUrl(targetPath, opt);
             }
         },

@@ -28,22 +28,26 @@ define(['dInherit', 'dBaseUI', 'dLayer', 'dValidate'], function(dInherit, dBaseU
             options.contentHTML = contentHTML;
 
             this._super.setOpt.call(this, options);
+
+            this.opt.oncancel = dValidate.isFunction(options.oncancel) ? options.oncancel : $.noop;
+            this.opt.onsure = dValidate.isFunction(options.onsure) ? options.onsure : $.noop;
         },
 
         cancel: function(){
-            if(dValidate.isFunction(this.opt.oncancel)){
-                this.opt.oncancel();
-            }
+            this.opt.oncancel();
 
             this.hide();
         },
 
         sure: function(){
-            if(dValidate.isFunction(this.opt.onsure)){
-                this.opt.onsure();
-            }
+            this.opt.onsure();
 
             this.hide();
+        },
+
+        resetOpt: function(options){
+            this.opt.oncancel = dValidate.isFunction(options.oncancel) ? options.oncancel : $.noop;
+            this.opt.onsure = dValidate.isFunction(options.onsure) ? options.onsure : $.noop;
         }
     });
 

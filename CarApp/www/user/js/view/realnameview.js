@@ -1,4 +1,4 @@
-define(['dView', 'dBottomPopLayer', 'dConfirmPopLayer'], function(dView, dBottomPopLayer, dConfirmPopLayer){
+define(['dView', 'dCameraPopLayer', 'dConfirmPopLayer', 'userStore'], function(dView, dCameraPopLayer, dConfirmPopLayer, userStore){
     var View = dView.extend({
         events: {
             'click .add-file-item': 'takePicture',
@@ -6,8 +6,6 @@ define(['dView', 'dBottomPopLayer', 'dConfirmPopLayer'], function(dView, dBottom
         },
 
         onCreate: function(){
-            var self = this;
-
             this.$el.append(this.T['js-realname-wrap']);
             this.embedHeader({
                 titleHtml: '实名登记',
@@ -17,7 +15,7 @@ define(['dView', 'dBottomPopLayer', 'dConfirmPopLayer'], function(dView, dBottom
                     backHandler: function(){
                         Ancients.back('login.html');
                     },
-                    moreHandler: self.save
+                    moreHandler: this.save.bind(this)
                 }
             });
 
@@ -25,7 +23,7 @@ define(['dView', 'dBottomPopLayer', 'dConfirmPopLayer'], function(dView, dBottom
 
         onLoad: function(){
             if(!this.photoPop) {
-                this.photoPop = new dBottomPopLayer();
+                this.photoPop = new dCameraPopLayer();
 
                 this.photoPop.setOpt({
                     root: 'body',
@@ -36,7 +34,16 @@ define(['dView', 'dBottomPopLayer', 'dConfirmPopLayer'], function(dView, dBottom
         },
 
         onHide: function(){
+            this.confirmLayer && this.confirmLayer.destory();
+            this.photoPop && this.photoPop.destory();
 
+            userStore.realNameStore.set({
+                nickName: this.model.get('nickName'),
+                name: this.model.get('name'),
+                portrait: this.model.get('portrait'),
+                drivingLicense: this.model.get('drivingLicense'),
+                drivingPhoto: this.model.get('drivingPhoto')
+            });
         },
 
         save: function(){
@@ -50,9 +57,8 @@ define(['dView', 'dBottomPopLayer', 'dConfirmPopLayer'], function(dView, dBottom
         bindings: {
             '#js-nickName': 'nickName',
             '#js-name': 'name',
-//            '#js-portrait': 'portrait',
             '#js-license': 'drivingLicense'
-//            '#js-drivingPhoto': 'drivingPhoto'
+
         },
 
         photoCB: {
@@ -63,6 +69,7 @@ define(['dView', 'dBottomPopLayer', 'dConfirmPopLayer'], function(dView, dBottom
                 this.model.set(triggerDOM.attr('data-bind'), base64);
             },
             error: function(error, triggerDOM){
+                this.model.set(triggerDOM.attr('data-bind'), '');
                 this.showToast(error);
             }
         },
@@ -77,14 +84,18 @@ define(['dView', 'dBottomPopLayer', 'dConfirmPopLayer'], function(dView, dBottom
                 this.confirmLayer = new dConfirmPopLayer();
                 this.confirmLayer.setOpt({
                     title: '您确定要删除此张图片吗?',
-                    root: 'body',
-                    onsure: function(){
-                        container.removeClass('file-item').addClass('add-file-item').empty();
-
-                        self.model.set(binding, '');
-                    }
+                    root: 'body'
                 });
             }
+
+            this.confirmLayer.resetOpt({
+                onsure: function(){
+
+                    container.removeClass('file-item').addClass('add-file-item').empty();
+
+                    self.model.set(binding, '');
+                }
+            });
 
             this.confirmLayer.show();
         }

@@ -1,4 +1,4 @@
-define(['dInherit', 'dCompare', 'dValidate'], function(dInherit, dCompare, dValidate) {
+define(['dInherit', 'dCompare', 'dValidate', 'dUIQueue'], function(dInherit, dCompare, dValidate, dUIQueue) {
     var config = {
             prefix: 'ui-',
             /**
@@ -71,6 +71,9 @@ define(['dInherit', 'dCompare', 'dValidate'], function(dInherit, dCompare, dVali
                     'display': 'none'
                 });
 
+                if(this._name !== 'Header') {
+                    dUIQueue.add(this);
+                }
 
                 // 初始化events
                 this.initEvents();

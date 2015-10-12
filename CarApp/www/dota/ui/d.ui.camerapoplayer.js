@@ -11,9 +11,9 @@ define(['dInherit', 'dBaseUI', 'dMask', 'dValidate', 'dBridge'], function(dInher
             </section>\
         </div>';
 
-    var BottomPopLayer = dInherit(dBaseUI, {
+    var CameraPopLayer = dInherit(dBaseUI, {
         __propertys__: function () {
-            this._name = 'bottompoplayer';
+            this._name = 'camerapoplayer';
 
             this.tplFunc = _.template(layerTpl);
 
@@ -114,5 +114,5 @@ define(['dInherit', 'dBaseUI', 'dMask', 'dValidate', 'dBridge'], function(dInher
 
     });
 
-    return BottomPopLayer;
+    return CameraPopLayer;
 });

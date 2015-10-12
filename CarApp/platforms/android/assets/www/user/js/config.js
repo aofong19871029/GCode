@@ -14,6 +14,7 @@ require.config({
         'addcarView': 'user/js/view/addcarview',
         'h5upload': 'com/upload',
         'appupload': 'com/appupload',
-        'exif': 'com/exif'
+        'exif': 'com/exif',
+        'userStore': 'user/js/store/userstore'
     }
 });
