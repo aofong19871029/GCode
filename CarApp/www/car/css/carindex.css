@@ -1,0 +1,32 @@
+.ui-header-fixed h2 .car-title{
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+    display: inline-block;
+    border-radius: 0.25rem;
+    padding: 1px;
+    line-height: 2.3rem;
+    height: 2.3rem;
+    margin: 0.2rem 0 0 0;
+    font-size: 16px;
+}
+
+.ui-header-fixed h2 .car-title span{
+    font-size: 15px;
+    min-width: 6.5rem;
+    max-width: 8rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 0.32rem;
+    display: inline-block;
+
+    background-color: #066F9B;
+    border: 1px solid #066F9B;
+    color: #1491C5;
+}
+.ui-header-fixed h2 .car-title span.active{
+    background-color: #FE9522;
+    color: #fff;
+}

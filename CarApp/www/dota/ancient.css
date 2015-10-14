@@ -82,6 +82,8 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin: 0 auto;
+    max-width: 70%;
 }
 
 .ui-header-fixed .ui-func-icon {
