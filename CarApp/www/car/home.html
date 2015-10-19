@@ -39,13 +39,22 @@
 
 
 <script type="text/tpl" id="js-carindex-wrap">
-<article class="carhome-wrapper">
+<article class="carhome-wrapper clearfix">
+    <button class="pure-button item js-book" data-action="towork">上班拼车</button>
+    <button class="pure-button item js-book" data-action="tohome">下班拼车</button>
+    <button class="pure-button item js-book" data-action="paul">长途顺风车</button>
+    <button class="pure-button item js-book" data-action="any">其他拼车</button>
+    <ul class="menu">
+        <li class="fl"><a href="#">我的预约</a></li>
+        <li class="fl"><a href="#">拼车广场</a></li>
+        <li class="fl"><a href="#">历史订单</a></li>
+    </ul>
 </article>
 </script>
 <script type="text/config">
         {
             "controller": "car/js/controller/homecontroller.js",
-            "viewName": "index"
+            "viewName": "home"
         }
 </script>
 <script type="text/javascript" src="/dota/Ancients.js" pgConfig="car/js/config.js"></script>

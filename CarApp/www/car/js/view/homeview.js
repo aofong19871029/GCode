@@ -1,7 +1,7 @@
 define(['dView'], function(dView){
     var View = dView.extend({
         events: {
-
+            'click .js-book': 'reserveCar'
         },
 
 
@@ -11,17 +11,6 @@ define(['dView'], function(dView){
                 titleHtml: '<div class="car-title"><span class="active">车主</span><span>乘客</span></div>',
                 back: true
             });
-
-            this.els = {
-                phone: this.$el.find('#js-phone'),
-                password: this.$el.find('#js-pwd'),
-                code: this.$el.find('#js-security'),
-                submit: this.$el.find('#js-submit'),
-                loginType: this.$el.find('#js-loginType'),
-                changePwd: this.$el.find('#js-changePwd'),
-                pwdPanel: this.$el.find('.js-pwdPanel'),
-                codePanel: this.$el.find('.js-codePanel')
-            }
         },
 
         onLoad: function(){
@@ -34,6 +23,19 @@ define(['dView'], function(dView){
 
         bindings: {
 
+        },
+
+        reserveCar: function(e){
+            var target = $(e.currentTarget),
+                action = target.attr('data-action'),
+                url = 'reservation.html?action=';
+
+            if(action) {
+                action = action.toLowerCase();
+                url += action;
+            }
+
+            Ancients.forward(url);
         }
     });
 
