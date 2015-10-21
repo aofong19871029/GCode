@@ -649,7 +649,7 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 }
 
 /*********  UI switch *********/
-.cui-switch {
+.ui-switch {
     position: relative;
     width: 44px;
     height: 24px;
@@ -718,4 +718,62 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 .ui-switch.current .ui-switch-scroll.wide {
     left: 14px;
     right: 1px
+}
+
+/*********  UI number span *********/
+.ui-increase-decrease {
+    display: inline-block;
+    vertical-align: top;
+    width: 101px;
+    height: 29px;
+    text-align: center;
+    overflow: hidden;
+}
+.ui-increase-decrease .ui-minus, .ui-increase-decrease .ui-plus, .ui-increase-decrease .item {
+    border: 1px solid #2577E3;
+    height: 27px;
+    line-height: 27px;
+    overflow: hidden;
+    float: left;
+    position: relative;
+}
+.ui-increase-decrease .ui-minus, .ui-increase-decrease .ui-plus {
+    width: 29px;
+    cursor: pointer;
+}
+.ui-increase-decrease .item {
+    width: 39px;
+    color: #2577E3;
+}
+.ui-increase-decrease .ui-minus {
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+}
+.ui-increase-decrease .ui-plus {
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+}
+.ui-increase-decrease .ui-minus:before, .ui-increase-decrease .ui-plus:before, .ui-increase-decrease .ui-plus:after {
+    content: '';
+    position: absolute;
+    background-color: #2577E3;
+}
+.ui-increase-decrease .ui-minus:before, .ui-increase-decrease .ui-plus:before {
+    width: 15px;
+    height: 3px;
+    top: 12px;
+    left: 7px;
+}
+.ui-increase-decrease .ui-plus:after {
+    width: 3px;
+    height: 15px;
+    top: 6px;
+    left: 13px;
+}
+.ui-increase-decrease .disabled {
+    border-color: #999;
+    cursor: default;
+}
+.ui-increase-decrease .disabled:before, .ui-increase-decrease .disabled:after {
+    background-color: #999;
 }

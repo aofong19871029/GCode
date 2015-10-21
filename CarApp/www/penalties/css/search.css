@@ -1,4 +1,4 @@
-.penalties-wrapper {background-color: #efefef; position: absolute; height: 100%;}
+.penalties-wrapper {background-color: #efefef; position: absolute; height: 100%; width: 100%;}
 .penalties-wrapper .slogan{color: #666; font-size: 13px; padding: 0.43rem 0.93rem}
 
 .base-list{border-top: 1px solid #bcbcbc; width: 100%;}

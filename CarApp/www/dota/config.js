@@ -64,6 +64,8 @@
             'dUIQueue': baseDir + 'ui/d.ui.queue',
             'dBaseUI': baseDir + 'ui/d.ui.base',
             'dUIHeader': baseDir + 'ui/d.ui.header',
+            'dSwitch': baseDir + 'ui/d.ui.switch',
+            'dNumberStep': baseDir + 'ui/d.ui.numberstep',
             'dUIToast': baseDir + 'ui/d.ui.toast',
             'dCalendar': baseDir + 'ui/d.ui.calendar',
             'dMask': baseDir + 'ui/d.ui.mask',
