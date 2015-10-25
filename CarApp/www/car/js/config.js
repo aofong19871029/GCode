@@ -7,6 +7,6 @@ require.config({
         'reservationView': 'car/js/view/reservationview',
         'reservationModel': 'car/js/model/reservationmodel',
         'suggestionView': 'car/js/view/suggestionview',
-        'suggestionModel': 'car/js/model/suggestionModel'
+        'suggestionModel': 'car/js/model/suggestionmodel'
     }
 });

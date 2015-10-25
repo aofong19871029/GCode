@@ -71,7 +71,7 @@ define(['dInherit', 'dCompare', 'dValidate', 'dUIQueue'], function(dInherit, dCo
                     'display': 'none'
                 });
 
-                if(this._name !== 'Header') {
+                if(this._name.indexOf(['Header', 'Switch', 'numberStep']) !== -1) {
                     dUIQueue.add(this);
                 }
 

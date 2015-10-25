@@ -1,35 +1,16 @@
 if(Ancients.isApp) {
-    define(['dCordova'], function () {
+    define(['dCordova', 'dHybridCamera', 'dValidate'], function (cordova, camera, dValidate) {
         var bridge = {
-            pictureFromCamera: function (success, error) {
-                navigator.camera.getPicture(function (data) {
-                    success('data:image/jpeg;base64,' + data);
-                }, function (e) {
-                    error(e);
-                }, {
-                    destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.CAMERA,
-                    allowEdit: false,
-                    targetWidth: 135,
-                    targetHeight: 200
-                });
-            },
-            pictureFromPhotolibrary: function (success, error) {
-                navigator.camera.getPicture(function (data) {
-                    success('data:image/jpeg;base64,' + data);
-                }, function (e) {
-                    error(e);
-                }, {
-                    destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                    allowEdit: false,
-                    targetWidth: 135,
-                    targetHeight: 200,
-                    mediaType: Camera.MediaType.PICTURE
-                });
-            },
+            pictureFromCamera: camera.pictureFromCamera,
+            pictureFromPhotolibrary: camera.pictureFromPhotolibrary,
             imei: function () {
                 return device['imei'];
+            },
+            photoNumber: function(success, error){
+                !dValidate.isFunction(success) && (success = noop);
+                !dValidate.isFunction(error) && (error = noop);
+
+                window.plugins.phonenumber.get(success, error);
             }
         };
 
@@ -39,14 +20,13 @@ if(Ancients.isApp) {
 else if(Ancients.isH5){
     define(function () {
         var bridge = {
-            pictureFromCamera: function (success, error) {
-
-            },
-            pictureFromPhotolibrary: function (success, error) {
-
-            },
+            pictureFromCamera: $.noop,
+            pictureFromPhotolibrary: $.noop,
             imei: function () {
                 return '';
+            },
+            photoNumber: function(){
+
             }
         };
 

@@ -11,6 +11,15 @@
     <feature name="Camera">
         <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
     </feature>
+    <feature name="BaiduLocation">
+        <param name="android-package" value="com.spout.phonegap.plugins.baidulocation.BaiduLocation" />
+    </feature>
+    <feature name="Contacts">
+        <param name="android-package" value="org.apache.cordova.contacts.ContactManager" />
+    </feature>
+    <feature name="PhoneNumberPlugin">
+        <param name="android-package" value="at.oneminutedistraction.phonenumber.PhoneNumberPlugin" />
+    </feature>
     <allow-intent href="market:*" />
     <name>CarApp</name>
     <description>
@@ -19,7 +28,7 @@
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team
     </author>
-    <content src="user/realname.html" />
+    <content src="car/suggestion.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

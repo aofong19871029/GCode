@@ -1,11 +1,14 @@
 (function(doc, exports) {
     var url = location.href,
+        userAgent = navigator.userAgent,
         rootIdx = url.indexOf('/www/'),
         Ancients;
 
     Ancients = {
         isH5: rootIdx === -1,
         isApp: rootIdx !== -1,
+        isAndroid: userAgent.indexOf('Android') !== -1,
+        isIOS: userAgent.indexOf('iPad') !== -1 || userAgent.indexOf('iPhone') !== -1,
         init: false,
         dir: rootIdx === -1 ? '/' : url.slice(0, rootIdx + 5),
         frameworkDir: 'dota/',
@@ -78,3 +81,5 @@
 
     exports.Ancients = Ancients;
 })(document, window);
+
+//BfkPvjDGHC0ATZhIr6wxnHh9 baidu ak

@@ -79,6 +79,7 @@
             'dDateTimeScroll': baseDir + 'ui/d.ui.mobiscroll',
 
             'dBridge': baseDir + 'hybrid/d.bridge',
+            'dHybridCamera': baseDir + 'service/d.hybrid.camera',
 
             // 第三方UI组件
             'mobiscroll': baseDir + 'mobiscroll/mobiscroll.custom-2.17.0.min',

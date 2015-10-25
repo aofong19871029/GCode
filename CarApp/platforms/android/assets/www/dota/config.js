@@ -31,6 +31,9 @@
             },
             dCordova: {
                 exports: 'cordova'
+            },
+            mobiscroll: {
+                exports: 'mobiscroll'
             }
         },
         paths: {
@@ -64,6 +67,8 @@
             'dUIQueue': baseDir + 'ui/d.ui.queue',
             'dBaseUI': baseDir + 'ui/d.ui.base',
             'dUIHeader': baseDir + 'ui/d.ui.header',
+            'dSwitch': baseDir + 'ui/d.ui.switch',
+            'dNumberStep': baseDir + 'ui/d.ui.numberstep',
             'dUIToast': baseDir + 'ui/d.ui.toast',
             'dCalendar': baseDir + 'ui/d.ui.calendar',
             'dMask': baseDir + 'ui/d.ui.mask',
@@ -71,8 +76,13 @@
             'dPopLayer': baseDir + 'ui/d.ui.poplayer',
             'dCameraPopLayer': baseDir + 'ui/d.ui.camerapoplayer',
             'dConfirmPopLayer': baseDir + 'ui/d.ui.confirmlayer',
+            'dDateTimeScroll': baseDir + 'ui/d.ui.mobiscroll',
 
             'dBridge': baseDir + 'hybrid/d.bridge',
+            'dHybridCamera': baseDir + 'service/d.hybrid.camera',
+
+            // 第三方UI组件
+            'mobiscroll': baseDir + 'mobiscroll/mobiscroll.custom-2.17.0.min',
             // 基础框架
             '$': baseDir + 'external/zepto',
             '_': baseDir + 'external/underscore',

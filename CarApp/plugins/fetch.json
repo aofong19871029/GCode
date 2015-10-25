@@ -22,5 +22,31 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.spout.phonegap.plugins.baidulocation": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/DoubleSpout/phonegap_baidu_sdk_location.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "org.apache.cordova.contacts": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.contacts"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "at.oneminutedistraction.phonenumber": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/oneminutedistraction/phonenumber.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

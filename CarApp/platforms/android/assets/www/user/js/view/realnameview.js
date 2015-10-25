@@ -37,7 +37,13 @@ define(['dView', 'dCameraPopLayer', 'dConfirmPopLayer', 'userStore'], function(d
             this.confirmLayer && this.confirmLayer.destory();
             this.photoPop && this.photoPop.destory();
 
-            userStore.realNameStore.set(this.model.get());
+            userStore.realNameStore.set({
+                nickName: this.model.get('nickName'),
+                name: this.model.get('name'),
+                portrait: this.model.get('portrait'),
+                drivingLicense: this.model.get('drivingLicense'),
+                drivingPhoto: this.model.get('drivingPhoto')
+            });
         },
 
         save: function(){
