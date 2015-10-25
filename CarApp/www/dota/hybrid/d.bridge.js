@@ -1,5 +1,5 @@
 if(Ancients.isApp) {
-    define(['dCordova', 'dHybridCamera', 'dValidate'], function (cordova, camera, dValidate) {
+    define(['dCordova', 'dHybridCamera', 'dHybridGeo', 'dValidate'], function (cordova, camera, dHybridGeo, dValidate) {
         var bridge = {
             pictureFromCamera: camera.pictureFromCamera,
             pictureFromPhotolibrary: camera.pictureFromPhotolibrary,
@@ -11,7 +11,10 @@ if(Ancients.isApp) {
                 !dValidate.isFunction(error) && (error = noop);
 
                 window.plugins.phonenumber.get(success, error);
-            }
+            },
+            reversePosition: dHybridGeo.reversePosition,
+            placeSuggestion: dHybridGeo.placeSuggestion,
+            getCurrentPosition: dHybridGeo.getCurrentPosition
         };
 
         return bridge;
@@ -25,9 +28,10 @@ else if(Ancients.isH5){
             imei: function () {
                 return '';
             },
-            photoNumber: function(){
-
-            }
+            photoNumber: $.noop,
+            reversePosition: $.noop,
+            placeSuggestion: $.noop,
+            getCurrentPosition: $.noop
         };
 
         return bridge;

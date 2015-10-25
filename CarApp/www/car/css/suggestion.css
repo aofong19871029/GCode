@@ -1,0 +1,15 @@
+.js-carsuggestion-wrapper{
+    background-color: #EFEFEF;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.js-carsuggestion-wrapper .btn-cancel{
+    line-height: 1.75rem;
+    text-align: center;
+    color: #1491C5;
+    background: rgba(0,0,0,0);
+    border: 0;
+    display: block;
+}

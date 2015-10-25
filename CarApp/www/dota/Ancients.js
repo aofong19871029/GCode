@@ -5,6 +5,7 @@
         Ancients;
 
     Ancients = {
+        stores: {},
         isH5: rootIdx === -1,
         isApp: rootIdx !== -1,
         isAndroid: userAgent.indexOf('Android') !== -1,
@@ -82,4 +83,4 @@
     exports.Ancients = Ancients;
 })(document, window);
 
-//BfkPvjDGHC0ATZhIr6wxnHh9 baidu ak
+//WtFOgzR7MS7qcSiGBuX35SmR baidu ak

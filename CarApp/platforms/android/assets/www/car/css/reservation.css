@@ -1,0 +1,76 @@
+.reservation-wrapper {background-color: #efefef; position: absolute; height: 100%; width: 100%;}
+.reservation-wrapper .slogan{color: #666; font-size: 13px; padding: 0.43rem 0.93rem}
+
+.reservation-wrapper .base-list .pre-car{
+    position: absolute;
+    display: block;
+    top: 0;
+    height: 100%;
+    line-height: 2.68rem;
+    width: 2rem;
+}
+.reservation-wrapper .base-list .pre-car:after{
+    margin-bottom: 0.125rem;
+    -webkit-transform: rotateZ(-45deg);
+    -ms-transform: rotateZ(-45deg);
+    transform: rotateZ(-45deg);
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-left: 0.312rem;
+    overflow: hidden;
+    content: '\20';
+    font-size: 0.94rem;
+    box-shadow: inset 0.125rem 0.125rem 0 #099fde;
+}
+
+
+.reservation-wrapper .base-list .carnum{
+    padding-left: 3rem;
+}
+
+.reservation-wrapper .base-list .city{
+    padding-right: 0.3rem;
+    float: right;
+    height: 2.86rem;
+    line-height: 2.86rem;
+    display: inline-block;
+    width: -webkit-calc(100% - 0.3rem);
+    text-align: right;
+}
+
+.reservation-wrapper .base-list .city:after{
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    background: url(http://simg1.qunarzz.com/site/images/wap/touch/images/v2/images2x/arrow_grey_sprites.png) 0 0 no-repeat;
+    width: 0.56rem;
+    height: 0.875rem;
+    margin-top: -0.437rem;
+    background-size: 500% 100%;
+    background-position: -0.56rem 0;
+}
+
+
+.reservation-wrapper .multi-people,
+.reservation-wrapper .price{
+    padding-top: 0.625rem;
+}
+
+.reservation-wrapper .price{
+    color: #ff9a14;
+    font-weight: 700;
+}
+.reservation-wrapper .price small{
+   margin-right: 0.3rem;
+}
+
+.reservation-wrapper .book{
+    text-align: center;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    width: 80%;
+    background-color: #FF851B;
+    margin: 1rem 10%;
+}

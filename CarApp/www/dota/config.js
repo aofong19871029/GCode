@@ -80,6 +80,7 @@
 
             'dBridge': baseDir + 'hybrid/d.bridge',
             'dHybridCamera': baseDir + 'service/d.hybrid.camera',
+            'dHybridGeo': baseDir + 'service/d.hybrid.geolocation',
 
             // 第三方UI组件
             'mobiscroll': baseDir + 'mobiscroll/mobiscroll.custom-2.17.0.min',

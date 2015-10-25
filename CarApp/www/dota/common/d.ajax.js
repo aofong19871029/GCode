@@ -126,6 +126,37 @@ define(['dValidate', 'dStore', 'dUrl', 'libs'], function(dValidate, dStore, dUrl
             };
 
             return sendReq(opt);
+        },
+        js: function(url, errorCallback, loadCallback) {
+            var script = document.createElement("script");
+
+            script.type = "text/javascript";
+
+            if (script.readyState) {
+                script.onreadystatechange = function () {
+                    if (script.readyState == "loaded" ||
+                        script.readyState == "complete") {
+
+                        script.onreadystatechange = null;
+                        dValidate.isFunction(loadCallback) && loadCallback();
+                        document.body.removeChild(script);
+                    }
+                };
+            } else {
+                script.onload = function () {
+                    script.onload = null;
+                    dValidate.isFunction(loadCallback) && loadCallback();
+                    document.body.removeChild(script);
+                };
+                script.onerror = function(){
+                    script.onerror = null;
+                    dValidate.isFunction(errorCallback) && errorCallback();
+                    document.body.removeChild(script);
+                };
+            }
+
+            script.src = url;
+            document.body.appendChild(script);
         }
     };
 });

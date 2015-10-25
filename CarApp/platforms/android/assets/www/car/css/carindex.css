@@ -1,0 +1,86 @@
+.ui-header-fixed h2 .car-title{
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+    display: inline-block;
+    border-radius: 0.25rem;
+    padding: 1px;
+    line-height: 2.3rem;
+    height: 2.3rem;
+    margin: 0.2rem 0 0 0;
+    font-size: 16px;
+}
+
+.ui-header-fixed h2 .car-title span{
+    font-size: 15px;
+    min-width: 6.5rem;
+    max-width: 8rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 0.32rem;
+    display: inline-block;
+
+    background-color: #066F9B;
+    border: 1px solid #066F9B;
+    color: #1491C5;
+}
+.ui-header-fixed h2 .car-title span.active{
+    background-color: #FE9522;
+    color: #fff;
+}
+
+.carhome-wrapper{
+    background-color: #EFEFEF;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.carhome-wrapper button{
+    height: 3rem;
+    width: 12rem;
+    margin: 2.5rem 0 0rem  -webkit-calc(50% - 6rem);
+    background-color: #fff;
+    border-radius: 0.3rem;
+}
+
+.carhome-wrapper button:nth-child(2){
+    background-color: #EDB66D;
+}
+
+.carhome-wrapper button:nth-child(1){
+    background-color: #FF851B;
+}
+
+.carhome-wrapper button:nth-child(3){
+    background-color: #F5F5F5;
+}
+
+.carhome-wrapper button:nth-child(4){
+    background-color: #2ECC40;
+}
+
+.carhome-wrapper .menu{
+    position: fixed;
+    bottom: 0;
+    color: #666;
+    width: 100%;
+    text-align: center;
+    list-style: none;
+    background-color: #fff;
+}
+
+.carhome-wrapper .menu a{
+    text-decoration: none;
+    color: #666;
+}
+
+.carhome-wrapper .menu :nth-child(1),
+.carhome-wrapper .menu :nth-child(3){
+    width: 30%;
+}
+.carhome-wrapper .menu :nth-child(2){
+    width: 33%;
+}

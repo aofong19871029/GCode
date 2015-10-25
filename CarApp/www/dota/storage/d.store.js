@@ -2,7 +2,7 @@
  * LocalStorage的简易入口
  */
 
-define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dLog', 'dValidate'], function(dInherit, dLocalStorage, dAbstractStorage, dDate, dLog, dValidate){
+define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dLog', 'dValidate', ''], function(dInherit, dLocalStorage, dAbstractStorage, dDate, dLog, dValidate){
     var Message = {
         ERROR_OPTIONS: 'error Store option',
         ERROR_KEY: 'error Store key',
