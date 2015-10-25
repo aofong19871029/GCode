@@ -777,3 +777,90 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 .ui-increase-decrease .disabled:before, .ui-increase-decrease .disabled:after {
     background-color: #999;
 }
+
+/*********  UI search title span *********/
+.ui-citys-hd {
+    background: #e6f1f7;
+    padding: 8px 10px;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.ui-citys-hd .ui-input-bd {
+    position: relative
+}
+
+.ui-citys-hd .ui-btn-cancle {
+    display: none
+}
+
+.ui-citys-hd.ui-input-focus .ui-input-bd {
+    width: 80%;
+    float: left
+}
+
+.ui-citys-hd.ui-input-focus .ui-btn-cancle {
+    width: 18%;
+    float: left;
+    line-height: 28px;
+    text-align: center;
+    font-size: 16px;
+    color: #1491C5;
+    background: rgba(0,0,0,0);
+    border: 0;
+    display: block
+}
+
+.ui-citys-hd .ui-input-bd:before,.ui-citys-hd .ui-input-bd:after {
+    position: absolute;
+    content: ""
+}
+
+.ui-citys-hd .ui-input-bd:before {
+    width: 12px;
+    height: 12px;
+    left: 6px;
+    top: 6px;
+    border: 1px solid #999;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%
+}
+
+.ui-citys-hd .ui-input-bd:after {
+    width: 1px;
+    height: 8px;
+    left: 20px;
+    top: 16px;
+    background: #999;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg)
+}
+
+.ui-citys-hd .ui-input-box {
+    width: 100%;
+    height: 28px;
+    line-height: normal;
+    display: inline-block;
+    padding: 0 60px 0 28px;
+    background-color: #FFF;
+    border-radius: 20px
+}
+
+.ui-focus-close {
+    color: #999;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin: -17px 0 0 0;
+    width: 40px;
+    height: 34px;
+    line-height: 30px;
+    text-align: center;
+    font: 700 22px/1.7 sans-serif
+}
