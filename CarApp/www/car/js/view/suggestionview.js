@@ -6,33 +6,42 @@ define(['dView'], function(dView){
 
 
         onCreate: function(){
+            var self = this,
+                timer;
+
             this.$el.append(this.T['js-carsuggestion-wrapper']);
             this.embedHeader({
                 titleHtml: '<div class="ui-citys-hd">\
-                                <div class="ui-input-hd">\
-                                <input class="ui-input-box" placeholder="目的地/区域/位置"/>\
-                                <span class="ui-pro-load js_input_loading_icon" style="display: none;">\
-                                    <span class="ui-pro-radius hide"></span>\
-                                    <span class="ui-i ui-pro-logo"></span>\
-                                </span> \
-                                <span class="ui-focus-close" style="display: none;">×</span>\
+                                <div class="ui-input-bd" style="height: 2.75rem; line-height: 2.7rem;">\
+                                    <input class="ui-input-box js-input" placeholder="目的地/区域/位置"/>\
+                                    <span class="ui-focus-close js-clear" style="display: none;">×</span>\
                                 </div>\
                             </div>',
-                moreHtml: '<button type="button" class="ui-btn-cancle">取消</button>',
                 back: true,
                 listener: {
-                    moreHandler: function(){}
+                    'input .js-input': function(e){
+                        var target = $(e.currentTarget),
+                            closeIcon = target.parent().find('.js-clear'),
+                            queryVal = target.val().trim();
+
+                        closeIcon[queryVal.length ? 'show' : 'hide']();
+
+                        clearTimeout(timer);
+                        timer = setTimeout($.proxy(self.query, self, queryVal), 800);
+                    },
+                    'click .js-clear': function(e){
+                        var target = $(e.currentTarget),
+                            input = target.parent().find('.js-input');
+
+                        input.val('');
+                        target.hide();
+                    }
                 }
             });
         },
 
         onLoad: function(){
-            window.locationService.getCurrentPosition(function(pos){
-                alert(JSON.stringify(pos))
-            },
-                function(pos){
-                    alert(JSON.stringify(pos))
-                });
+
 
         },
 
@@ -42,6 +51,10 @@ define(['dView'], function(dView){
 
         bindings: {
 
+        },
+
+        query: function(keyword){
+            console.log(keyword)
         }
     });
 

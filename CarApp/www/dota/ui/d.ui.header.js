@@ -64,7 +64,8 @@ define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValida
 
         attachEvent: function(){
             var opt = this.opt,
-                listener = opt.listener;
+                listener = opt.listener,
+                custom;
 
             this.$el.off();
 
@@ -80,8 +81,9 @@ define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValida
 
             // 自定义事件
             for(var i in listener){
+                custom = i.trim().split(' ');
                 if(i !== 'backHandler' && i !== 'moreHandler' && listener.hasOwnProperty(i)){
-                    this.bindEvent('click', i, listener[i]);
+                    this.bindEvent(custom.length === 2 ? custom[0] : 'click', custom[custom.length - 1], listener[i]);
                 }
             }
         }
