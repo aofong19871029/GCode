@@ -2,15 +2,15 @@
  * 定位功能
  */
 
-define(['dCordova', 'dValidate', 'dAjax', 'dStore'], function (cordova, dValidate, dAjax, dStore) {
-    var isAndroid = Ancients.isAndroid,
+define(['dValidate', 'dAjax', 'dStore'], function (dValidate, dAjax, dStore) {
+    var isApp = Ancients.isApp,
+        isAndroid = Ancients.isAndroid,
         isIOS = Ancients.isIOS,
         win = window,
         noop = $.noop,
         baiduAk = 'WtFOgzR7MS7qcSiGBuX35SmR',
         GeoAPI = {},
         baiduStatusCode = {
-            '0': '正常',
             '1': '请求参数非法',
             '2': '请求参数非法',
             '3': '权限校验失败',
@@ -70,6 +70,7 @@ define(['dCordova', 'dValidate', 'dAjax', 'dStore'], function (cordova, dValidat
             }
         };
 
+        //todo: $.param 会转义[pos.latitude, pos.longitude].join(',') ','号， baidu没正确解析这个转义后的值， 报code 2 错误, 坑!
         dAjax.js('http://api.map.baidu.com/geocoder/v2/?ak=' + baiduAk + '&callback=Ancients.reversePosition&location=' + [pos.latitude, pos.longitude].join(',') + '&output=json&pois=0', function(){
             error({status:404, message:'服务无返回'});
         });
@@ -88,35 +89,40 @@ define(['dCordova', 'dValidate', 'dAjax', 'dStore'], function (cordova, dValidat
         !dValidate.isFunction(success) && (success = noop);
         !dValidate.isFunction(error) && (error = noop);
 
-        if(arguments.length === 3 && dValidate.isFunction(region) && storeCityCode){
-            region = storeCityCode;
+        if(arguments.length === 3 && dValidate.isFunction(region)){
+            region = storeCityCode ? storeCityCode : null;
         }
 
-        if(dValidate.isEmpty(region)){
+        if(region == undefined){
             return error({status: 220, message: 'region(城市代号) 不可为空'});
         }
 
-        dAjax.get('http://api.map.baidu.com/place/v2/suggestion', {
-            query: encodeURIComponent(query),
+        dAjax.jsonp('http://api.map.baidu.com/place/v2/suggestion', {
+            query: query,
             region: region,
             output: 'json',
             ak: baiduAk
         }, function(obj){
             var status = obj.status + '',
-                errorMsg = getBaiduErrorByCode(status);
+                errorMsg = getBaiduErrorByCode(status),
+                poiPlace = [];
 
 
             if(errorMsg) {
                 error({status: status, message: errorMsg});
             } else{
-                success(obj);
+                poiPlace = obj.result.filter(function(poi){
+                    return poi.city && poi.district && poi.name && poi.location;
+                });
+
+                poiPlace && poiPlace.length ? success(poiPlace) : error({status: '404', message: '无匹配数据'});
             }
         }, function(){
             error({status:404, message:'服务无返回'});
-        })
+        });
     };
 
-    if (isAndroid) {
+    if (isAndroid && isApp) {
         GeoAPI._getCurrentPosition = function (success, error) {
             !dValidate.isFunction(success) && (success = noop);
             !dValidate.isFunction(error) && (error = noop);
@@ -201,16 +207,18 @@ define(['dCordova', 'dValidate', 'dAjax', 'dStore'], function (cordova, dValidat
             time = 180000;
 
         // 获取手机地址经纬度
-        GeoAPI.getCurrentPosition(function(obj){
-            geoStore.setAttr('oldlocation', lastPos);
+        GeoAPI._getCurrentPosition(function(obj){
+            geoStore.setAttr('oldlocation', lastPos || {});
             geoStore.setAttr('location', obj);
 
             // 根据经纬度逆解析 得到 address 和 cityCode
             GeoAPI.reversePosition(obj, function(json){
                 var result = json.result,
                     address = result.formatted_address,
+                    cityName = result.addressComponent.city,
                     cityCode = result.cityCode;
 
+                geoStore.setAttr('cityName', cityName);
                 geoStore.setAttr('address', address);
                 geoStore.setAttr('cityCode', cityCode);
 

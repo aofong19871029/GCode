@@ -21,7 +21,7 @@ if(Ancients.isApp) {
     });
 }
 else if(Ancients.isH5){
-    define(function () {
+    define(['dHybridGeo'], function (dHybridGeo) {
         var bridge = {
             pictureFromCamera: $.noop,
             pictureFromPhotolibrary: $.noop,
@@ -29,9 +29,9 @@ else if(Ancients.isH5){
                 return '';
             },
             photoNumber: $.noop,
-            reversePosition: $.noop,
-            placeSuggestion: $.noop,
-            getCurrentPosition: $.noop
+            reversePosition: dHybridGeo.reversePosition,
+            placeSuggestion: dHybridGeo.placeSuggestion,
+            getCurrentPosition: dHybridGeo.getCurrentPosition
         };
 
         return bridge;

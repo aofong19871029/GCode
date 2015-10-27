@@ -46,6 +46,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,if
 }
 input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 
+.slogan{color: #666; font-size: 13px; padding: 0.43rem 0.93rem}
 .base-list{border-top: 1px solid #bcbcbc; width: 100%;}
 .base-list li{
     position: relative;

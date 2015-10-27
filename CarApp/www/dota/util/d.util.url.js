@@ -77,6 +77,25 @@ define(function(){
             }
 
             return urlParams;
+        },
+
+        /**
+         * 设置url参数
+         * @param url
+         * @param params
+         * @returns {*} url + search + hash
+         */
+        setParams: function(url, params){
+            if(!params) return url;
+
+            var currentParams = this.getUrlParams(url),
+                urlObj = this.parseUrl(url),
+                mergeParams;
+
+            $.extend(true, currentParams, params);
+            mergeParams = $.param(currentParams);
+
+            return urlObj.hrefNoSearch + (mergeParams ? '?' + mergeParams : '') + urlObj.hash;
         }
     };
 });

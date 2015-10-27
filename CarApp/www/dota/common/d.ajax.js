@@ -44,7 +44,7 @@ define(['dValidate', 'dStore', 'dUrl', 'libs'], function(dValidate, dStore, dUrl
     function sendReq(opt){
         var protocol = dUrl.parseUrl(opt.url).protocol;
 
-        if(protocol !== 'http' && protocol !== 'https'){
+        if(protocol !== 'http:' && protocol !== 'https:'){
             opt.url = Ancients.serviceDir + opt.url;
         }
 
@@ -127,8 +127,14 @@ define(['dValidate', 'dStore', 'dUrl', 'libs'], function(dValidate, dStore, dUrl
 
             return sendReq(opt);
         },
-        js: function(url, errorCallback, loadCallback) {
-            var script = document.createElement("script");
+        js: function(url, errorCallback, loadCallback, cache) {
+            var script = document.createElement("script"),
+                timeZone;
+
+            if(!cache){
+                timeZone = '_=' + new Date().getTime();
+                url += (dUrl.parseUrl(url).search ? '&' : '?') + timeZone;
+            }
 
             script.type = "text/javascript";
 

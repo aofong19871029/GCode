@@ -2,7 +2,7 @@
  * LocalStorage的简易入口
  */
 
-define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dLog', 'dValidate', ''], function(dInherit, dLocalStorage, dAbstractStorage, dDate, dLog, dValidate){
+define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dLog', 'dValidate'], function(dInherit, dLocalStorage, dAbstractStorage, dDate, dLog, dValidate){
     var Message = {
         ERROR_OPTIONS: 'error Store option',
         ERROR_KEY: 'error Store key',
@@ -93,8 +93,13 @@ define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dLog', 'dVali
             this.iProxy.set(this.key, JSON.stringify(value), this.expir.getTime());
         },
         setAttr: function(name, value){
+            if(!dValidate.isString(name)) return;
+
             var data = this.get();
 
+            if(!data) {
+                data = {};
+            }
             data[name + ''] = value;
             this.set(data);
         },
@@ -102,7 +107,9 @@ define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dLog', 'dVali
             return JSON.parse(this.iProxy.get(this.key));
         },
         getAttr: function(name){
-            return this.get()[name];
+            var data = this.get();
+
+            return data ? data[name] : null;
         }
     });
 

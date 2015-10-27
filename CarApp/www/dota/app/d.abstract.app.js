@@ -81,11 +81,11 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView', 'dUIQ
          * @param url
          * @param opt
          */
-        loadViewFromUrl: function(url, opt){
+        loadViewFromUrl: function(url, opt, queryString){
             var self = this;
 
             require(['text!' + url], function(html){
-                self.loadView(self._collectPageOption(html), url, opt.action);
+                self.loadView(self._collectPageOption(html), url, opt.action, queryString);
             });
         },
 
@@ -117,13 +117,13 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView', 'dUIQ
             };
         },
 
-        loadView: function(opt, path, action){
+        loadView: function(opt, path, action, queryString){
             var self = this,
                 configPath = opt.configPath,
                 controllerPath = opt.controllerPath,
                 ctrl;
 
-            this._freshUrlAndTitle(opt.title, path, action);
+            this._freshUrlAndTitle(opt.title, path, action, queryString);
 
             // 现有取缓存中的
             ctrl = this.pageCache.getPageByPath(path);
@@ -185,11 +185,14 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView', 'dUIQ
          * @param action
          * @private
          */
-        _freshUrlAndTitle: function(title, path, action){
+        _freshUrlAndTitle: function(title, path, action, queryString){
             var url = location.protocol + '//' + location.host + '/' + path,
                 noSuffixPath = this._getRootAbsolutePathWithoutSuffix(path);
 
-
+            // push state带上querystring
+            if(!dUrl.parseUrl(path).search && queryString){
+                path += queryString;
+            }
 
             if(action === 'forward'){
                 history.pushState({
@@ -277,7 +280,7 @@ define(['dInherit', 'dPageCache', 'dUrl', 'dGuid', 'dValidate', 'dUIView', 'dUIQ
                 dUIQueue.disposeAll();
 
                 // 加载Next View
-                this.loadViewFromUrl(targetPath, opt);
+                this.loadViewFromUrl(targetPath, opt, dUrl.parseUrl(url).search);
             }
         },
 

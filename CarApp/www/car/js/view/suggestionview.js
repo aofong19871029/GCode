@@ -1,7 +1,16 @@
-define(['dView', 'dBridge'], function(dView, dBridge){
+define(['dView', 'dBridge', 'dUrl'], function(dView, dBridge, dUrl){
+    var searchPoiTpl =
+        '<%_.each(pois, function(poi, i){%>\
+            <li class="js-poi" data-poi=<%=JSON.stringify(poi)%>>\
+            <div class="asso-l"><%=poi.name%></div>\
+            <span class="asso-r fr"><%=poi.district%></span>\
+            </li>\
+        <%})%>',
+        searchPoiTplFunc = _.template(searchPoiTpl);
+
     var View = dView.extend({
         events: {
-
+            'click .js-poi': 'selectPoi'
         },
 
 
@@ -35,14 +44,30 @@ define(['dView', 'dBridge'], function(dView, dBridge){
 
                         input.val('');
                         target.hide();
+                        self.query();
+                    },
+                    backHandler: function(){
+                        var from = decodeURIComponent(dUrl.getUrlParam(location.href, 'from')).trim();
+
+                        Ancients.back(from || undefined);
                     }
                 }
             });
+
+            this.els = {
+                loading: this.$el.find('.js-load'),
+                destination: this.$el.find('.js-destination'),
+                noresult: this.$el.find('.js-noresult'),
+                destinationToolbar: this.$el.find('.js-destinationToolbar'),
+                input: this.$el.find('.js-input')
+            };
         },
 
         onLoad: function(){
+            var keyword = dUrl.getUrlParam(location.href, 'keyword').trim();
 
-
+            this.els.input.val(keyword);
+            this.query(keyword);
         },
 
         onHide: function(){
@@ -57,17 +82,48 @@ define(['dView', 'dBridge'], function(dView, dBridge){
             var self = this,
                 pos = dBridge.getCurrentPosition();
 
+            this.els.noresult.hide();
+            this.els.destination.hide().empty();
+            this.els.destinationToolbar.hide();
+
+            if(!keyword || !(keyword + '').trim().length) return;
+
             if(!pos){
                 this.showToast('定位失败,请开启GPS');
                 return;
             }
 
+            this.els.loading.show();
 
-            dBridge.placeSuggestion(keyword, function(obj){
+            dBridge.placeSuggestion(keyword, 131, function(pois){
+                self.els.loading.hide();
 
-            }, function(err){
-                self.showToast(err.message);
+                self.els.destinationToolbar.show();
+                self.els.destination.html(searchPoiTplFunc({pois: pois}));
+                self.els.destination.show();
+            }, function(){
+                self.els.loading.hide();
+                self.els.noresult.show();
             });
+        },
+
+        selectPoi: function(e){
+            var from = decodeURIComponent(dUrl.getUrlParam(location.href, 'from')).trim(),
+                target = $(e.currentTarget),
+                poi = target.attr('data-poi'),
+                params;
+
+            if(poi){
+                poi = JSON.parse(poi);
+                params = {
+                    address: poi.name,
+                    location: [poi.location.lat, poi.location.lng].join(',')
+                };
+            }
+
+            from = dUrl.setParams(from, params);
+
+            Ancients.back(from || undefined);
         }
     });
 

@@ -1,15 +1,45 @@
 define(['dView', 'dUrl', 'dSwitch', 'dNumberStep', 'dDateTimeScroll'], function(dView, dUrl, dSwitch, dNumberStep, dDateTimeScroll){
     var View = dView.extend({
         events: {
-
+            'click .js-startPoi': function(e){
+                Ancients.forward('suggestion.html?from=' + encodeURIComponent('reservation.html?poi=start') + '&keyword=' + e.currentTarget.value.trim());
+            },
+            'click .js-endPoi': function(e){
+                Ancients.forward('suggestion.html?from=' + encodeURIComponent('reservation.html?poi=end') + '&keyword=' + e.currentTarget.value.trim());
+            }
         },
 
 
         onCreate: function(){
-            var self = this,
-                title = dUrl.getUrlParam('action').toLowerCase();
+            var self = this;
 
-            switch (title) {
+            this.$el.append(this.T['js-reservation-wrap']);
+
+            //多人拼车
+            new dSwitch(this.$el.find('.js-multiPeople'), function(selected){
+               self.model.set('multiPlayer', selected);
+            });
+            //乘坐人数
+            this._persionStep = new dNumberStep(this.$el.find('.js-pnum'));
+            this._persionStep.setOpt({
+                onChange: function(num){
+                    self.model.set('personCount', num);
+                }
+            });
+
+            this.els = {
+                departureDate: this.$el.find('.js-departureDate')
+            }
+        },
+
+        onLoad: function(){
+           var params = dUrl.getUrlParams(location.href),
+               title = params.title || '',
+               tag = params.poi,
+               address = params.address,
+               location = params.location;
+
+            switch (title.toLowerCase()) {
                 case 'towork':
                     title = '上班约车';
                     break;
@@ -24,35 +54,25 @@ define(['dView', 'dUrl', 'dSwitch', 'dNumberStep', 'dDateTimeScroll'], function(
                     break;
             }
 
-            this.$el.append(this.T['js-reservation-wrap']);
-            new dSwitch(this.$el.find('.js-multiPeople'), function(selected){
-               self.model.set('multiPlayer', selected);
-            });
-            this._persionStep = new dNumberStep(this.$el.find('.js-pnum'));
-            this._persionStep.setOpt({
-                onChange: function(num){
-                    self.model.set('personCount', num);
-                }
-            });
-
             this.embedHeader({
                 titleHtml: title,
                 moreHtml: '<span style="margin-left: -1.3rem">计费规则</span>',
                 back: true,
                 listener: {
-                   moreHandler: function(){}
+                    moreHandler: function(){},
+                    backHandler: function(){
+                        Ancients.back('home.html');
+                    }
                 }
             });
 
-            this.els = {
-                departureDate: this.$el.find('.js-departureDate')
-            }
-        },
-
-        onLoad: function(){
+            // 时间
             new dDateTimeScroll( this.els.departureDate, {
                 type: 'datetime'
             });
+
+            // 设置起始点
+            this.model.setPoi(tag, address, location);
         },
 
         onHide: function(){
