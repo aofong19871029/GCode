@@ -1,4 +1,4 @@
-define(['dView'], function(dView){
+define(['dView', 'dBridge'], function(dView, dBridge){
     var View = dView.extend({
         events: {
 
@@ -54,7 +54,20 @@ define(['dView'], function(dView){
         },
 
         query: function(keyword){
-            console.log(keyword)
+            var self = this,
+                pos = dBridge.getCurrentPosition();
+
+            if(!pos){
+                this.showToast('定位失败,请开启GPS');
+                return;
+            }
+
+
+            dBridge.placeSuggestion(keyword, function(obj){
+
+            }, function(err){
+                self.showToast(err.message);
+            });
         }
     });
 
