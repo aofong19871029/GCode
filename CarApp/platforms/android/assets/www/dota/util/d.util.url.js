@@ -60,7 +60,7 @@ define(function(){
             var urlParams = {};
             var match, value, length, name;
 
-            while (match = searchReg.exec(_url[0])) {
+            while (match = searchReg.exec(_url[_url.length - 1])) {
                 name = match[1];
                 value = match[2];
                 urlParams[name] = value;

@@ -1,4 +1,5 @@
-define(['dView', 'dUrl', 'dSwitch', 'dNumberStep', 'dDateTimeScroll'], function(dView, dUrl, dSwitch, dNumberStep, dDateTimeScroll){
+define(['dView', 'dUrl', 'dSwitch', 'dNumberStep', 'dDateTimeScroll'],
+    function(dView, dUrl, dSwitch, dNumberStep, dDateTimeScroll){
     var View = dView.extend({
         events: {
             'click .js-startPoi': function(e){
@@ -18,18 +19,24 @@ define(['dView', 'dUrl', 'dSwitch', 'dNumberStep', 'dDateTimeScroll'], function(
             //多人拼车
             new dSwitch(this.$el.find('.js-multiPeople'), function(selected){
                self.model.set('multiPlayer', selected);
-            });
+            }, this.model.get('multiPlayer'));
             //乘坐人数
             this._persionStep = new dNumberStep(this.$el.find('.js-pnum'));
             this._persionStep.setOpt({
                 onChange: function(num){
                     self.model.set('personCount', num);
-                }
+                },
+                initalVal: this.model.get('personCount')
             });
 
             this.els = {
                 departureDate: this.$el.find('.js-departureDate')
-            }
+            };
+
+            // 时间
+            new dDateTimeScroll( this.els.departureDate, {
+                type: 'datetime'
+            });
         },
 
         onLoad: function(){
@@ -37,7 +44,7 @@ define(['dView', 'dUrl', 'dSwitch', 'dNumberStep', 'dDateTimeScroll'], function(
                title = params.title || '',
                tag = params.poi,
                address = params.address,
-               location = params.location;
+               latlng = params.location;
 
             switch (title.toLowerCase()) {
                 case 'towork':
@@ -66,21 +73,19 @@ define(['dView', 'dUrl', 'dSwitch', 'dNumberStep', 'dDateTimeScroll'], function(
                 }
             });
 
-            // 时间
-            new dDateTimeScroll( this.els.departureDate, {
-                type: 'datetime'
-            });
-
+            this._persionStep.setNum(this.model.get('personCount'));
             // 设置起始点
-            this.model.setPoi(tag, address, location);
+            this.model.setPoi(tag, address, latlng);
         },
 
         onHide: function(){
-
+            this.model.backup();
         },
 
         bindings: {
-
+            '.js-departureDate': 'departureDate',
+            '.js-startPoi': 'departureAddress',
+            '.js-endPoi': 'destinationAddress'
         }
     });
 

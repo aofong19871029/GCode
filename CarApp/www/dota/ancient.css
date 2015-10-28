@@ -668,7 +668,7 @@ input[type="checkbox"]{height: 15px; width: 15px; vertical-align: text-top;}
 }
 
 .ui-switch.current {
-    background-color: #099fde
+    background-color: #2ECC40;
 }
 
 .ui-switch .ui-switch-bg {

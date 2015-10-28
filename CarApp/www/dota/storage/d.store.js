@@ -2,12 +2,13 @@
  * LocalStorage的简易入口
  */
 
-define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dLog', 'dValidate'], function(dInherit, dLocalStorage, dAbstractStorage, dDate, dLog, dValidate){
+define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dHash', 'dLog', 'dValidate'], function(dInherit, dLocalStorage, dAbstractStorage, dDate, dHash, dLog, dValidate){
     var Message = {
-        ERROR_OPTIONS: 'error Store option',
-        ERROR_KEY: 'error Store key',
-        ERROR_EXPIR: 'error Store expir'
-    };
+            ERROR_OPTIONS: 'error Store option',
+            ERROR_KEY: 'error Store key',
+            ERROR_EXPIR: 'error Store expir'
+        },
+        storeCache = new dHash();
 
     var Store = dInherit(dAbstractStorage, {
         __propertys__: function(){
@@ -29,11 +30,20 @@ define(['dInherit', 'dLocalStorage', 'dAbstractStorage', 'dDate', 'dLog', 'dVali
             this._model = {};
         },
         initialize: function(options){
+            var instance;
+
             if(this._checkOpt(options)) {
+                // 单例
+                if(instance = storeCache.get(options.key)){
+                    return instance;
+                }
+
                 $.extend(this, options);
 
                 this.expir = this._getExpirDate();
             }
+
+            storeCache.add(this.key, this);
         },
         /**
          * 验证参数是有效性

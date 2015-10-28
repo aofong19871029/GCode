@@ -44,7 +44,7 @@ define(function(){
          */
         getUrlParam : function (url, name) {
             var re = new RegExp("(\\?|&)" + name + "=([^&]+)(&|$)", "i"), m = url.match(re);
-            return m ? m[2] : "";
+            return decodeURIComponent(m ? m[2] : "");
         },
 
         /**
@@ -60,20 +60,10 @@ define(function(){
             var urlParams = {};
             var match, value, length, name;
 
-            while (match = searchReg.exec(_url[0])) {
+            while (match = searchReg.exec(_url[_url.length - 1])) {
                 name = match[1];
-                value = match[2];
+                value = decodeURIComponent(match[2]);
                 urlParams[name] = value;
-            }
-
-            if (_url[1]) {
-                var idx = 0;
-                length = _.size(urlParams);
-                _.each(urlParams, function (value, key) {
-                    if (++idx == length) {
-                        urlParams[key] += '://' + _url[1];
-                    }
-                });
             }
 
             return urlParams;

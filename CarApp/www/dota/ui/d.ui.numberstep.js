@@ -31,10 +31,13 @@ define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValida
         setOpt: function(options) {
             options = options || {};
 
+            var max = dValidate.isNull(options.max) || !dValidate.isNumber(options.max) ? 4 : options.max,
+                min = dValidate.isNull(options.min) || !dValidate.isNumber(options.min) ? 1 : options.min;
+
             this.setOptions({
-                max: dValidate.isNull(options.max) || !dValidate.isNumber(options.max) ? 4 : options.max,
-                min: dValidate.isNull(options.min) || !dValidate.isNumber(options.min) ? 1 : options.max,
-                initalVal: 1,
+                max: max,
+                min: min,
+                initalVal: dValidate.isNumber(options.initalVal) && options.initalVal >= min && options.initalVal <= max ? options.initalVal : options.min,
                 step: 1,
                 onChange: dValidate.isFunction(options.onChange) ? options.onChange :  $.noop,
                 onMax: dValidate.isFunction(options.onMax) ? options.onMax :  $.noop,
@@ -97,8 +100,16 @@ define(['dInherit', 'dBaseUI', 'dValidate'], function(dInherit, dBaseUI, dValida
             this.currentNum = num;
             this.els.val.html(num);
             this.opt.onChange(num);
-        }
+        },
 
+        setNum: function(num){
+            if(dValidate.isNumber(num) && num >= this.opt.min && num <= this.opt.max){
+                this.currentNum = num + 1;
+
+                this.$el.find('.item').text(this.currentNum);
+                this.$el.find('.ui-minus').removeClass('disabled').trigger('click');
+            }
+        }
 
     });
 

@@ -6,15 +6,26 @@ define(['dView'], function(dView){
 
 
         onCreate: function(){
+            var self = this;
+
             this.$el.append(this.T['js-carindex-wrap']);
             this.embedHeader({
-                titleHtml: '<div class="car-title"><span class="active">车主</span><span>乘客</span></div>',
-                back: true
+                titleHtml: '<div class="car-title"><span class="js-role" data-role="driver">车主</span><span class="active js-role" data-role="passenger">乘客</span></div>',
+                back: true,
+                listener: {
+                    'click .js-role': function(e){
+                        var target = $(e.currentTarget);
+
+                        self.model.set('role', target.attr('data-role'));
+                    }
+                }
             });
+
+            this.bindModelListener();
         },
 
         onLoad: function(){
-
+            this.changeRole(this.model.get('role'));
         },
 
         onHide: function(){
@@ -23,6 +34,14 @@ define(['dView'], function(dView){
 
         bindings: {
 
+        },
+
+        bindModelListener: function(){
+            var self = this;
+
+            this.listenTo(this.model, 'change:role', function(model, newVal){
+                self.changeRole(newVal);
+            });
         },
 
         reserveCar: function(e){
@@ -36,6 +55,12 @@ define(['dView'], function(dView){
             }
 
             Ancients.forward(url);
+        },
+
+        changeRole: function(role){
+            var roleDom = this.$el.find('.js-role').removeClass('active');
+
+            roleDom.filter('[data-role="' + role +'"]').addClass('active');
         }
     });
 
