@@ -1,0 +1,10 @@
+E:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe.manifest
+E:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.application
+E:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe
+E:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.pdb
+E:\project\GitHub\GCode\ProxyService\ProxyService\obj\Release\ProxyService.ServiceProxy.resources
+E:\project\GitHub\GCode\ProxyService\ProxyService\obj\Release\ProxyService.csproj.GenerateResource.Cache
+E:\project\GitHub\GCode\ProxyService\ProxyService\obj\Release\ProxyService.exe.manifest
+E:\project\GitHub\GCode\ProxyService\ProxyService\obj\Release\ProxyService.application
+E:\project\GitHub\GCode\ProxyService\ProxyService\obj\Release\ProxyService.exe
+E:\project\GitHub\GCode\ProxyService\ProxyService\obj\Release\ProxyService.pdb

@@ -1,0 +1,10 @@
+C:\Users\Administrator\Desktop\ProxyService\ProxyService\bin\Debug\ProxyService.exe.manifest
+C:\Users\Administrator\Desktop\ProxyService\ProxyService\bin\Debug\ProxyService.application
+C:\Users\Administrator\Desktop\ProxyService\ProxyService\bin\Debug\ProxyService.exe
+C:\Users\Administrator\Desktop\ProxyService\ProxyService\bin\Debug\ProxyService.pdb
+C:\Users\Administrator\Desktop\ProxyService\ProxyService\obj\Debug\ProxyService.ServiceProxy.resources
+C:\Users\Administrator\Desktop\ProxyService\ProxyService\obj\Debug\ProxyService.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\ProxyService\ProxyService\obj\Debug\ProxyService.exe.manifest
+C:\Users\Administrator\Desktop\ProxyService\ProxyService\obj\Debug\ProxyService.application
+C:\Users\Administrator\Desktop\ProxyService\ProxyService\obj\Debug\ProxyService.exe
+C:\Users\Administrator\Desktop\ProxyService\ProxyService\obj\Debug\ProxyService.pdb

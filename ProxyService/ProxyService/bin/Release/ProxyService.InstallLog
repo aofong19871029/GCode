@@ -1,0 +1,13 @@
+﻿Installing assembly 'e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.InstallLog
+   assemblypath = e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe
+Installing service ProxyServiceCJ...
+Service ProxyServiceCJ has been successfully installed.
+Creating EventLog source ProxyServiceCJ in log Application...
+Committing assembly 'e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.InstallLog
+   assemblypath = e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe

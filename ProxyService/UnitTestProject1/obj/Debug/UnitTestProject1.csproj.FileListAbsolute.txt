@@ -1,0 +1,16 @@
+C:\Users\Administrator\Desktop\ProxyService\UnitTestProject1\bin\Debug\UnitTestProject1.dll
+C:\Users\Administrator\Desktop\ProxyService\UnitTestProject1\bin\Debug\UnitTestProject1.pdb
+C:\Users\Administrator\Desktop\ProxyService\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Administrator\Desktop\ProxyService\UnitTestProject1\bin\Debug\ProxyService.exe
+C:\Users\Administrator\Desktop\ProxyService\UnitTestProject1\bin\Debug\ProxyService.pdb
+C:\Users\Administrator\Desktop\ProxyService\UnitTestProject1\obj\Debug\UnitTestProject1.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\ProxyService\UnitTestProject1\obj\Debug\UnitTestProject1.dll
+C:\Users\Administrator\Desktop\ProxyService\UnitTestProject1\obj\Debug\UnitTestProject1.pdb
+E:\project\GitHub\GCode\ProxyService\UnitTestProject1\bin\Debug\UnitTestProject1.dll
+E:\project\GitHub\GCode\ProxyService\UnitTestProject1\bin\Debug\UnitTestProject1.pdb
+E:\project\GitHub\GCode\ProxyService\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\project\GitHub\GCode\ProxyService\UnitTestProject1\bin\Debug\ProxyService.exe
+E:\project\GitHub\GCode\ProxyService\UnitTestProject1\obj\Debug\UnitTestProject1.dll
+E:\project\GitHub\GCode\ProxyService\UnitTestProject1\obj\Debug\UnitTestProject1.pdb
+E:\project\GitHub\GCode\ProxyService\UnitTestProject1\bin\Debug\ProxyService.pdb
+E:\project\GitHub\GCode\ProxyService\UnitTestProject1\obj\Debug\UnitTestProject1.csprojResolveAssemblyReference.cache
