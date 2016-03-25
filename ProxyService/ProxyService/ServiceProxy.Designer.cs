@@ -1,4 +1,4 @@
-﻿namespace ProxyService
+﻿namespace ProxyServiceCJ
 {
     partial class ServiceProxy
     {

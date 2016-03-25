@@ -1,0 +1,10 @@
+E:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe.manifest
+E:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.application
+E:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe
+E:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.pdb
+E:\192.168.83.70\GCode\ProxyService\ProxyService\obj\Release\ProxyServiceCJ.ServiceProxy.resources
+E:\192.168.83.70\GCode\ProxyService\ProxyService\obj\Release\ProxyServiceCJ.csproj.GenerateResource.Cache
+E:\192.168.83.70\GCode\ProxyService\ProxyService\obj\Release\ProxyServiceCJ.exe.manifest
+E:\192.168.83.70\GCode\ProxyService\ProxyService\obj\Release\ProxyServiceCJ.application
+E:\192.168.83.70\GCode\ProxyService\ProxyService\obj\Release\ProxyServiceCJ.exe
+E:\192.168.83.70\GCode\ProxyService\ProxyService\obj\Release\ProxyServiceCJ.pdb

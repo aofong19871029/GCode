@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ProxyService")]
+[assembly: AssemblyTitle("ProxyServiceCJ")]
 [assembly: AssemblyDescription("NODE CLIENT 翻墙服务. 关闭此进程后请自行启动ProxyServiceCJ")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ProxyService")]
+[assembly: AssemblyProduct("ProxyServiceCJ")]
 [assembly: AssemblyCopyright("Copyright © CJ 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

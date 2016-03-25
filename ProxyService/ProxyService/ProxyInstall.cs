@@ -9,7 +9,7 @@ using System.Linq;
 using System.ServiceProcess;
 using System.IO;
 
-namespace ProxyService
+namespace ProxyServiceCJ
 {
     [RunInstaller(true)]
     public partial class ProxyInstall : System.Configuration.Install.Installer
@@ -44,9 +44,9 @@ namespace ProxyService
 
             try
             {
-                if (IsServiceIsExisted(SERVICENAME) && File.Exists("ProxyService.exe"))
+                if (IsServiceIsExisted(SERVICENAME) && File.Exists("ProxyServiceCJ.exe"))
                 {
-                    UnInstallmyService("ProxyService.exe");
+                    UnInstallmyService("ProxyServiceCJ.exe");
                 }
             }
             catch (Exception) { }

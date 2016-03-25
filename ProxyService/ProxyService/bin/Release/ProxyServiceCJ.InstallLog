@@ -1,0 +1,39 @@
+﻿Installing assembly 'e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe
+   logfile = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.InstallLog
+Uninstalling assembly 'e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe'.
+Affected parameters are:
+   assemblypath = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe
+   logfile = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.InstallLog
+An exception occurred in the OnBeforeUninstall event handler of ProxyServiceCJ.ProxyInstall.
+System.InvalidOperationException: Cannot open ProxyServiceCJ service on computer '.'.
+The inner exception System.ComponentModel.Win32Exception was thrown with the following error message: 指定的服务未安装。.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Removing EventLog source ProxyServiceCJ.
+Service ProxyServiceCJ is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: 指定的服务未安装。
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Installing service ProxyServiceCJ...
+Service ProxyServiceCJ has been successfully installed.
+Creating EventLog source ProxyServiceCJ in log Application...
+Committing assembly 'e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe
+   logfile = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.InstallLog
+Installing assembly 'e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe
+   logfile = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.InstallLog
+Installing service ProxyServiceCJ...
+Service ProxyServiceCJ has been successfully installed.
+Creating EventLog source ProxyServiceCJ in log Application...
+Committing assembly 'e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.exe
+   logfile = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyServiceCJ.InstallLog

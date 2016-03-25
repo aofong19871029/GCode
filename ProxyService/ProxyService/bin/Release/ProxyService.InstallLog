@@ -1,13 +1,26 @@
-﻿Installing assembly 'e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe'.
+﻿Installing assembly 'e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe'.
 Affected parameters are:
    logtoconsole = 
-   logfile = e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.InstallLog
-   assemblypath = e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe
+   assemblypath = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe
+   logfile = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.InstallLog
 Installing service ProxyServiceCJ...
 Service ProxyServiceCJ has been successfully installed.
 Creating EventLog source ProxyServiceCJ in log Application...
-Committing assembly 'e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe'.
+Committing assembly 'e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe'.
 Affected parameters are:
    logtoconsole = 
-   logfile = e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.InstallLog
-   assemblypath = e:\project\GitHub\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe
+   assemblypath = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe
+   logfile = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.InstallLog
+Installing assembly 'e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe
+   logfile = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.InstallLog
+Installing service ProxyServiceCJ...
+Service ProxyServiceCJ has been successfully installed.
+Creating EventLog source ProxyServiceCJ in log Application...
+Committing assembly 'e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.exe
+   logfile = e:\192.168.83.70\GCode\ProxyService\ProxyService\bin\Release\ProxyService.InstallLog

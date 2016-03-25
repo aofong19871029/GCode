@@ -51,7 +51,7 @@ define(['dInherit', 'libs'], function(dInherit){
         ampm: ["AM", "PM"],
         patternValue: {
             yy: function () {
-                return this.format.toFixedWidth(this.getFullYear(), 2);
+                return dateFormatHelper.toFixedWidth(this.getFullYear(), 2);
             },
             yyyy: function () {
                 return this.getYear().toString();

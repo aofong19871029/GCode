@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace ProxyService
+namespace ProxyServiceCJ
 {
     static class Log
     {
@@ -49,6 +49,11 @@ namespace ProxyService
         public static void Information(string message)
         {
             WriteSystemLog(message, EventLogEntryType.Information);
+        }
+
+        public static void Warn(string message)
+        {
+            WriteSystemLog(message, EventLogEntryType.Warning);
         }
     }
 }

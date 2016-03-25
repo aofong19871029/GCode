@@ -6,7 +6,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 
-namespace ProxyService
+namespace ProxyServiceCJ
 {
     public class Cmd
     {
@@ -17,7 +17,7 @@ namespace ProxyService
 
         internal bool IsEnable { get; set; }
 
-        public Cmd(string path = @"D:\Applications\nodejs\node.exe")
+        public Cmd(string path = @"D:\Application\nodejs\node.exe")
         {
             this.p = new Process();
             this.Path = path;
@@ -55,7 +55,7 @@ namespace ProxyService
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.CreateNoWindow = true;
             p.StartInfo.Arguments = @"client.js";
-            p.StartInfo.WorkingDirectory = @"C:\Users\Administrator\Desktop\proxy";
+            p.StartInfo.WorkingDirectory = @"d:\Users\jian_chen.CN1\Desktop\proxy\";
 
             try
             {
@@ -63,10 +63,10 @@ namespace ProxyService
                 if (!isPortBeTaken()) {
                     if (p.StandardError.Peek() != -1)
                     {
-                        Log.Failure("Start Process Failure: " + p.StandardError.ReadToEnd());
+                        Log.Error("Start Process Failure: " + p.StandardError.ReadToEnd());
                     }
                     else {
-                        Log.Error("Port be used");
+                        Log.Warn("Port be used");
                     }
                 }                
                 else
@@ -77,10 +77,6 @@ namespace ProxyService
             catch (Exception e)
             {
                 Log.Error("Start Process Failure: " + e.Message);
-            }
-            finally
-            {
-                Log.Information("Start Process Complete");
             }
         }
 
@@ -104,9 +100,6 @@ namespace ProxyService
                     }
 
                     Log.Error("Kill Process Failure: " + errorMsg);
-                }
-                finally {
-                    Log.Information("Kill Process Complete");
                 }
             }
         }
