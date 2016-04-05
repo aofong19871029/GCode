@@ -7,7 +7,10 @@
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
+
+        TextureView, etc. -->
+
+    <!--
     <TextView
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
@@ -18,6 +21,7 @@
         android:textColor="#33b5e5"
         android:textSize="50sp"
         android:textStyle="bold" />
+        -->
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
@@ -27,30 +31,46 @@
         android:fitsSystemWindows="true">
 
         <LinearLayout
+            style="?metaButtonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center_horizontal"
-            android:orientation="horizontal"
-            style="?metaButtonBarStyle"
             android:background="@color/black_overlay"
-            android:minHeight="30dp"
-            android:layoutMode="opticalBounds"
-            tools:ignore="UselessParent">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent"
+            android:id="@+id/top_header">
 
             <Button
-                android:id="@+id/tool_button"
+                android:id="@+id/btnBack"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="回退" />
+                android:text="@string/back" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:id="@+id/body_line"></LinearLayout>
 
         </LinearLayout>
 
-        <SurfaceView
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/surfaceView" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/main_body_line"
+            android:longClickable="false"
+            style="@style/TextAppearance.AppCompat.Subhead.Inverse">
+
+            <SurfaceView
+                android:layout_width="match_parent"
+                android:layout_height="467dp"
+                android:id="@+id/surfaceView" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/fullscreen_content_controls"
@@ -71,6 +91,7 @@
                 android:text="@string/dummy_button" />
 
         </LinearLayout>
+
     </FrameLayout>
 
 </FrameLayout>
