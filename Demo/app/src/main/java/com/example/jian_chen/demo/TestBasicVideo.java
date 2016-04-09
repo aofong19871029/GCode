@@ -41,11 +41,13 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jian_chen.demo.ClientIdTask;
 import com.example.jian_chen.demo.HttpHelper;
+import com.example.jian_chen.demo.UploadTask;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -62,7 +64,8 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
     private Button start;// 开始录制按钮
     private Button stop;// 停止录制按钮
     private Button btnUpload;
-    private TextView txtCode;
+    private EditText txtCode;
+    private EditText txtDir;
 
     private MediaRecorder mediarecorder;// 录制视频的类
     private SurfaceView surfaceview;// 显示视频的控件
@@ -108,6 +111,7 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
         }
 
 
+
         init();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -130,14 +134,15 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
 
         this.BindEvents();
 
-//        this.GetClientIdFromSOA();
+        this.GetClientIdFromSOA();
     }
 
     private void BindEvents() {
         start = (Button) this.findViewById(R.id.start);
         stop = (Button) this.findViewById(R.id.stop);
         btnUpload = (Button) this.findViewById(R.id.btnUpload);
-        txtCode = (TextView) this.findViewById(R.id.txtCode);
+        txtCode = (EditText) this.findViewById(R.id.txtCode);
+        txtDir = (EditText) this.findViewById(R.id.txtDir);
 
         start.setOnClickListener(new TestVideoListener());
         stop.setOnClickListener(new TestVideoListener());
@@ -293,29 +298,27 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
         String code = txtCode.getText().toString().trim();
 
         //获取code
-        if (!code.isEmpty()) {
-//            Map<String, String> params = new HashMap<String, String>();
-//            params.put("UserID", "1");
-//
-//            try {
-//                String result = HttpHelper.Post("http://10.32.201.31/VRHackathonServer/json/reply/VRGetPairID", params);
-//
-//            } catch (MalformedURLException ex) {
-//                ex.printStackTrace();
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
+        if (code.isEmpty()) {
+            GetClientIdFromSOA();
         }
         //上传
+        UploadVideo();
     }
 
     private void GetClientIdFromSOA(){
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("UserID", "1");
-
-        ClientIdTask task = new ClientIdTask(this, "http://10.32.201.31/VRHackathonServer/api/GetPairID", params);
+        ClientIdTask task = new ClientIdTask(this, "http://10.32.201.31/VRHackathonServer/json/reply/vrgetpairid", "{\"UserID\":654321}");
         task.execute();
     }
 
+    private void UploadVideo(){
+        int videoType = 0;
 
+        if(this.txtDir.getText().toString().trim() == "右"){
+            videoType = 1;
+        }
+
+
+        UploadTask task = new UploadTask("http://10.32.201.31/VRHackathonServer/api/UploadFile?userid=635621&pairid=" + this.GetClientId() + "&videoType="  + videoType , videoPath);
+        task.execute();
+    }
 }

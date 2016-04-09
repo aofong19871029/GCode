@@ -1,7 +1,7 @@
 package com.example.jian_chen.demo;
 
-import android.app.Activity;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.video.TestBasicVideo;
 
@@ -9,24 +9,21 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Created by jian_chen on 2016/4/9.
+ * Created by jian_chen on 2016/4/10.
  */
-
-public class ClientIdTask extends AsyncTask<String, Integer, String> {
-    private  TestBasicVideo _activity;
+public class UploadTask extends AsyncTask<String, Integer, String> {
     private  String url;
-    private  String params;
+    private String videoPath;
 
-    public ClientIdTask(TestBasicVideo a, String url, String params){
-        this._activity = a;
+    public UploadTask(String url,String videoPath){
         this.url = url;
-        this.params = params;
+        this.videoPath = videoPath;
     }
 
     @Override
     protected String doInBackground(String... params) {
         try {
-            return HttpHelper.getPairID(this.url, this.params);
+            return HttpHelper.Upload(this.url, videoPath);
         }
         catch (IOException ex){
             return  "";
@@ -35,7 +32,6 @@ public class ClientIdTask extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onPostExecute(String result) {   // 可以与UI控件交互
-        this._activity.SetClientId(Long.parseLong(result));
+        int a =10;
     }
 }
-
