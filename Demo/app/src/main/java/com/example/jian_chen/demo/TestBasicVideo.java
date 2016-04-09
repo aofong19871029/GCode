@@ -17,6 +17,7 @@ import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.media.CamcorderProfile;
@@ -53,6 +54,7 @@ import com.example.jian_chen.demo.UploadTask;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.video.MediaActivity;
 
 /**
  * class name：TestBasicVideo<BR>
@@ -243,26 +245,26 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
 
         // 设置录制视频源为Camera(相机)
         mediarecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+
+
+
+        // 设置录制声音来源
+        mediarecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+
         // 设置录制完成后视频的封装格式THREE_GPP为3gp.MPEG_4为mp4
         mediarecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
 
 
-        // 设置录制声音来源
-//        mediarecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-
-
-
-
         // 设置录制的视频编码h263 h264, 音频编码
         mediarecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
-//        mediarecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        mediarecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
         // 设置视频录制的分辨率。必须放在设置编码和格式的后面，否则报错
         mediarecorder.setVideoSize(176, 144);
         // 设置录制的视频帧率。必须放在设置编码和格式的后面，否则报错
         mediarecorder.setVideoFrameRate(20);
         //音码率
-//        mediarecorder.setAudioEncodingBitRate(3000000);
+        mediarecorder.setAudioEncodingBitRate(3000000);
 
         mediarecorder.setPreviewDisplay(surfaceHolder.getSurface());
 
@@ -271,8 +273,9 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
         try {
             // 创建保存录制视频的视频文件
             videoFile = new File(Environment.getExternalStorageDirectory().getCanonicalFile() + "/" + new Date().getTime() + ".mp4");
+//            videoFile = new File("/sdcards/" + new Date().getTime() + ".mp4");
             this.videoPath = videoFile.getAbsolutePath();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -305,6 +308,11 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
     }
 
     private void SendFileToServer() {
+//        Intent intent = new Intent();
+//        intent.setClassName(getApplicationContext(), "com.video.MediaActivity");
+//        startActivity(intent);
+//        return;
+
         if (status || this.videoPath == null) return;
 
         String code = txtCode.getText().toString().trim();
