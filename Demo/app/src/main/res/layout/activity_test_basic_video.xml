@@ -7,7 +7,7 @@ android:orientation="vertical" >
 <LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="50" >
+    android:layout_weight="10" >
 
     <SurfaceView
         android:id="@+id/surfaceview"
@@ -18,10 +18,8 @@ android:orientation="vertical" >
 <LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_weight="2"
     android:gravity="center"
-    android:background="@color/white"
     android:orientation="horizontal" >
 
     <TextView
@@ -29,66 +27,74 @@ android:orientation="vertical" >
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="6位码"/>
+        android:text="PairID:"/>
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text=""
         android:id="@+id/txtCode"
-        android:layout_gravity="fill"
+        android:layout_gravity="center"
         android:layout_weight="3"
-        android:background="@color/white"/>
+        android:lines="3"
+        android:singleLine="true"
+        android:imeOptions="flagNoExtractUi" />
+    </LinearLayout>
 
-    <Button
-        android:visibility="gone"
-        android:id="@+id/start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Start" />
-
-    <Button
-        android:visibility="invisible"
-        android:id="@+id/stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Stop" />
-</LinearLayout>
 <LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
     android:gravity="center"
     android:orientation="horizontal" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="眼睛"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="左"
-        android:layout_weight="1"
-        android:id="@+id/txtDir"
-        />
+    <RadioGroup  android:id="@+id/orderBy"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_marginLeft="200px"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/leftEye"
+            android:text="左视频"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/rightEye"
+            android:text="右视频"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+
+    <!--<Button-->
+        <!--android:visibility="visible"-->
+        <!--android:gravity="center"-->
+        <!--android:id="@+id/leftEye"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="左视频" />-->
+
+    <!--<Button-->
+        <!--android:visibility="visible"-->
+        <!--android:gravity="center"-->
+        <!--android:id="@+id/rightEye"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="右视频" />-->
 
     <Button
         android:visibility="visible"
         android:gravity="center"
         android:id="@+id/btnUpload"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Upload" />
-</LinearLayout>
 
+</LinearLayout>
 </LinearLayout>

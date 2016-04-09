@@ -19,6 +19,7 @@ import java.util.logging.LogRecord;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
+import android.media.CamcorderProfile;
 import android.media.CameraProfile;
 import android.media.MediaRecorder;
 import android.net.LocalServerSocket;
@@ -42,6 +43,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,11 +63,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
  * @version 1.00 2011/09/21
  */
 public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
-    private Button start;// 开始录制按钮
-    private Button stop;// 停止录制按钮
+
     private Button btnUpload;
     private EditText txtCode;
-    private EditText txtDir;
 
     private MediaRecorder mediarecorder;// 录制视频的类
     private SurfaceView surfaceview;// 显示视频的控件
@@ -74,6 +74,7 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
     private SurfaceHolder surfaceHolder;
     private boolean status = false; //是否开始录制
     private String videoPath;
+    private int videoType = 0;
 
     private long clientId;
 
@@ -137,30 +138,37 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
         this.GetClientIdFromSOA();
     }
 
+    private RadioButton leftEye;
+    private RadioButton rightEye;
     private void BindEvents() {
-        start = (Button) this.findViewById(R.id.start);
-        stop = (Button) this.findViewById(R.id.stop);
+
         btnUpload = (Button) this.findViewById(R.id.btnUpload);
         txtCode = (EditText) this.findViewById(R.id.txtCode);
-        txtDir = (EditText) this.findViewById(R.id.txtDir);
 
-        start.setOnClickListener(new TestVideoListener());
-        stop.setOnClickListener(new TestVideoListener());
+
         btnUpload.setOnClickListener(new TestVideoListener());
+
+
+        leftEye = (RadioButton)this.findViewById(R.id.leftEye);
+        rightEye = (RadioButton)this.findViewById(R.id.rightEye);
+
+        leftEye.setOnClickListener(new TestVideoListener());
+        rightEye.setOnClickListener(new TestVideoListener());
     }
 
     class TestVideoListener implements OnClickListener {
 
         @Override
         public void onClick(View v) {
-            if (v == start) {
-                StartRecord();
-            }
-            if (v == stop) {
-                StopRecord();
-            }
+
             if (v == btnUpload) {
                 SendFileToServer();
+            }
+            if(v == leftEye){
+                videoType = 0;
+            }
+            if(v == rightEye){
+                videoType = 1;
             }
         }
 
@@ -213,9 +221,9 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
             case KeyEvent.KEYCODE_VOLUME_DOWN:
             case KeyEvent.KEYCODE_VOLUME_UP:
                 if (this.status) {
-                    stop.performClick();
+                    StopRecord();
                 } else {
-                    start.performClick();
+                    StartRecord();
                 }
                 status = !status;
                 return true;
@@ -233,24 +241,28 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
 
         mediarecorder.reset();
 
-        // 设置录制声音来源
-        mediarecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-
         // 设置录制视频源为Camera(相机)
         mediarecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
         // 设置录制完成后视频的封装格式THREE_GPP为3gp.MPEG_4为mp4
         mediarecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
 
+
+        // 设置录制声音来源
+//        mediarecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+
+
+
+
         // 设置录制的视频编码h263 h264, 音频编码
         mediarecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
-        mediarecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+//        mediarecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
         // 设置视频录制的分辨率。必须放在设置编码和格式的后面，否则报错
         mediarecorder.setVideoSize(176, 144);
         // 设置录制的视频帧率。必须放在设置编码和格式的后面，否则报错
         mediarecorder.setVideoFrameRate(20);
         //音码率
-        mediarecorder.setAudioEncodingBitRate(3000000);
+//        mediarecorder.setAudioEncodingBitRate(3000000);
 
         mediarecorder.setPreviewDisplay(surfaceHolder.getSurface());
 
@@ -311,14 +323,11 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
     }
 
     private void UploadVideo(){
-        int videoType = 0;
-
-        if(this.txtDir.getText().toString().trim() == "右"){
-            videoType = 1;
-        }
-
-
-        UploadTask task = new UploadTask("http://10.32.201.31/VRHackathonServer/api/UploadFile?userid=635621&pairid=" + this.GetClientId() + "&videoType="  + videoType , videoPath);
+        UploadTask task = new UploadTask("http://10.32.201.31/VRHackathonServer/api/UploadFile?userid=635621&pairid=" + this.GetClientId() + "&videoType="  + videoType , videoPath, this);
         task.execute();
+    }
+
+    public void toast(String msg){
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 }

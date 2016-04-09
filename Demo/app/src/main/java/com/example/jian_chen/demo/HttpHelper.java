@@ -169,15 +169,9 @@ public class HttpHelper {
             pairId += temp;
         }
 
-        try {
-            JSONObject json = new JSONObject(pairId);
-//            return json.getString("PairID");
 
-        } catch (JSONException ex) {
-//            return "";
-        }
 
-        return "";
+        return pairId;
     }
 
 }
