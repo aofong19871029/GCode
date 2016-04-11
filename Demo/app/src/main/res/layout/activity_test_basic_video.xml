@@ -36,6 +36,7 @@ android:orientation="vertical" >
         android:layout_gravity="center"
         android:layout_weight="3"
         android:lines="3"
+        android:text="PairId"
         android:singleLine="true"
         android:imeOptions="flagNoExtractUi" />
     </LinearLayout>
@@ -51,8 +52,8 @@ android:orientation="vertical" >
     <RadioGroup  android:id="@+id/orderBy"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:layout_marginLeft="200px"
+        android:layout_weight="40"
+        android:layout_marginLeft="100px"
         android:orientation="horizontal">
 
         <RadioButton
@@ -69,32 +70,23 @@ android:orientation="vertical" >
             android:layout_height="wrap_content" />
     </RadioGroup>
 
-    <!--<Button-->
-        <!--android:visibility="visible"-->
-        <!--android:gravity="center"-->
-        <!--android:id="@+id/leftEye"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="左视频" />-->
-
-    <!--<Button-->
-        <!--android:visibility="visible"-->
-        <!--android:gravity="center"-->
-        <!--android:id="@+id/rightEye"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="右视频" />-->
-
     <Button
         android:visibility="visible"
         android:gravity="center"
         android:id="@+id/btnUpload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:text="Upload" />
+
+    <Button
+        android:visibility="visible"
+        android:gravity="center"
+        android:id="@+id/btnBrowser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="View" />
 
 </LinearLayout>
 </LinearLayout>

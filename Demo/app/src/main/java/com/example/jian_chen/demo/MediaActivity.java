@@ -3,9 +3,12 @@ package com.video;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
@@ -32,15 +35,17 @@ import android.widget.VideoView;
 public class MediaActivity extends Activity {
     private VideoView v1,v2;
 
-    private String FilePath = "/sdcards/1460237867710.mp4";
+    private String FilePath = "/sdcard/left.m4v";
 
 
-    private String FilePath2 = "/sdcards/1460189177258.mp4";
+    private String FilePath2 = "/sdcard/right.m4v";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
+        // 设置横屏显示
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media);
 
@@ -49,9 +54,16 @@ public class MediaActivity extends Activity {
 
         v1.setVideoPath(FilePath);
         v2.setVideoPath(FilePath2);
-        v1.start();
         v2.start();
 
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                v1.start();
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(task,550);
     }
 
 }

@@ -68,6 +68,7 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
 
     private Button btnUpload;
     private EditText txtCode;
+    private Button btnBrowser;
 
     private MediaRecorder mediarecorder;// 录制视频的类
     private SurfaceView surfaceview;// 显示视频的控件
@@ -153,9 +154,11 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
 
         leftEye = (RadioButton)this.findViewById(R.id.leftEye);
         rightEye = (RadioButton)this.findViewById(R.id.rightEye);
+        btnBrowser = (Button)this.findViewById(R.id.btnBrowser);
 
         leftEye.setOnClickListener(new TestVideoListener());
         rightEye.setOnClickListener(new TestVideoListener());
+        btnBrowser.setOnClickListener(new TestVideoListener());
     }
 
     class TestVideoListener implements OnClickListener {
@@ -171,6 +174,9 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
             }
             if(v == rightEye){
                 videoType = 1;
+            }
+            if(v==btnBrowser){
+                gpTpViewPics();
             }
         }
 
@@ -211,7 +217,7 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
                 dir = "+音量";
             }
 
-            Toast.makeText(getApplicationContext(), dir, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), dir, Toast.LENGTH_SHORT).show();
         }
 
         return super.dispatchKeyEvent(event);
@@ -308,11 +314,6 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
     }
 
     private void SendFileToServer() {
-//        Intent intent = new Intent();
-//        intent.setClassName(getApplicationContext(), "com.video.MediaActivity");
-//        startActivity(intent);
-//        return;
-
         if (status || this.videoPath == null) return;
 
         String code = txtCode.getText().toString().trim();
@@ -324,10 +325,17 @@ public class TestBasicVideo extends Activity implements SurfaceHolder.Callback {
         //上传
         UploadVideo();
     }
+    private void gpTpViewPics(){
+        Intent intent = new Intent();
+        intent.setClassName(getApplicationContext(), "com.video.MediaActivity");
+        startActivity(intent);
+    }
 
     private void GetClientIdFromSOA(){
-        ClientIdTask task = new ClientIdTask(this, "http://10.32.201.31/VRHackathonServer/json/reply/vrgetpairid", "{\"UserID\":654321}");
-        task.execute();
+        return;
+
+//        ClientIdTask task = new ClientIdTask(this, "http://10.32.201.31/VRHackathonServer/json/reply/vrgetpairid", "{\"UserID\":654321}");
+//        task.execute();
     }
 
     private void UploadVideo(){
