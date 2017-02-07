@@ -338,7 +338,7 @@ define(['dInherit', 'libs'], function(dInherit){
                 case 'string':
                     str = str || '';
                     if (str.match(rShortDate)) {
-                        str = str.replace(regtime, "$2/$3/$1");
+                        str = str.replace(rShortDate, "$2/$3/$1");
                     }
                     str = Date.parse(str);
                     str = new Date(str);
