@@ -1,0 +1,204 @@
+html {
+  -ms-touch-action: none;
+}
+
+body, canvas, div {
+  display: block;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Remove spin of input type number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  margin: 0;
+
+  cursor: default;
+  color: #888;
+  background-color: #fff;
+
+  text-align: center;
+  font-family: Helvetica, Verdana, Arial, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#Cocos2dGameContainer {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  left: 0px;
+  top: 0px;
+
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+}
+
+canvas {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+a:link, a:visited {
+  color: #666;
+}
+
+a:active, a:hover {
+  color: #666;
+}
+
+p.header {
+  font-size: small;
+}
+
+p.footer {
+  font-size: x-small;
+}
+
+#splash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #FFF;
+  /* background-size: 150px; */
+}
+#splash .main-splash {
+    background:  url(./loading.480f7.png) no-repeat center;
+    background-size: auto 400px;
+    position: absolute;
+    width: 100%;
+    height: 83%;
+    min-height: 200px;
+    top: 5px;
+}
+#splash .main-logo {
+    /* background:  url(./main_logo.a652f.png) no-repeat center; */
+    background-size: 50px;
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    bottom: 1%;
+}
+
+.progress-bar {
+    background-color: #e4e4e4;
+    position: absolute;
+    left: 20%;
+    top: 90%;
+    height: 6px;
+    width: 60%;
+    /*margin: 0 -175px;         */
+    border-radius: 6px;
+    /* box-shadow: 0 1px 2px #000 inset, 0 1px 0 #444;            */
+    transition: opacity 0.25s;
+}
+
+.progress-bar span {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
+    transition: width .4s ease-in-out; 
+    background-color: #CCC;    
+}
+.progress-bar img {
+    width: 90px;
+    height: auto;
+    margin-top: -30px;
+    margin-left: -40px;
+    position: absolute;
+    transition: left .3s ease-in-out; 
+    left: 0%;
+}
+
+.start-btn {
+    background-color: #000;
+    position: absolute;
+    left: 30%;
+    top: 87%;
+    height: 34px;
+    width: 40%;
+    border-radius: 34px;
+    line-height: 34px;
+    color: white;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: opacity 0.25s;
+    transition-delay: 0.3s;
+    opacity:0;
+}
+.start-btn:hover,
+.start-btn:focus,
+.start-btn:active {
+    background:#EEE;
+    color:#000;
+}
+
+.stripes span {
+    background-size: 30px 30px;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+                        transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+                        transparent 75%, transparent);            
+    
+    animation: animate-stripes 1s linear infinite;             
+}
+
+@keyframes animate-stripes {
+    0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+}
+
+
+.slide {
+  transition: all 0.4s;
+  transform: translate3d(0, 0, 0);
+}
+.slide.slide-in {
+  transform: translate3d(-100%, 0, 0);
+}
+
+#web_hint_bot {
+  display:none;
+  width: 100%;
+  height: 135px;
+  background:white;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translate3d(0, 140px, 0);
+  transition-delay: 0.2s;
+  transition: all 0.3s linear;
+}
+#web_hint_bot.move-in {
+  transform: translate3d(0, 0, 0);
+}
+#web_hint_bot img {
+    width: 140px;
+}

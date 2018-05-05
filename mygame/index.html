@@ -2,34 +2,147 @@
 <html>
 <head>
     <title>Hello Cocos2d-JS</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui,viewport-fit=cover">
+    <style>
+        .box{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 12.5rem;
+            width: 100%;
+            background-color: #fff;
+            border-top: 1px solid #666;
+        }
+
+        .box .kind{
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+            height: 1.5rem;
+            width: 100%;
+            line-height: 1.5rem;
+        }
+        .box .kind div{
+            flex: 1;
+            text-align: center;
+        }
+
+        .box .window{
+            background-color: #F6F6F6;
+            height: 11rem;
+        }
+
+        .box .window .male{
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+        }
+
+        .box .window .male .base{
+            width:7rem;
+            height: 15rem;
+            margin: 0 auto;
+        }
+
+        .box .window .male .menu{
+            width: 3.75rem;
+            background-color: #EEEEEE;
+        }
+
+        .box .window .male .menu div{
+            width: 100%;
+            height: 33.3333%;
+            position: relative;
+        }
+
+        .box .window .male .menu div span{
+            position: absolute;
+            display: block;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .box .window .list{
+           display: flex;
+            flex-direction: row;
+            flex: 1;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .box .window .list img{
+            width: 5rem;
+            height: 5rem;
+        }
+
+        .hidden{
+            display: none !important;
+        }
+
+    </style>
 </head>
 <body>
 <canvas id="gameCanvas" width="800" height="450"></canvas>
-<script type="text/javascript" src="cocos2d-js-v3.13-lite.js" charset="UTF-8"></script>
-<script type="text/javascript">
-    window.onload = function(){
-        cc.game.onStart = function(){
-            //load resources
-            cc.LoaderScene.preload(["HelloWorld.png"], function () {
-                var MyScene = cc.Scene.extend({
-                    onEnter:function () {
-                        this._super();
-                        var size = cc.director.getWinSize();
-                        var sprite = cc.Sprite.create("HelloWorld.png");
-                        sprite.setPosition(size.width / 2, size.height / 2);
-                        sprite.setScale(0.8);
-                        this.addChild(sprite, 0);
+<div class="box">
+    <div class="kind">
+        <div>cat</div>
+        <div>dog</div>
+        <div>male</div>
+    </div>
+    <div class="window">
+        <div class="list hidden">
+            <img src="res/asset/cat/01.d19bf.png">
+            <img src="res/asset/cat/05.dec1b.png">
+        </div>
+        <div class="list hidden">
+            <img src="res/asset/dog/01.3df41.png">
+            <img src="res/asset/dog/15.27961.png">
+        </div>
+        <div class="male">
+            <img class="base" src="res/asset/male/img_male.9b4a5.png"/>
 
-                        var label = cc.LabelTTF.create("Hello World", "Arial", 40);
-                        label.setPosition(size.width / 2, size.height / 2);
-                        this.addChild(label, 1);
-                    }
-                });
-                cc.director.runScene(new MyScene());
-            }, this);
-        };
-        cc.game.run("gameCanvas");
-    };
+            <div class="menu hidden">
+                <div><span>beard</span></div>
+                <div><span>body_low</span></div>
+                <div><span>body_up</span></div>
+            </div>
+            <div class="list hidden">
+                <img src="res/asset/male/beard/02.4a418.png"/>
+                <img src="res/asset/male/beard/08.8553c.png"/>
+            </div>
+            <div class="list hidden">
+                <img src="res/asset/male/body_low/01.40935.png"/>
+                <img src="res/asset/male/body_low/03.ba5c2.png"/>
+            </div>
+            <div class="list hidden">
+                <img src="res/asset/male/body_up/01.86636.png"/>
+                <img src="res/asset/male/body_up/08.d25e8.png"/>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                var fontSize = 17 * (clientWidth / 320);
+                fontSize =Math.round((fontSize > 27) ? 27 : fontSize);
+                docEl.style.fontSize = fontSize + 'px';
+                var dpi = window.devicePixelRatio;
+                docEl.setAttribute('data-dpi', dpi);
+            };
+        recalc();
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+    })(document, window);
+</script>
+<script>
+    
 </script>
 </body>
 </html>
