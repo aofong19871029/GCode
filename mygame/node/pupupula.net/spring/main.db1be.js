@@ -13,6 +13,7 @@
             var rawAssets = settings.rawAssets;
             var assetTypes = settings.assetTypes;
             var realRawAssets = settings.rawAssets = {};
+
             for (var mount in rawAssets) {
                 var entries = rawAssets[mount];
                 var realEntries = realRawAssets[mount] = {};

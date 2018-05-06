@@ -15,7 +15,7 @@
             border-top: 1px solid #666;
         }
 
-        .box .kind{
+        .box .menu{
             display: flex;
             flex: 1;
             flex-direction: row;
@@ -23,9 +23,14 @@
             width: 100%;
             line-height: 1.5rem;
         }
-        .box .kind div{
+        .box .menu .icon{
             flex: 1;
             text-align: center;
+            background-color: #fff;
+        }
+
+        .box .menu .icon.selected{
+            background-color: #fff;
         }
 
         .box .window{
@@ -81,15 +86,25 @@
             display: none !important;
         }
 
+        .menu .icon{
+
+        }
+
+        .menu .furniture{
+            background: url('/webresource/img/menu/furniture')
+        }
+
     </style>
 </head>
 <body>
 <canvas id="gameCanvas" width="800" height="450"></canvas>
 <div class="box">
-    <div class="kind">
-        <div>cat</div>
-        <div>dog</div>
-        <div>male</div>
+    <div class="menu">
+        <div class="icon furniture"></div>
+        <div class="icon people">dog</div>
+        <div class="icon children">male</div>
+        <div class="icon cat">male</div>
+        <div class="icon dog">male</div>
     </div>
     <div class="window">
         <div class="list hidden">
@@ -141,8 +156,6 @@
         win.addEventListener(resizeEvt, recalc, false);
     })(document, window);
 </script>
-<script>
-    
-</script>
+<script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
 </html>

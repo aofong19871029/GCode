@@ -317,7 +317,7 @@ window._CCSettings = {
                 2
             ],
             "1fHZQmElJLx6P593NXzN7z": [
-                "UI/icon_sofa.png",
+                "UI/sofa.png",
                 2
             ],
             "cf3cHXPF9PA4KR2/e6JXqx": [
