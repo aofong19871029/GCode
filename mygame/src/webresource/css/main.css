@@ -1,0 +1,33 @@
+*{margin:0;padding: 0;}
+.hidden{display: none !important;}
+/**************** menu *****************/
+.box .menu {display:flex;flex:1;flex-direction:row;height:1.5rem;line-height:1.5rem;}
+.menu .icon {flex:1;background:#fff no-repeat center center;background-size:auto 80%;}
+.menu .icon.current {background-color:#F6F6F6;}
+.menu .furniture {background-image:url('../img/icon/sofa.png');}
+.menu .people {background-image:url('../img/icon/adult.png');}
+.menu .children {background-image:url('../img/icon/kid.png');}
+.menu .dog {background-image:url('../img/icon/dog.png');}
+.menu .mini {background:url('../img/icon/mini.png') #fff no-repeat 70% center;background-size:40%;width:3.2rem;}
+
+
+
+.panel .kind .beard{
+    background-image: url(../img/icon/beard.png);
+}
+
+.panel .kind .cloth{
+    background-image: url(../img/icon/cloth.png);
+}
+
+.panel .kind .glass{
+    background-image: url(../img/icon/glass.png);
+}
+
+.panel .kind .hair{
+    background-image: url(../img/icon/hair.png);
+}
+
+.panel .kind .pants{
+    background-image: url(../img/icon/pants.png);
+}

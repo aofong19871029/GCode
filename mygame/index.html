@@ -15,27 +15,11 @@
             border-top: 1px solid #666;
         }
 
-        .box .menu{
-            display: flex;
-            flex: 1;
-            flex-direction: row;
-            height: 1.5rem;
-            width: 100%;
-            line-height: 1.5rem;
-        }
-        .box .menu .icon{
-            flex: 1;
-            text-align: center;
-            background-color: #fff;
-        }
-
-        .box .menu .icon.selected{
-            background-color: #fff;
-        }
-
         .box .window{
             background-color: #F6F6F6;
             height: 11rem;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .box .window .male{
@@ -69,53 +53,102 @@
             transform: translate(-50%, -50%);
         }
 
-        .box .window .list{
-           display: flex;
+        .box .window .table {
+        }
+
+        .box .window .row{
+            display: flex;
             flex-direction: row;
-            flex: 1;
-            justify-content: space-around;
             align-items: center;
+            flex-wrap: nowrap;
+            box-sizing: border-box;
+            justify-content: space-around;
         }
 
-        .box .window .list img{
-            width: 5rem;
-            height: 5rem;
+        .box .window .row .icon{
+            /*width: 33.33%;*/
+            height: 8rem;
+            padding: 1rem;
+            -webkit-box-sizing: border-box;
+            background:no-repeat center center;background-size:auto 35%;
+            flex: 1
         }
 
-        .hidden{
-            display: none !important;
+        .panel{
+            position: relative;
         }
 
-        .menu .icon{
 
+        .panel .kind{
+            width: 3rem;
+            display: flex;
+            flex-direction: column;
+
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
         }
 
-        .menu .furniture{
-            background: url('/webresource/img/menu/furniture')
+        .panel .kind .icon{
+            flex: 1;
+            background:#eee no-repeat center center;background-size:auto 50%;
         }
+
+        .panel .kind .icon.current {background-color:#F6F6F6;}
+        .panel .window{
+            padding-left: 3.4rem;
+        }
+
+
 
     </style>
+    <link rel="stylesheet" href="src/webresource/css/main.css">
 </head>
 <body>
 <canvas id="gameCanvas" width="800" height="450"></canvas>
 <div class="box">
     <div class="menu">
-        <div class="icon furniture"></div>
-        <div class="icon people">dog</div>
-        <div class="icon children">male</div>
-        <div class="icon cat">male</div>
-        <div class="icon dog">male</div>
+        <div class="icon furniture current"></div>
+        <div class="icon people"></div>
+        <div class="icon children"></div>
+        <div class="icon dog"></div>
+        <div class="icon mini"></div>
     </div>
-    <div class="window">
-        <div class="list hidden">
-            <img src="res/asset/cat/01.d19bf.png">
-            <img src="res/asset/cat/05.dec1b.png">
+
+    <div class=" panel">
+        <div class="kind">
+            <div class="icon hair"></div>
+            <div class="icon beard"></div>
+            <div class="icon pants"></div>
+            <div class="icon cloth"></div>
+            <div class="icon glass"></div>
+        </div>
+        <div class="window">
+            <div class="table">
+                <div class="row">
+                    <div class="icon" style="background-image: url(src/webresource/img/png/furniture/01.8e65f.png)"></div>
+                    <div class="icon" style="background-image: url(src/webresource/img/png/furniture/02.0dbe7.png)"></div>
+                    <div class="icon" style="background-image: url(src/webresource/img/png/furniture/03.36d46.png)"></div>
+                </div>
+                <div class="row">
+                    <div class="icon" style="background-image: url(src/webresource/img/png/furniture/04.fbdd1.png)"></div>
+                    <div class="icon" style="background-image: url(src/webresource/img/png/furniture/05.809da.png)"></div>
+                    <div class="icon" style="background-image: url(src/webresource/img/png/furniture/06.b55ff.png)"></div>
+                </div>
+                <div class="row">
+                    <div class="icon" style="background-image: url(src/webresource/img/png/furniture/07.29edd.png)"></div>
+                    <div class="icon" style="background-image: url(src/webresource/img/png/furniture/08.74848.png)"></div>
+                    <div class="icon"></div>
+                    <!--<img src="src/webresource/img/png/furniture/09.f0c90.png">-->
+                </div>
+            </div>
         </div>
         <div class="list hidden">
             <img src="res/asset/dog/01.3df41.png">
             <img src="res/asset/dog/15.27961.png">
         </div>
-        <div class="male">
+        <div class="male hidden">
             <img class="base" src="res/asset/male/img_male.9b4a5.png"/>
 
             <div class="menu hidden">
