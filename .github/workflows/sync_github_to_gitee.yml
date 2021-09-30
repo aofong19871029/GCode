@@ -24,7 +24,7 @@ jobs:
     steps:
       # Sync code with Yikun
       - name: Sync Github Repos To Gitee
-        uses: Yikun/hub-mirror-action@v1.0
+        uses: Yikun/hub-mirror-action@master
         with:
           src: github/aofong19871029 #源端账户名
           dst: gitee/huskar #目的端账户名
