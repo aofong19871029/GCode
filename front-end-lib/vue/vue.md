@@ -56,7 +56,11 @@ vue diff是对状态改变后的vdom进行比较, diff原理
 
        i = 2, e1 = 4, e2 = 5
 
-      1.  遍历new，做个map图 Map<key, idx>, react是遍历old
-      2. 构建一个new 节点对应old节点位置的map, 用来标记最长的稳定序列，减少节点的移动，保持dom的稳定
+      1. 遍历new，做个map图 Map<key, idx>, react是遍历old
+      
+      2. 构建一个new 节点对应old节点位置的map, 用来标记最长的稳定序列，减少节点的移动，保持dom的稳定.
+      
+         *`Vue更新阶段，新老vdom diff如果有节点移动，那么此时可以计算dom节点中最长递增子序列，减少move,确保dom影响最小`*
+      
       3. 
 
