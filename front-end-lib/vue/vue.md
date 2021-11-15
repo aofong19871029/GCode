@@ -7,9 +7,33 @@
 ### Virtual Dom
 
 1. 什么是vdom
+
+   vdom就是一个普通的javascript对象，包含了tag, props, children 三个属性。用来描述，模拟真实的DOM树结构信息
+
 2. 为什么要使用vdom
-3. vdom的作用是什么，解决什么问题
-4. vdom的原理是什么
+
+* 直接操作dom操作会频繁的操作dom, 引起重绘和回流，使用vdom可以将dom diff 放在js层处理，输出比对后的操作，能够最小颗粒度的操作复用dom
+* vue引入vdom，将渲染过程抽象化，从而提升了组件的抽象能力，可以适配DOM以外的渲染目标, 可以实现跨平台，实现SSR 同构渲染, Weex等高级特性
+* 通过vdom的抽象能力，我们拥有了声明式编写UI的能力，大大提高了工作效率，
+* 不再依赖HTML解析器进行模板解析，可以进行更多的AOT工作提高运行时的效率，通过模板的AOT编译，进一步压缩VUE运行时体积
+
+3. vdom的原理是什么
+
+   ```text
+   虚拟 DOM 的工作原理是通过 JS 对象模拟 DOM 的节点。在 Facebook 构建 React 初期时，考虑到要提升代码抽象能力、避免人为的 DOM 操作、降低代码整体风险等因素，所以引入了虚拟 DOM。
+   
+   虚拟 DOM 在实现上通常是 Plain Object，以 React 为例，在 render 函数中写的 JSX 会在 Babel 插件的作用下，编译为 React.createElement 执行 JSX 中的属性参数。
+   
+   React.createElement 执行后会返回一个 Plain Object，它会描述自己的 tag 类型、props 属性以及 children 情况等。这些 Plain Object 通过树形结构组成一棵虚拟 DOM 树。当状态发生变更时，将变更前后的虚拟 DOM 树进行差异比较，这个过程称为 diff，生成的结果称为 patch。计算之后，会渲染 Patch 完成对真实 DOM 的操作。
+   
+   虚拟 DOM 的优点主要有三点：改善大规模 DOM 操作的性能、规避 XSS 风险、能以较低的成本实现跨平台开发。
+   
+   虚拟 DOM 的缺点在社区中主要有两点。
+   
+   内存占用较高，因为需要模拟整个网页的真实 DOM。
+   
+   高性能应用场景存在难以优化的情况，类似像 Google Earth 一类的高性能前端应用在技术选型上往往不会选择 React。
+   ```
 
 ### Vue Diff
 
