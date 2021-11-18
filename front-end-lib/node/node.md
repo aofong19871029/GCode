@@ -16,3 +16,9 @@ https://www.bookstack.cn/read/node-in-debugging/v8-profiler.md
 
 异步io, 前后同构, 跨平台，一人开发3端节省人力，方便迁移，机器运营成本低(低核), 社区提供大量npm包并且代码开源
 
+
+
+## 前后分离的思考
+
+https://bytedance.feishu.cn/docs/doccnj3gHOMrNhL4IjEoC06d0ze 
+
