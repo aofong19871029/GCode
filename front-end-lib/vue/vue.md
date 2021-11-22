@@ -88,3 +88,120 @@ vue diff是对状态改变后的vdom进行比较, diff原理
       
       3. 
 
+### vue3为了提高运行速度，做了哪些优化
+
+1. diff算法优化
+
+* 静态标记 PatchFlag
+
+`patchFlag` 是 `complier` 时的 `transform` 阶段解析 AST Element 打上的**优化标识**。并且，顾名思义 `patchFlag`，`patch` 一词表示着它会为 `runtime` 时的 `patchVNode` 提供依据，从而实现靶向更新 `VNode` 的效果.
+
+对带有动态属性的元素进行标记, 标记类型有13种
+
+```typescript
+export const enum PatchFlags {
+  
+  TEXT = 1,// 动态的文本节点
+  CLASS = 1 << 1,  // 2 动态的 class
+  STYLE = 1 << 2,  // 4 动态的 style
+  PROPS = 1 << 3,  // 8 动态属性，不包括类名和样式
+  FULL_PROPS = 1 << 4,  // 16 动态 key，当 key 变化时需要完整的 diff 算法做比较
+  HYDRATE_EVENTS = 1 << 5,  // 32 表示带有事件监听器的节点
+  STABLE_FRAGMENT = 1 << 6,   // 64 一个不会改变子节点顺序的 Fragment
+  KEYED_FRAGMENT = 1 << 7, // 128 带有 key 属性的 Fragment
+  UNKEYED_FRAGMENT = 1 << 8, // 256 子节点没有 key 的 Fragment
+  NEED_PATCH = 1 << 9,   // 512
+  DYNAMIC_SLOTS = 1 << 10,  // 动态 solt
+  HOISTED = -1,  // 特殊标志是负整数表示永远不会用作 diff
+  BAIL = -2 // 一个特殊的标志，指代差异算法
+}
+```
+
+
+
+
+
+Vue2.0 vdom的diff是全量diff, 而Vue 3.0 新增了静态标记.在与上一次vdom进行对比的时候，只对比带有patch flag的节点，并且可以通过flag的信息得知当前节点要对比的具体内容
+
+```html
+<div>
+  <p>标签</p>
+  <p>{{msg}}</p>
+</div>
+```
+
+上图在进行比对时只对<p>{{msg}}</p>进行比对.转换后的代码:
+
+```js
+import { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+
+export function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (_openBlock(), _createElementBlock("div", null, [
+    _createElementVNode("p", null, "标签"),
+    _createElementVNode("p", null, _toDisplayString(_ctx.msg), 1 /* TEXT */) // 静态标记, 1: 动态的文本
+  ]))
+}
+```
+
+
+
+1. hoistStatic 静态提升
+
+vue2.x中无论元素是否参与更新，每次都会重新创建，然后再渲染。vue3.0中对于不参与更新的元素，会做静态提升，只会被创建一次，在渲染时直接复用即可。
+
+右边之前数据固定不变的标签，也就是这里的`<p>标签</p>`，被放在了`render`函数的外面。所以这样只会在全局创建一次，这样性能就明显提升了。
+
+```js
+import { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+
+// 静态提升
+const _hoisted_1 = /*#__PURE__*/_createElementVNode("p", null, "标签", -1 /* HOISTED */)
+
+export function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (_openBlock(), _createElementBlock("div", null, [
+    _hoisted_1,
+    _createElementVNode("p", null, _toDisplayString(_ctx.msg), 1 /* TEXT */)
+  ]))
+}
+```
+
+
+
+1. catchHandlers (事件帧听缓存)
+
+   默认情况下，如`onClick`事件会被视为动态绑定，所以每次都会追踪它的变化，但是因为是同一个函数，所以不用追踪变化，直接缓存起来复用即可。 好，我们来对比一下开启事件侦听器缓存前后。
+
+   ```html
+   <div>
+     <p @click="cli">标签</p>
+   </div>
+   ```
+
+   * 未开启catchHandlers
+
+   ```js
+   import { createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+   
+   export function render(_ctx, _cache, $props, $setup, $data, $options) {
+     return (_openBlock(), _createElementBlock("div", null, [
+       _createElementVNode("p", { onClick: _ctx.cli }, "标签", 8 /* PROPS */, ["onClick"])
+     ]))
+   }
+   ```
+
+   
+
+   * 开启后
+
+```js
+import { createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+
+export function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (_openBlock(), _createElementBlock("div", null, [
+    _createElementVNode("p", {
+      onClick: _cache[0] || (_cache[0] = (...args) => (_ctx.cli && _ctx.cli(...args)))
+    }, "标签")
+  ]))
+}
+```
+
