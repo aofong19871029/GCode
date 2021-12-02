@@ -3,8 +3,16 @@ const PENDING = 'pending';
 const FULFULLED = 'fulfilled'
 const REJECTED = 'rejected';
 
-class Promise{
-     constructor(fn){
+class MPromise{
+    /** 成功状态的回调 */
+    FULFILLED_CALLBACK_LIST = [];
+    /** 失败状态的回调 */
+    REJECTED_CALLBACK_LIST = [];
+
+    /** 私有变量，存储真正的status */
+    _status = PENDING;
+
+    constructor(fn){
         /* 状态，初始为pending */
         this.status = PENDING;
 		/* fulfilled的值 */
@@ -18,21 +26,197 @@ class Promise{
             this.reject(e);
         }
     }
+
+    get static(){
+        return this._status;
+    }
+
+    set status(newState){
+        this._status = newState;
+
+        switch(newState){
+            case FULFULLED: {
+                this.FULFILLED_CALLBACK_LIST.forEach(callback => {
+                    callback(this.value);
+                })
+                break;
+            }
+            case REJECTED: {
+                this.REJECTED_CALLBACK_LIST.forEach(callback => {
+                    callback(this.reason);
+                })
+                break;
+            }
+        }
+    }
     
-   resolve(value){
+    resolve(value){
         if(this.status === PENDING){
             this.value = value;
-            this.status = FULFILLED;
+            this.status = FULFULLED;
         }
     }
     
     reject(reason){
         if(this.status === PENDING){
-            this.reason = reaon;
+            this.reason = reason;
             this.status = REJECTED;
         }
     }
+
+    then(onFulfilled, onRejected){
+        const realOnFulfilled = this.isFunction(onFulfilled) ? onFulfilled : (value)=>value;
+        const realOnRejected = this.isFunction(onRejected) ? onRejected : (reason)=>reason;
+
+        const promise2 = new MPromise((resolve, reject)=>{
+            const fulfilledMicrotask = () => {
+                queueMicrotask(()=>{
+                    try {
+                        const x = realOnFulfilled(this.value);
+                        this.resolvePromise(promise2, x, resolve, reject);
+                        realOnFulfilled(this.value);
+                    } catch (e) {
+                        reject(e);
+                    }
+                });              
+            }
+
+            const rejectedMicrotask = () => {
+                queueMicrotask(()=>{
+                    try {
+                        const x = realOnRejected(this.reason);
+                        this.resolvePromise(promise2, x, resolve, reject);
+                    } catch (e) {
+                        reject(e);
+                    } 
+                });
+            }
+
+
+            switch(this.status){
+                case FULFULLED: {
+                    fulfilledMicrotask();
+                    break;
+                }
+                case REJECTED: {
+                    rejectedMicrotask();
+                    break;
+                }
+                case PENDING: {
+                    // 如果是宏任务会有什么影响
+                    this.FULFILLED_CALLBACK_LIST.push(realOnFulfilled);
+                    this.REJECTED_CALLBACK_LIST.push(realOnRejected);
+                }
+            }
+        });
+        return promise2;
+    }
+
+    catch(onRejected){
+        return this.then(null, onRejected);
+    }
+
+    resolvePromise(promise2, x, resolve, reject){
+        // 如果promis2 和 x 相等，抛error, 为了防止死循环
+        if(promise2 === x){
+            return reject(new TypeError('The promise and return value are the same'))
+        } 
+
+        if(x instanceof MPromise) {
+            queueMicrotask(()=> {
+                x.then((y)=> {
+                    this.resolvePromise(promise2, y, resolve, reject);
+                }, reject);
+            })
+            
+        } else if(typeof x === 'object' || this.isFunction(x)) {
+            if(x == null) {
+                return resolve(x);
+            }
+
+            let then = null;
+            try {
+                then = x.then;
+            } catch(e){
+                // 如果取x.then的值报错，那么以e为reason, reject promise
+                return reject(e);
+            }
+
+            // 如果then是函数
+            if(this.isFunction(then)) {
+                let called = false;
+                
+                try {
+                    then.call(
+                        x,
+                        (y) => {
+                            if(called){
+                                return;
+                            }
+
+                            called = true;
+                            this.resolvePromise(promise2, y, resolve, reject);
+                        },
+                        (r) => {
+                            if(called){
+                                return;
+                            }
+                            called = true;
+                            reject(r);
+                        }
+                    );
+                } catch(error) {
+                    if(called){
+                        return;
+                    }
+                    reject(error);
+                }
+
+            } else {
+                resolve(x);
+            }
+
+        } else {
+            resolve(x);
+        }
+    }
+
+    isFunction(param){
+        return typeof param === 'function';
+    }
+
+    static resolve(value){
+        if(value instanceof MPromise){
+            return value;
+        }
+
+        return new MPromise(resolve=>resolve(value))
+    }
+
+    static reject(reason){
+        if(value instanceof MPromise){
+            return value;
+        }
+
+        return new MPromise((resolve, reject)=>reject(value))
+    }
 }
+
+
+const test = new MPromise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(111)
+    }, 1000);
+}).then(console.log)
+.catch(reason => {
+    console.log(`reason = ${reason}`)
+})
+
+console.log(test); // value: null
+
+setTimeout(() => {
+    console.log(test) // value: undefined 因为then方法没有返回值
+}, 2000);
 ```
 
 
