@@ -7,3 +7,8 @@ let 和const  在自身所在作用域中， 声明语句之前构建一个暂�
 与let, const相比较
 
 var 是直接默认值为undefined
+
+
+
+微前端
+

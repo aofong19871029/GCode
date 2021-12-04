@@ -138,3 +138,7 @@ promise.then(onFulfilled, onRejected)
 
    ​        如果then 不是一个函数, fulfilled promise x
 
+
+
+视频看到2:01
+

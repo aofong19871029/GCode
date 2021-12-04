@@ -319,8 +319,8 @@ class MPromise{
                 }
                 case PENDING: {
                     // 如果是宏任务会有什么影响
-                    this.FULFILLED_CALLBACK_LIST.push(realOnFulfilled);
-                    this.REJECTED_CALLBACK_LIST.push(realOnRejected);
+                    this.FULFILLED_CALLBACK_LIST.push(fulfilledMicrotask);
+                    this.REJECTED_CALLBACK_LIST.push(rejectedMicrotask);
                 }
             }
         });
@@ -434,3 +434,60 @@ setTimeout(() => {
 }, 2000);
 ```
 
+
+
+## promise.race方法的实现
+
+方法返回一个 `promise`，一旦迭代器中的某个`promise`解决或拒绝，返回的 `promise`就会解决或拒绝。
+
+1. 先判断list是否为空，如果空直接返回
+2. 检查promiselist中的每一项是否都是promise, 如果不是包装为promise
+
+```js
+static race(promiseList){
+    return new Promise((resolve, reject) => {
+        const length = promiseList.length;
+
+        if(length === 0) {
+            return resolve();
+        } else {
+            for(let i=0;i<length;i++){
+                MPromise.resolve(promiseList[i])
+                    .then(value => {
+                    resolve(value);
+                })
+                    .catch(reason => {
+                    reject(reason)
+                })
+            }
+        }
+    })
+}
+```
+
+
+
+## promise.all方法的实现
+
+方法返回一个 `Promise` 实例，此实例在 `iterable` 参数内所有的 `promise` 都“完成（resolved）”或参数中不包含 `promise` 时回调完成（resolve）；如果参数中 `promise` 有一个失败（rejected），此实例回调失败（reject），失败原因的是第一个失败 `promise` 的结果
+
+![promise.all工作流程](https://image-static.segmentfault.com/322/559/3225599429-5d4e9a12178af_fix732)
+
+规范:
+
+1. 返回值将会按照参数内的 promise 顺序排列，而不是由调用 promise 的完成顺序决定。
+
+2. 有一个出错，就被认定为失败。
+
+3. 返回的是一个promise。
+
+4. 参数是一个数组，而且期望每个都是promise，如果不是会直接放入结果集。
+
+```js
+```
+
+
+
+## promise.allSettled方法的实现
+
+方法返回一个`promise`，该`promise`在所有给定的`promise`已被解析或被拒绝后解析，并且每个对象都描述每个`promise`的结果。

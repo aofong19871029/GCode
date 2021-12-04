@@ -3,7 +3,7 @@ const PENDING = 'pending';
 const FULFULLED = 'fulfilled'
 const REJECTED = 'rejected';
 
-class MPromise{
+class MPromise {
     /** 成功状态的回调 */
     FULFILLED_CALLBACK_LIST = [];
     /** 失败状态的回调 */
@@ -12,29 +12,29 @@ class MPromise{
     /** 私有变量，存储真正的status */
     _status = PENDING;
 
-    constructor(fn){
+    constructor(fn) {
         /* 状态，初始为pending */
         this.status = PENDING;
-		/* fulfilled的值 */
+        /* fulfilled的值 */
         this.value = null;
         /* rejected的值 */
         this.reason = null;
 
-        try{
+        try {
             fn(this.resolve.bind(this), this.reject.bind(this));
-        } catch(e){
+        } catch (e) {
             this.reject(e);
         }
     }
 
-    get static(){
+    get status() {
         return this._status;
     }
 
-    set status(newState){
+    set status(newState) {
         this._status = newState;
 
-        switch(newState){
+        switch (newState) {
             case FULFULLED: {
                 this.FULFILLED_CALLBACK_LIST.forEach(callback => {
                     callback(this.value);
@@ -49,28 +49,28 @@ class MPromise{
             }
         }
     }
-    
-    resolve(value){
-        if(this.status === PENDING){
+
+    resolve(value) {
+        if (this.status === PENDING) {
             this.value = value;
             this.status = FULFULLED;
         }
     }
-    
-    reject(reason){
-        if(this.status === PENDING){
+
+    reject(reason) {
+        if (this.status === PENDING) {
             this.reason = reason;
             this.status = REJECTED;
         }
     }
 
-    then(onFulfilled, onRejected){
-        const realOnFulfilled = this.isFunction(onFulfilled) ? onFulfilled : (value)=>value;
-        const realOnRejected = this.isFunction(onRejected) ? onRejected : (reason)=>reason;
+    then(onFulfilled, onRejected) {
+        const realOnFulfilled = this.isFunction(onFulfilled) ? onFulfilled : (value) => value;
+        const realOnRejected = this.isFunction(onRejected) ? onRejected : (reason) => reason;
 
-        const promise2 = new MPromise((resolve, reject)=>{
+        const promise2 = new MPromise((resolve, reject) => {
             const fulfilledMicrotask = () => {
-                queueMicrotask(()=>{
+                queueMicrotask(() => {
                     try {
                         const x = realOnFulfilled(this.value);
                         this.resolvePromise(promise2, x, resolve, reject);
@@ -78,22 +78,22 @@ class MPromise{
                     } catch (e) {
                         reject(e);
                     }
-                });              
+                });
             }
 
             const rejectedMicrotask = () => {
-                queueMicrotask(()=>{
+                queueMicrotask(() => {
                     try {
                         const x = realOnRejected(this.reason);
                         this.resolvePromise(promise2, x, resolve, reject);
                     } catch (e) {
                         reject(e);
-                    } 
+                    }
                 });
             }
 
 
-            switch(this.status){
+            switch (this.status) {
                 case FULFULLED: {
                     fulfilledMicrotask();
                     break;
@@ -103,54 +103,54 @@ class MPromise{
                     break;
                 }
                 case PENDING: {
-                    // 如果是宏任务会有什么影响
-                    this.FULFILLED_CALLBACK_LIST.push(realOnFulfilled);
-                    this.REJECTED_CALLBACK_LIST.push(realOnRejected);
+                    // 如果是宏任务会有什么影响?
+                    this.FULFILLED_CALLBACK_LIST.push(fulfilledMicrotask);
+                    this.REJECTED_CALLBACK_LIST.push(rejectedMicrotask);
                 }
             }
         });
         return promise2;
     }
 
-    catch(onRejected){
+    catch(onRejected) {
         return this.then(null, onRejected);
     }
 
-    resolvePromise(promise2, x, resolve, reject){
+    resolvePromise(promise2, x, resolve, reject) {
         // 如果promis2 和 x 相等，抛error, 为了防止死循环
-        if(promise2 === x){
+        if (promise2 === x) {
             return reject(new TypeError('The promise and return value are the same'))
-        } 
+        }
 
-        if(x instanceof MPromise) {
-            queueMicrotask(()=> {
-                x.then((y)=> {
+        if (x instanceof MPromise) {
+            queueMicrotask(() => {
+                x.then((y) => {
                     this.resolvePromise(promise2, y, resolve, reject);
                 }, reject);
             })
-            
-        } else if(typeof x === 'object' || this.isFunction(x)) {
-            if(x == null) {
+
+        } else if (typeof x === 'object' || this.isFunction(x)) {
+            if (x == null) {
                 return resolve(x);
             }
 
             let then = null;
             try {
                 then = x.then;
-            } catch(e){
+            } catch (e) {
                 // 如果取x.then的值报错，那么以e为reason, reject promise
                 return reject(e);
             }
 
             // 如果then是函数
-            if(this.isFunction(then)) {
+            if (this.isFunction(then)) {
                 let called = false;
-                
+
                 try {
                     then.call(
                         x,
                         (y) => {
-                            if(called){
+                            if (called) {
                                 return;
                             }
 
@@ -158,15 +158,15 @@ class MPromise{
                             this.resolvePromise(promise2, y, resolve, reject);
                         },
                         (r) => {
-                            if(called){
+                            if (called) {
                                 return;
                             }
                             called = true;
                             reject(r);
                         }
                     );
-                } catch(error) {
-                    if(called){
+                } catch (error) {
+                    if (called) {
                         return;
                     }
                     reject(error);
@@ -181,42 +181,108 @@ class MPromise{
         }
     }
 
-    isFunction(param){
+    isFunction(param) {
         return typeof param === 'function';
     }
 
-    static resolve(value){
-        if(value instanceof MPromise){
+    static resolve(value) {
+        if (value instanceof MPromise) {
             return value;
         }
 
-        return new MPromise(resolve=>resolve(value))
+        return new MPromise(resolve => resolve(value))
     }
 
-    static reject(reason){
-        if(value instanceof MPromise){
+    static reject(reason) {
+        if (value instanceof MPromise) {
             return value;
         }
 
-        return new MPromise((resolve, reject)=>reject(value))
+        return new MPromise((resolve, reject) => reject(value))
+    }
+
+    static race(promiseList) {
+        return new MPromise((resolve, reject) => {
+            const length = promiseList.length;
+
+            if (length === 0) {
+                return resolve();
+            } else {
+                for (let i = 0; i < length; i++) {
+                    MPromise.resolve(promiseList[i])
+                        .then(value => {
+                            resolve(value);
+                        })
+                        .catch(reason => {
+                            reject(reason)
+                        })
+                }
+            }
+        })
+    }
+
+    static _isMPromise(obj) {
+        return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+    }
+
+    static all(promiseList) {
+        const result = new Array(promiseList);
+        let resolveCount = 0;
+        return new Promise((resolve, reject) => {
+            for (let i = 0; i < promiseList.length; i++) {
+                if (MPromise._isMPromise(promiseList[i])) {
+                    promiseList[i].then(data => {
+                        result[i] = data;
+                        resolveCount++;
+                        if (resolveCount == promiseList.length) {
+                            resolve(result);
+                        }
+                    }, (reason) => reject(reason))
+                } else {
+                    resolveCount++;
+                    result[i] = promiseList[i];
+                }
+            }
+
+            // 全部非promise + 同步promise组成
+            if (resolveCount === promiseList.length) {
+                resolve(result);
+            }
+        });
+    }
+
+    static allSettled(promiseList) {
+        const result = new Array(promiseList);
+        let resolveCount = 0;
+        return new Promise((resolve, reject) => {
+            for (let i = 0; i < promiseList.length; i++) {
+                if (MPromise._isMPromise(promiseList[i])) {
+                    promiseList[i].then(data => {
+                        result[i] = data;
+                        resolveCount++;
+                        if (resolveCount == promiseList.length) {
+                            resolve(result);
+                        }
+                    }, (reason) => {
+                        result[i] = reason;
+                        resolveCount++;
+                        if (resolveCount == promiseList.length) {
+                            resolve(result);
+                        }
+                    })
+                } else {
+                    resolveCount++;
+                    result[i] = promiseList[i];
+                }
+            }
+
+            // 全部非promise + 同步promise组成
+            if (resolveCount === promiseList.length) {
+                resolve(result);
+            }
+        });
     }
 }
-
-
-const test = new MPromise((resolve, reject) => {
-    setTimeout(() => {
-        resolve(111)
-    }, 1000);
-}).then(console.log)
-.catch(reason => {
-    console.log(`reason = ${reason}`)
-})
-
-console.log(test); // value: null
-
-setTimeout(() => {
-    console.log(test) // value: undefined 因为then方法没有返回值
-}, 2000);
 ```
 
 
