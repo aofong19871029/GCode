@@ -85,6 +85,8 @@ module.exports = function(content, map, meta) {
 
 ### normal loader和pitch loader
 
+![前端工程化](https://www.teqng.com/wp-content/uploads/2021/08/wxsync-2021-08-7cddce2290b005768bbb3a0e060bdc0a.jpeg)
+
 ```js
 const { getOptions } = require('loader-utils');
 const { validate } = require('schema-utils');
