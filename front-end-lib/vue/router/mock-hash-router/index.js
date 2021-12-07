@@ -30,7 +30,7 @@ class BaseRouter {
 const body = document.querySelector('body');
 
 function changeBgColor(color) {
-    // body.style.backgroundColor = color;
+    body.style.backgroundColor = color;
 }
 
 const Router = new BaseRouter();

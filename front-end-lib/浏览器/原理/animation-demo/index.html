@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation demo!</title>
+  <style>
+      .container {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+      }
+      .left-demo, .transform-demo {
+          width: 100px;
+          height: 50px;
+          background-color: red;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 16px;
+          font-weight: bold;
+          color: white;
+      }
+
+      .left-demo {
+          position: absolute;
+          left: 0;
+          top: 0;
+          animation: left-move 3s ease infinite alternate;
+      }
+
+      @keyframes left-move {
+        100% {
+            left: 400px;
+        }
+    }
+
+      .transform-demo {
+          position: absolute;
+          left: 0;
+          top: 100px;
+          animation: transform-move 3s ease infinite alternate;
+      }
+
+    
+    @keyframes transform-move {
+        100% {
+            transform: translateX(400px);
+        }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-demo">
+        left
+    </div>
+    <div class="transform-demo">
+        transform
+    </div>
+  </div>
+</body>
+
+</html>

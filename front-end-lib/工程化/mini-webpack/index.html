@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+    <script>
+        /**
+         * webpack 小原型
+         * 1. 收集依赖 , 把js 收集为字典{path, es6 sourcecode}
+         * 2. es6 to es5 更新字典{path: es5 sourcecode}
+         * 3. 替换require与exports
+         */
+
+        (function (list) {
+            function require(file) {
+                // 模块导出
+                var exports = {};
+                // 自运行函数, 避免产生全局变量
+                (function (exports, code) {
+                    eval(code);
+                })(exports, list[file])
+                return exports;
+            }
+
+            require('src/index.js')
+        })({
+            'index.js': `
+            var add = require('add.js').default;
+             console.log(add(1,2))
+            `,
+            'add.js': `exports.default = function (a,b) {return a+b;};`
+        });
+
+
+
+
+        console.log(exports.default(1,3));
+    </script>
+-->
+
+    <script src="dist/bundle.js"></script>
+</body>
+</html>
