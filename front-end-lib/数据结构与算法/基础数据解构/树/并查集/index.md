@@ -128,6 +128,8 @@ b为爸爸
 
 比较结果就是2棵树，节点多的当爸爸，平均查找效率最高
 
+### 按次优化Quick-Union
+
 按秩优化后的算法
 
 ```js
@@ -139,7 +141,7 @@ class UnionSet {
            size = new int[n+1]
            for(int i=0;i<=n;i++){
                fa[i]=i;
-               size[i]=i;
+               size[i]=1;
            }
        }
        int find(x){ // O(1)
