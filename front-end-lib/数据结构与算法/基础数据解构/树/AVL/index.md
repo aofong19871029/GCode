@@ -209,9 +209,46 @@ $$
 
 与LL相反, `RR型,直接左旋`
 
-### AVL数的代码实现
+## AVL数的代码实现
 
-重要技巧: 构建虚拟空节点
+### 重要技巧
+
+1. 构建虚拟空节点
+2. 把二叉排序树经常可以看成是一个有序的序列
+3. 很多二叉排序树的题目都需要通过中序遍历，将问题转化为有序序列
+4. 中序遍历中, 遍历完left后，可以再处理root时修改left 来做计数
+5. 将有序序列变成AVL树的方法就是二分查找，挑选中间的节点做根
+
+```c#
+ public class TreeNode {
+     public int val;
+     public TreeNode left;
+     public TreeNode right;
+     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+         this.val = val;
+         this.left = left;
+         this.right = right;
+     }
+ }
+
+/**
+ * 从有序队列中， 2分查找选择根节点
+ * l ~ mid-1 为左节点
+ * mid+1 ~ r 为右节点
+ */
+TreeNode buildTree(List<TreeNode> nodes, int l, int r){
+    if(l> r) return null;
+    int mid = (l + r) / 2;  // (l+r) >> 1
+    TreeNode root = nodes[mid];
+    root.left = buildTree(nodes, l, mid-1);
+    root.right = buildTree(nodes, mid+1, r);
+    return root;
+}
+```
+
+
+
+### C++实现
 
 ```c++
 #define NIL (&node::__NIL);
@@ -333,4 +370,156 @@ void output(Node *root){
 }
 ```
 
-3:00
+### TS实现
+
+```typescript
+class TreeNode {
+    key:number;
+    h:number;
+    left:TreeNode;
+    right: TreeNode;
+    static node:TreeNode;
+
+    constructor(key:number=1, h:number=1, left:TreeNode=NIL, right:TreeNode=NIL){
+        this.key = key,
+        this.h = h;
+        this.left=left;
+        this.right = right
+    }
+}
+
+const __NIL = new TreeNode(), NIL:TreeNode = __NIL;
+TreeNode.node = NIL;
+
+class AVL{
+    static getNewNode = (key:number): TreeNode => {
+        return new TreeNode(key, 1);
+    }
+
+    static update_height = (root:TreeNode):void => {
+        root.h = Math.max(root.left.h, root.right.h) +1;
+    }
+
+    /**
+     * 左旋
+     * @param root 失衡节点
+     * @returns 
+     */
+    static left_rotate = (root:TreeNode):TreeNode => {
+        const new_root = root.right;
+        root.right = new_root.left;
+        new_root.left = root;
+
+        this.update_height(root);
+        this.update_height(new_root);
+        return new_root;
+    }
+
+    /**
+     * 右旋
+     * @param root 失衡节点
+     * @returns 
+     */
+    static right_rotate = (root:TreeNode):TreeNode => {
+        const new_root = root.left;
+        root.left = new_root.right;
+        new_root.right = root;
+
+        this.update_height(root);
+        this.update_height(new_root);
+        return new_root;
+    }
+
+    /**
+     * 对失衡二叉树进行平衡调整
+     * @param root 
+     */
+    static maintain = (root:TreeNode):TreeNode => {
+        // 平衡因子 in (-1, 0, 1) 未失衡，不做调整
+        if(Math.abs(root.left.h - root.right.h) < 2) return root;
+        // 检查是LL型 还是LR型
+        if(root.left.h > root.right.h){
+            if(root.left.right.h > root.right.left.h){
+                // LR， 先小左旋，再大右旋
+                root.left = this.left_rotate(root.left);
+            }
+            // 如果是LL, 直接大右旋
+            root = this.right_rotate(root);
+        }
+        // 检查是RR型 还是RL型
+        else {
+            if(root.right.left.h > root.right.right.h){
+                // RL, 先小右旋，再大左旋
+                root.right = this.right_rotate(root.left);
+            }
+            // 如果是RR. 直接大左旋
+            root = this.left_rotate(root);
+        }
+        return root;
+    }
+
+    static insert = (root:TreeNode, key:number) => {
+        if(root === NIL) return this.getNewNode(key);
+        // 二叉排序树不包含重复节点
+        if(root.key === key) return root;
+        if(key < root.key) root.left = this.insert(root.left, key);
+        else root.right = this.insert(root.right, key);
+        this.update_height(root);
+        return this.maintain(root);
+    }
+
+    /**
+     * 删除节点时，寻找前驱节点
+     * @param root 
+     * @returns 
+     */
+    static predeccessor = (root:TreeNode):TreeNode => {
+        let temp:TreeNode = root.left;
+        while(temp.right !== NIL){
+            temp = temp.right;
+        }
+        return temp;
+    }
+
+    static erase = (root:TreeNode, key:number):TreeNode => {
+        if(root === NIL) return root;
+        // 查找待删除节点
+        if(key < root.key){
+            root.left = this.erase(root.left, key);
+        } else if(key > root.key){
+            root.right = this.erase(root.right, key);
+        } 
+        // 找到后，进行删除
+        else {
+            if(root.left === NIL || root.left === NIL){
+                const temp:TreeNode = root.left !== NIL ? root.left : root.right;
+                root = null;
+                // delete root;
+                return temp;
+            } else {
+                const temp:TreeNode = this.predeccessor(root);
+                root.key = temp.key;
+                root.left = this.erase(root.left, temp.key);
+            }
+        }
+
+        this.update_height(root);
+        return this.maintain(root);
+    }
+
+    static clear = (root:TreeNode):void => {
+        if(root === NIL) return;
+        this.clear(root.left);
+        this.clear(root.right);
+        root = null;
+    }
+
+    static output = (root:TreeNode):void => {
+        if(root === NIL) return;
+        this.output(root.left);
+        console.log(root.key);
+        this.output(root.right);
+    }
+}
+```
+
