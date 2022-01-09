@@ -23,8 +23,8 @@ module.exports = {
       },
     }, */
   },
-  // entry: './src/redux/index.js', // 课堂学习部分
-  entry: './src/mobx/index.js', // 课堂学习部分
+  entry: './src/redux/index.js', // 课堂学习部分
+  // entry: './src/mobx/index.js', // 课堂学习部分
   // entry: './src/main.js', // 真实的 redux 使用场景
   output: {
     publicPath: '/',

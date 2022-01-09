@@ -4,7 +4,13 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
 
-function App({ count, add, dispatch, remove }) {
+function App({ count, add, dispatch, remove, subscribe }) {
+
+  useEffect(()=>{
+    subscribe(()=>{
+      debugger
+    });
+  });
   const onAdd = () => {
     add(2);
   };
@@ -42,9 +48,13 @@ const actions = { add, remove };
 
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(actions, dispatch),
-  dispatch,
+  dispatch
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+const mapSubscribeToProps = subscribe => ({
+  subscribe
+})
+
+export default connect(mapStateToProps, mapDispatchToProps, mapSubscribeToProps)(App)
 
 
