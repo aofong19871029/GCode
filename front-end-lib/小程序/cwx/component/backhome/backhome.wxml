@@ -1,0 +1,5 @@
+<template name="backhome">
+	<view class="return-bar" wx:if="{{showBackHome}}" bindtap="backToHome">
+		<icon class="ico-logo-w" type="ctripLogo" />寻找更多旅行产品<icon type="arrow" class="icon-arrow-r"></icon>
+	</view>
+</template>

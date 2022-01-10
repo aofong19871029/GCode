@@ -1,0 +1,60 @@
+.col-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.85);
+  z-index: 5;
+}
+
+.col-title {
+  font-size: 48rpx;
+  line-height: 67rpx;
+  color: #fff;
+  text-align:center;
+  margin: 60rpx auto 30rpx;
+}
+
+.col-arrow {
+  position: fixed;
+  top: 20rpx;
+  right: 144rpx;
+  width: 77rpx;
+}
+
+.col-group {
+  padding:0 114rpx;
+}
+
+.col-item {
+  margin-bottom: 40rpx;
+}
+
+.col-text {
+  font-size: 32rpx;
+  line-height: 45rpx;
+  color: #fff;
+  vertical-align:middle;
+}
+
+.col-important {
+  color: #FD9913;
+}
+
+.col-icon {
+  display:inline-block;
+  width:65rpx;
+  height:40rpx;
+  vertical-align:middle;
+  margin-left:20rpx;
+}
+
+.col-img {
+  text-align: center;
+}
+
+.col-img image{
+  width: 480rpx;
+  margin-top:20rpx;
+}

@@ -1,0 +1,50 @@
+/* pages/search/globalSearchHeader/globalSearchHeader.wxss */
+
+.search-header{
+	transform: translateZ(0);
+    width: 100%;
+    background-color: #fff;
+    padding-top: 4rpx;
+    padding-bottom: 25rpx;
+    z-index: 111111;
+}
+.search-box{
+  position:relative;
+  margin-left: 36rpx;
+  margin-right: 36rpx;
+  z-index:1;
+  padding:7px 0;
+  /* background: #ffffff; */
+  background: #F2F2F2;
+  border-radius:18px;
+  background-clip: true;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+.search-box-text{
+  height:44rpx;
+  font-size:28rpx;
+  margin: auto;
+  color:#666;
+  line-height: 44rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+.search-icon{
+	/* display: inline-block; */
+  position: relative;
+  /* margin-left: 10rpx; */
+  margin-right: 8rpx;
+  width: 28rpx;
+  height: 28rpx;
+  top:-1.5rpx;
+  background:url(//images3.c-ctrip.com/search/native_images/search_recommend.png) 0 0 no-repeat;
+  -webkit-background-size: 28rpx 28rpx;
+  background-size: 28rpx 28rpx;
+}
+.search-box-inner{
+  display: inline-block;
+}

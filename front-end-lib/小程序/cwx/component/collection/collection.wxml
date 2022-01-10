@@ -1,0 +1,15 @@
+<view class="col-wrap">
+  <view class="col-title"><text>收藏小程序</text></view>
+  <image class="col-arrow" src='http://pic.c-ctrip.com/platform/h5/mini_programe/col-arrow.png' mode='widthFix' ></image>
+  <view class="col-group">
+    <view class="col-item"><text class="col-text">1.点击右上角</text><image class="col-icon" src='http://pic.c-ctrip.com/platform/h5/mini_programe/col-nav.png' mode='aspectFit' ></image></view>
+    <view class="col-item">
+      <text class="col-text">2.点击“<text class="col-important">添加到我的小程序</text>”</text>
+      <view class="col-img"><image src='http://pic.c-ctrip.com/platform/h5/mini_programe/col-img1.png' mode='widthFix' ></image></view>
+    </view>
+    <view class="col-item">
+      <text class="col-text">3.在微信首页下拉进入“<text class="col-important">携程小程序</text>”</text>
+      <view class="col-img"><image src='http://pic.c-ctrip.com/platform/h5/mini_programe/col-img2.png' mode='widthFix' ></image></view>
+    </view>
+  </view>
+</view>

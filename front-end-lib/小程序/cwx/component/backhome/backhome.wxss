@@ -1,0 +1,32 @@
+/*return homepage*/
+.ico-logo-w{
+  display: inline-block;
+  background: url(//pic.c-ctrip.com/platform/h5/public/logo-ctrip-w.png) no-repeat center center;
+  width: 134rpx;
+  height: 49rpx;
+  background-size: 134rpx 49rpx;
+  vertical-align: middle;
+}
+.icon-arrow-r{
+  display: inline-block;
+  width: 14rpx;
+  height: 14rpx;
+  border:4rpx solid #fff;
+  border-color:transparent #fff #fff transparent;
+  -webkit-transform: rotate(-45deg) translateY(-2rpx);
+  transform: rotate(-45deg) translateY(-2rpx);
+}
+.return-bar{
+  padding:0 32rpx;
+  height: 88rpx;
+  background: #19A0F0;
+  color: #fff;
+  font-size: 32rpx;
+  text-align: right;
+  line-height: 88rpx;
+  font-weight: bold;
+}
+.return-bar .ico-logo-w{
+  float: left;
+  margin-top:19rpx;
+}

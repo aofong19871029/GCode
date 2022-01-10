@@ -1,0 +1,10 @@
+<!--pages/search/globalSearchHeader/globalSearchHeader.wxml-->
+
+<view class="search-header" bindtap="jumpToGlobalSearchHome">
+    <view class="search-box">
+      <view class="search-box-inner">
+        <icon class="search-icon"></icon>
+        <text class="search-box-text">搜索目的地/交通/景点/酒店</text>
+      </view>
+    </view>
+</view>
